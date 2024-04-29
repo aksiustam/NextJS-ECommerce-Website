@@ -1,0 +1,217 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id            Int       @id @default(autoincrement())
+    name          String?
+    lastname      String?
+    email         String    @unique
+    code          String?
+    emailVerified Boolean?  @default(false)
+    tel           String?
+    password      String
+    newscheck     Boolean?
+    createdAt     DateTime? @default(now())
+    updatedAt     DateTime? @updatedAt
+    Siparis       Siparis[]
+    role          Role      @default(USER)
+    Account       Account[]
+
+    @@index([email])
+}
+
+model Product {
+    id          Int                @id @default(autoincrement())
+    name        String
+    slug        String             @unique
+    desc        String?
+    gender      String
+    categoryId  Int
+    category    Category           @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    brand       Brand[]
+    price       Float
+    inprice     Float
+    colorsize   ProductColorSize[]
+    parcelgram  Json?
+    indirimsize String?
+    indirim     Boolean?
+    yeni        Boolean?
+    ilk         Boolean?
+    ofg         Boolean?
+    bio         Boolean?
+    onclick     Int?
+    sells       Int?
+    archive     Boolean?
+    guideurl    String?
+    quill       Json?
+    createdAt   DateTime?          @default(now())
+    updatedAt   DateTime?          @updatedAt
+
+    @@unique([categoryId])
+    @@index([slug])
+}
+
+model ProductColorSize {
+    id         Int         @id @default(autoincrement())
+    type       SizeType    @relation(fields: [sizeTypeId], references: [id])
+    stocks     Sizestock[]
+    color      Color       @relation(fields: [colorId], references: [id], onDelete: Cascade)
+    colorId    Int
+    images     Json?
+    product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId  Int
+    sizeTypeId Int
+
+    @@unique([colorId, productId])
+}
+
+model Sizestock {
+    id                 Int               @id @default(autoincrement())
+    stock              Int
+    productColorSizeId Int
+    sizeId             Int
+    size               Size              @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+    ProductColorSize   ProductColorSize? @relation(fields: [productColorSizeId], references: [id], onDelete: Cascade)
+}
+
+model Brand {
+    id         Int       @id @default(autoincrement())
+    index      Int?
+    name       String?
+    archive    Boolean?
+    Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    categoryId Int?
+    Product    Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId  Int?
+
+    @@unique([categoryId, productId])
+}
+
+model Category {
+    id         Int       @id @default(autoincrement())
+    index      Int?
+    name       String
+    slug       String    @unique
+    brand      Brand[]
+    desc       String?
+    keywords   String?
+    gender     String?
+    type       SizeType  @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
+    season     String?
+    archive    Boolean?
+    sizeTypeId Int
+    Product    Product[]
+
+    @@unique([sizeTypeId])
+    @@index([slug])
+}
+
+model Color {
+    id               Int                @id @default(autoincrement())
+    index            Int?
+    name             String?
+    slug             String             @unique
+    hex              String?
+    archive          Boolean?
+    ProductColorSize ProductColorSize[]
+
+    @@index([slug])
+}
+
+model Size {
+    id         Int         @id @default(autoincrement()) // 1 
+    type       SizeType    @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade) // dress
+    index      Int? // 1
+    name       String? // XL
+    archive    Boolean?
+    sizeTypeId Int
+    Sizestock  Sizestock[]
+
+    @@unique([sizeTypeId])
+}
+
+model SizeType {
+    id               Int                @id @default(autoincrement())
+    name             String?
+    type             String?
+    Category         Category[]
+    Size             Size[]
+    ProductColorSize ProductColorSize[]
+}
+
+model Siparis {
+    id         Int      @id @default(autoincrement())
+    username   String
+    user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId     Int?
+    email      String
+    billadress Json
+    sendadress Json
+    basket     Json
+    amount     Float
+    note       String?
+    sendmail   String
+    shipping   Json?
+    status     String?
+    error      String?
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    @@unique([userId])
+}
+
+model Contact {
+    id       Int     @id @default(autoincrement())
+    name     String?
+    lastname String?
+    email    String?
+    konu     String?
+    not      String?
+}
+
+enum Role {
+    USER
+    ADMIN
+}
+
+model Ayarlar {
+    id           String  @id @default(cuid())
+    keywords     String?
+    header       Json?
+    banner       Json?
+    bannerb      String?
+    discountset  Json?
+    discountpage Json?
+    settings     Json?
+    stockmail    Json?
+    newsmail     Json?
+}
+
+model Account {
+    id                       String  @id @default(cuid())
+    userId                   Int     @unique
+    type                     String
+    provider                 String
+    providerAccountId        String
+    refresh_token            String? @db.Text
+    access_token             String? @db.Text
+    expires_at               Int?
+    token_type               String?
+    scope                    String?
+    id_token                 String? @db.Text
+    session_state            String?
+    refresh_token_expires_in Int?
+    user                     User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@unique([provider, providerAccountId])
+    @@index([userId])
+}

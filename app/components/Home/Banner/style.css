@@ -1,0 +1,9 @@
+.animatedDiv {
+  opacity: 0;
+
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+.animatedDiv.active {
+  opacity: 1;
+}
