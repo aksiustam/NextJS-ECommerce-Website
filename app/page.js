@@ -1,6 +1,7 @@
 import MenuData from "./components/Layout/Header/MenuData";
 import Banner from "./components/Home/Banner";
 import Header from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
 export default async function Home() {
   const headerdata = await MenuData();
 
@@ -11,6 +12,7 @@ export default async function Home() {
         <Banner />
         HEYYY
       </main>
+      <Footer />
     </>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -8,8 +8,9 @@ import "./style.css";
 import { API_URL } from "@/lib/config";
 import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const Banner = async () => {
+const Banner = () => {
   let slidersettings = {
     autoplay: true,
     arrows: false,
@@ -21,19 +22,22 @@ const Banner = async () => {
     slidesToScroll: 1,
     initialSlide: 0,
   };
-  const response = await axios.get(API_URL + "/settings/all");
-  const settings = response.data;
-
-  // bannercolor
-  const banner = settings?.banner;
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(API_URL + "/settings/all");
+      const settings = response.data.banner;
+      setData(settings);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
       <section
         id="banner_one"
-        className={``}
         style={{
-          backgroundImage: `url(${API_URL}${banner?.bannerRes?.url})`,
+          backgroundImage: `${data !== null ? `url(${API_URL}${data?.bannerRes?.url})`: "" } `,
         }}
       >
         <div className="container ">
@@ -44,29 +48,29 @@ const Banner = async () => {
                   className={`wow flipInX `}
                   data-wow-duration="3.0s"
                   data-wow-delay=".3s"
-                  style={{ color: banner?.bannercolor }}
+                  style={{ color: data?.bannercolor }}
                 >
-                  {banner?.bannerUst}
+                  {data?.bannerUst}
                   <span
                     className="wow flipInX"
                     data-wow-duration="2.0s"
                     data-wow-delay=".5s"
-                    style={{ color: banner?.bannercolor }}
+                    style={{ color: data?.bannercolor }}
                   >
-                    {banner?.bannerAlt}
+                    {data?.bannerAlt}
                   </span>
                 </h1>
 
-                {banner?.btncheck === "true" && (
+                {data?.btncheck === "true" && (
                   <Link
-                    href={banner?.buttonUrl}
+                    href={data?.buttonUrl}
                     className="theme-btn-one btn_sm tw-border-[3px] tw-rounded-2xl tw-text-xs lg:tw-text-xl"
                     style={{
-                      color: banner?.bannercolor,
-                      borderColor: banner?.bannercolor,
+                      color: data?.bannercolor,
+                      borderColor: data?.bannercolor,
                     }}
                   >
-                    {banner?.button}
+                    {data?.button}
                   </Link>
                 )}
               </div>
@@ -74,7 +78,7 @@ const Banner = async () => {
 
             <div className="col-6 tw-pr-0">
               <Slider {...slidersettings} className="tw-absolute">
-                {banner?.bannerYan.map((item, index) => {
+                {data?.bannerYan.map((item, index) => {
                   return (
                     <img
                       src={API_URL + item?.url}

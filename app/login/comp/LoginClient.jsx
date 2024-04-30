@@ -8,7 +8,8 @@ import Modal from "react-bootstrap/Modal";
 import ReactGA from "react-ga4";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+
 const LoginClient = () => {
   const router = useRouter();
 
@@ -24,6 +25,11 @@ const LoginClient = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+
+    Swal.fire({
+      icon: "question",
+      title: "Vous êtes déjà connecté!",
+    });
     try {
       const { ok, error } = await signIn("credentials", {
         email: data.email,
@@ -37,16 +43,22 @@ const LoginClient = () => {
           action: "GirişTıkla",
           label: "Kullanıcı Giriş Yaptı",
         });
-        toast.success("Connexion Réussie");
+        await Swal.fire({
+          icon: "success",
+          title: "Connexion Réussie",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         router.push("/");
         router.refresh();
       }
 
       if (error) {
-        toast.error("Erreur du serveur \n");
+        setError(error);
+        
       }
     } catch (error) {
-      toast.error("Erreur du serveur \n");
+      setError(error?.response?.data?.message);   
     }
   };
   const [clicked, setClicked] = useState(false);
@@ -73,8 +85,9 @@ const LoginClient = () => {
         setClicked(true);
         localStorage.setItem("lastClickedTime", Date.now().toString());
         const formData = { email: email };
+
         await axios
-          .post(`${API_URL}/user/forgotpass`, formData)
+          .post("/api/user/forgotpass", formData)
           .then((response) => {
             setModalError(
               "Votre mot de passe provisoire est disponible sur votre boite mail. Vous pouvez le changer a tout moment sur votre profil"
@@ -109,7 +122,7 @@ const LoginClient = () => {
           <div className="container">
             <div className="row tw-relative tw-mt-3">
               <div
-                className="tw-absolute tw-right-0  -tw-top-5 tw-z-30 tw-cursor-pointer"
+                className="tw-absolute tw-flex tw-justify-end -tw-top-5 tw-right-0 tw-z-30 tw-cursor-pointer"
                 onClick={() => {
                   setModalCheck(false);
                 }}

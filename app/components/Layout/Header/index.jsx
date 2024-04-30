@@ -33,8 +33,7 @@ const Header = (props) => {
   const [click, setClick] = useState(false);
   const [show, setShow] = useState();
 
-  const [, setFlag] = useState("en");
-
+ 
   const basket = [];
   const isAuth = true;
   const user = { name: "Admin", role: "ADMIN" };

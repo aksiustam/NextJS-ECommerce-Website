@@ -8,6 +8,9 @@ import { TiTimes } from "react-icons/ti";
 import ReactGA from "react-ga4";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+
+import Swal from "sweetalert2";
 const RegisterClient = () => {
   const router = useRouter();
 
@@ -49,66 +52,56 @@ const RegisterClient = () => {
       setError("Le deuxième mot de passe est incorrect");
       return;
     }
-    await axios.post("/api/auth/register", data).then(() => {
-      setVerify(true);
-    });
-    // toast.success("Kullanıcı Olusturuldu...");
-    // signIn("credentials", {
-    //   email: data.email,
-    //   password: data.password,
-    //   redirect: false,
-    // }).then((callback) => {
-    //   if (callback?.ok) {
-    //     router.push("/cart");
-    //     router.refresh();
-    //     toast.success("Login İşlemi Basarılı...");
-    //   }
+    try {
+      const response = await axios.post("/api/auth/register", data);
 
-    //   if (callback?.error) {
-    //     toast.error(callback.error);
-    //   }
-    // });
+      if (response.data) {
+        setVerify(true);
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
   };
   const VerifyCode = async () => {
     if (code === 0) {
       setFormError("Entrez le code");
     } else {
       try {
-        await axios.post("/api/auth/register", data).then(() => {
-          setVerify(true);
-        });
         const myform = { data: { ...formData }, code: code };
-        const response = await axios.post(
-          API_URL + "/auth/register/verify",
-          myform
-        );
+        const response = await axios.post("/api/auth/register/verify", myform);
         if (response.data) {
-          setFormError("connexion réussie.");
-          const cookies = new Cookies();
-          if (usercheck) {
-            const userAgent = navigator.userAgent;
-            if (
-              userAgent.includes("AppleWebKit") &&
-              !userAgent.includes("Chrome")
-            ) {
-              cookies.set("jwt_auth", response.data.token.toString(), {
-                path: "/",
+          signIn("credentials", {
+            email: formData.email,
+            password: formData.password,
+            redirect: false,
+          }).then(async (callback) => {
+            if (callback?.ok) {
+              setFormError("connexion réussie.");
+              setVerify(false);
+              await Swal.fire({
+                icon: "success",
+                title: "Connexion Réussie",
+                showConfirmButton: false,
+                timer: 1500,
               });
-            } else {
-              cookies.set("jwt_auth", response.data.token.toString(), {
-                path: "/",
-                secure: true,
-                SameSite: "Strict",
-              });
-            }
-          }
-          setVerify(false);
+              router.push("/");
+              router.refresh();
 
-          navigate("/");
-          window.location.reload();
+            }
+
+            if (callback?.error) {
+              await Swal.fire({
+                icon: "error",
+                title: callback.error,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+            }
+          });
         }
       } catch (error) {
-        setFormError(JSON.stringify(error.response.data.message));
+        setFormError(JSON.stringify(error?.response?.data?.message));
       }
     }
   };
@@ -118,14 +111,12 @@ const RegisterClient = () => {
       localStorage.setItem("lastClickedTime", Date.now().toString());
 
       const data = { email: formData.email };
-      const response = await axios.post(
-        API_URL + "/auth/register/resendmail",
-        data
-      );
+      const response = await axios.post("/api/auth/register/resendmail", data);
+
       if (response.data) {
         setVerify(true);
         setFormError(
-          "Votre code a était renvoyer de nouveau sur votre boîte mail."
+          "Votre code a était renvoyer de nouveau sur votre boîte mail."
         );
       }
       setTimeout(() => {

@@ -25,13 +25,13 @@ export const authOptions = {
           },
         });
 
-        if (!user || !user.hashedPassword) {
+        if (!user || !user.password) {
           throw new Error("Gecersiz mail ya da parola...");
         }
 
         const comparePassword = await bcryptjs.compare(
           credentials.password,
-          user.hashedPassword
+          user.password
         );
 
         if (!comparePassword) {
