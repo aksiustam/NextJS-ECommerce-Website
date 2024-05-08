@@ -6,6 +6,7 @@ import { TiTimes } from "react-icons/ti";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import setCookies from "@/app/actions/setCookies";
+import Image from "next/image";
 
 const CookiePage = () => {
   const [cookiemodal, setCookieModal] = useState(false);
@@ -35,9 +36,11 @@ const CookiePage = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row tw-border-b-2 tw-border-slate-500">
                 <div className="col-12 tw-flex tw-justify-center">
-                  <img
+                  <Image
                     src={"/assets/img/logo-siyah.png"}
-                    alt="logo"
+                    alt="Nilrio Logo"
+                    width={100}
+                    height={100}
                     className="tw-w-[50px] tw-h-[50px] lg:tw-w-[90px] lg:tw-h-[90px] tw-object-contain"
                   />
                 </div>
@@ -71,13 +74,13 @@ const CookiePage = () => {
 
                   <p className="tw-text-xs">
                     &emsp;Les cookies nécessaires, qui activent des fonctions de
-                    base telles que la navigation de page et l'accès aux zones
-                    sécurisées du site web, sont essentiels pour rendre un site
-                    web utilisable. Sans ces cookies, le site web ne peut pas
-                    fonctionner correctement. De plus, ces cookies sont utilisés
-                    pour vous offrir une expérience plus personnalisée sur notre
-                    site Web et pour mémoriser les choix que vous faites lors de
-                    son utilisation.
+                    base telles que la navigation de page et l&apos;accès aux
+                    zones sécurisées du site web, sont essentiels pour rendre un
+                    site web utilisable. Sans ces cookies, le site web ne peut
+                    pas fonctionner correctement. De plus, ces cookies sont
+                    utilisés pour vous offrir une expérience plus personnalisée
+                    sur notre site Web et pour mémoriser les choix que vous
+                    faites lors de son utilisation.
                   </p>
                 </div>
                 <div className="col-12 tw-mb-2">
@@ -92,10 +95,10 @@ const CookiePage = () => {
                   </label>
 
                   <p className="tw-text-xs">
-                    &emsp;Ces cookies d’analyse nous permettent d’améliorer
-                    l’ergonomie du site en analysant anonymement l’utilisation
-                    des visiteurs. Ils identifient aussi des produits que nous
-                    pouvons recommander.
+                    &emsp;Ces cookies d&apos;analyse nous permettent
+                    d&apos;améliorer l&apos;ergonomie du site en analysant
+                    anonymement l&apos;utilisation des visiteurs. Ils
+                    identifient aussi des produits que nous pouvons recommander.
                   </p>
                 </div>
 
@@ -112,10 +115,10 @@ const CookiePage = () => {
 
                   <p className="tw-text-xs">
                     &emsp;Ces cookies récupèrent des informations pour mieux
-                    cibler les publicités en fonction de vos centres d'intérêt.
-                    Les données sont récupérées de manière anonyme et ne
-                    contiennent pas d'informations personnelles que vous auriez
-                    pu nous communiquer.
+                    cibler les publicités en fonction de vos centres
+                    d&apos;intérêt. Les données sont récupérées de manière
+                    anonyme et ne contiennent pas d&apos;informations
+                    personnelles que vous auriez pu nous communiquer.
                   </p>
                 </div>
                 <div className="col-12 tw-mt-6 tw-flex tw-flex-row tw-justify-center">

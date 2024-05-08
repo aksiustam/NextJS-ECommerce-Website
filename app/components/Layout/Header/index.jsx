@@ -7,21 +7,24 @@ import logoWhite from "@/public/assets/img/logo-white.png";
 import errimg from "@/public/assets/img/common/defproductimg.webp";
 import frflag from "@/public/assets/img/svg/flag-france.svg";
 import svg from "@/public/assets/img/svg/cancel.svg";
-
+import { FaUser } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { FaSearch } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { FaShoppingBasket } from "react-icons/fa";
+import { IoExit } from "react-icons/io5";
 import { FaBars } from "react-icons/fa6";
+import { MdAdminPanelSettings } from "react-icons/md";
 import ReactGA from "react-ga4";
 import { useRouter } from "next/navigation";
-
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 
 const Header = (props) => {
   const MenuData = props.headerdata;
+  const User = props.user;
 
   const { register, handleSubmit } = useForm();
 
@@ -33,13 +36,9 @@ const Header = (props) => {
   const [click, setClick] = useState(false);
   const [show, setShow] = useState();
 
- 
   const basket = [];
-  const isAuth = true;
-  const user = { name: "Admin", role: "ADMIN" };
+
   // const { basket } = useSelector((state) => state.basket);
-  // const { isAuth, user } = useSelector((state) => state.user);
-  // const { gacheck } = useSelector((state) => state.settings);
 
   const rmBasket = async (id, color, size) => {
     const data = { id: id, color: color, size: size };
@@ -129,14 +128,11 @@ const Header = (props) => {
       : header.classList.remove("is-sticky");
   };
 
-  // const logout = async () => {
-  //   cookies.remove("jwt_auth", {
-  //     path: "/",
-  //   });
-  //   await dispatch(logOut());
-  //   navigate("/");
-  //   window.location.reload();
-  // };
+  const logout = async () => {
+    signOut();
+    router.push("/");
+    router.refresh();
+  };
   //#endregion
 
   return (
@@ -251,39 +247,33 @@ const Header = (props) => {
               <li className="after_login">
                 <FaUserCircle className="tw-text-white" size={26} />
                 <ul className="custom_dropdown">
-                  {isAuth ? (
+                  {User ? (
                     <>
-                      <li>
-                        <Link href="/profile">
-                          <i className="fa fa-user tw-mr-2"></i>
-                          Mon Profil
-                        </Link>
+                      <li className="tw-flex tw-items-center tw-gap-2">
+                        <FaUser size={16} />
+                        <Link href="/profile">Mon Profil</Link>
                       </li>
 
-                      {user && user.role === "ADMIN" ? (
-                        <li>
-                          <Link href="/admin">
-                            <i className="fa fa-cubes"></i>
-                            Admin
-                          </Link>
+                      {User && User.Role === "ADMIN" ? (
+                        <li className="tw-flex tw-items-center tw-gap-2">
+                          <MdAdminPanelSettings size={16} />
+                          <Link href="/admin">Admin</Link>
                         </li>
                       ) : (
                         ""
                       )}
-                      <li>
-                        <Link href="#!" onClick={() => logout()}>
-                          <i className="fa fa-sign-out tw-mr-1"></i>
+                      <li className="tw-flex tw-items-center tw-gap-2">
+                        <IoExit size={16} />
+                        <Link href="#!" onClick={logout}>
                           Déconnexion
                         </Link>
                       </li>
                     </>
                   ) : (
                     <>
-                      <li>
-                        <Link href="/login">
-                          <i className="fa fa-user tw-mr-2"></i>
-                          Se connecter / S’inscrire
-                        </Link>
+                      <li className="tw-flex tw-items-center tw-gap-2">
+                        <FaUser size={16} />
+                        <Link href="/login">Se connecter / S’inscrire</Link>
                       </li>
                     </>
                   )}
@@ -353,39 +343,33 @@ const Header = (props) => {
                   <li className="after_login">
                     <FaUserCircle className="tw-text-white" size={24} />
                     <ul className="custom_dropdown">
-                      {isAuth ? (
+                      {User ? (
                         <>
-                          <li>
-                            <Link href="/profile">
-                              <i className="fa fa-regular fa-user tw-mr-2"></i>
-                              Mon Profil
-                            </Link>
+                          <li className="tw-flex tw-items-center tw-gap-2">
+                            <FaUser size={16} />
+                            <Link href="/profile">Mon Profil</Link>
                           </li>
 
-                          {user && user.role === "ADMIN" ? (
-                            <li>
-                              <Link href="/admin">
-                                <i className="fa fa-cubes tw-mr-2"></i>
-                                Admin
-                              </Link>
+                          {User && User.Role === "ADMIN" ? (
+                            <li className="tw-flex tw-items-center tw-gap-2">
+                              <MdAdminPanelSettings size={16} />
+                              <Link href="/admin">Admin</Link>
                             </li>
                           ) : (
                             ""
                           )}
-                          <li>
-                            <Link href="#!" onClick={() => logout()}>
-                              <i className="fa fa-sign-out tw-mr-2"></i>
+                          <li className="tw-flex tw-items-center tw-gap-2">
+                            <IoExit size={16} />
+                            <Link href="#!" onClick={logout}>
                               Déconnexion
                             </Link>
                           </li>
                         </>
                       ) : (
                         <>
-                          <li>
-                            <Link href="/login">
-                              <i className="fa fa-user tw-mr-2"></i>
-                              Se connecter / S’inscrire
-                            </Link>
+                          <li className="tw-flex tw-items-center tw-gap-2">
+                            <FaUser size={16} />
+                            <Link href="/login">Se connecter / S’inscrire</Link>
                           </li>
                         </>
                       )}
@@ -545,10 +529,12 @@ const Header = (props) => {
                     href={`/product/${data.slug}`}
                     className="offcanvas-wishlist-item-image-link"
                   >
-                    <img
-                      className="offcanvas-wishlist-image"
+                    <Image
                       src={data.image?.url ? API_URL + data.image?.url : errimg}
                       alt={data.image?.name}
+                      width={300}
+                      height={300}
+                      className="offcanvas-wishlist-image"
                       onError={(e) => {
                         e.target.src = errimg;
                       }}

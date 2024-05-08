@@ -16,7 +16,7 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Geçersiz mail yada password");
+          throw new Error("Adresse email erronée!");
         }
 
         const user = await prisma.user.findUnique({
@@ -26,7 +26,7 @@ export const authOptions = {
         });
 
         if (!user || !user.password) {
-          throw new Error("Gecersiz mail ya da parola...");
+          throw new Error("Adresse email erronée!");
         }
 
         const comparePassword = await bcryptjs.compare(
@@ -35,7 +35,7 @@ export const authOptions = {
         );
 
         if (!comparePassword) {
-          throw new Error("Yanlıs parola...");
+          throw new Error("Mot de passe incorrect!");
         }
 
         return user;

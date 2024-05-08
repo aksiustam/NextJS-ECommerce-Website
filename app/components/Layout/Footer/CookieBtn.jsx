@@ -6,10 +6,11 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { TiTimes } from "react-icons/ti";
 import Modal from "react-bootstrap/Modal";
 import setCookies from "@/app/actions/setCookies";
+import Image from "next/image";
 
 const CookieBtn = (props) => {
   const { getCookie } = props;
-  const cookie = JSON.parse(getCookie.value);
+  const cookie = getCookie !== null ? JSON.parse(getCookie?.value) : null;
 
   const [cookiemodal, setCookieModal] = useState(false);
   const { register, handleSubmit } = useForm();
@@ -32,16 +33,18 @@ const CookieBtn = (props) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row tw-border-b-2 tw-border-slate-500">
                 <div className="col-12 tw-flex tw-justify-center">
-                  <img
+                  <Image
                     src={"/assets/img/logo-siyah.png"}
-                    alt="logo"
+                    alt="Nilrio Logo"
+                    width={100}
+                    height={100}
                     className="tw-w-[50px] tw-h-[50px] lg:tw-w-[90px] lg:tw-h-[90px] tw-object-contain"
                   />
                 </div>
               </div>
               <div className="row tw-mt-1">
                 <div
-                  className="tw-absolute tw-right-0 -tw-top-2 tw-z-30 tw-cursor-pointer"
+                  className="tw-absolute tw-flex tw-justify-end  -tw-top-2 tw-z-30 tw-cursor-pointer"
                   onClick={() => {
                     setCookieModal(false);
                   }}
@@ -68,13 +71,13 @@ const CookieBtn = (props) => {
 
                   <p className="tw-text-xs">
                     &emsp;Les cookies nécessaires, qui activent des fonctions de
-                    base telles que la navigation de page et l'accès aux zones
-                    sécurisées du site web, sont essentiels pour rendre un site
-                    web utilisable. Sans ces cookies, le site web ne peut pas
-                    fonctionner correctement. De plus, ces cookies sont utilisés
-                    pour vous offrir une expérience plus personnalisée sur notre
-                    site Web et pour mémoriser les choix que vous faites lors de
-                    son utilisation.
+                    base telles que la navigation de page et l&apos;accès aux
+                    zones sécurisées du site web, sont essentiels pour rendre un
+                    site web utilisable. Sans ces cookies, le site web ne peut
+                    pas fonctionner correctement. De plus, ces cookies sont
+                    utilisés pour vous offrir une expérience plus personnalisée
+                    sur notre site Web et pour mémoriser les choix que vous
+                    faites lors de son utilisation.
                   </p>
                 </div>
                 <div className="col-12 tw-mb-2">
@@ -83,7 +86,7 @@ const CookieBtn = (props) => {
                       type="checkbox"
                       id="newsletter"
                       className="tw-w-4 tw-h-4"
-                      defaultChecked={cookie.gacheck}
+                      defaultChecked={cookie?.gacheck}
                       {...register("gacheck")}
                     />
                     <span className="pl-2 tw-font-bold">Analytique</span>
@@ -103,7 +106,7 @@ const CookieBtn = (props) => {
                       type="checkbox"
                       id="newsletter"
                       className="tw-w-4 tw-h-4"
-                      defaultChecked={cookie.advertcheck}
+                      defaultChecked={cookie?.advertcheck}
                       {...register("advertcheck")}
                     />
                     <span className="pl-2 tw-font-bold">Marketing</span>
@@ -111,10 +114,10 @@ const CookieBtn = (props) => {
 
                   <p className="tw-text-xs">
                     &emsp;Ces cookies récupèrent des informations pour mieux
-                    cibler les publicités en fonction de vos centres d'intérêt.
-                    Les données sont récupérées de manière anonyme et ne
-                    contiennent pas d'informations personnelles que vous auriez
-                    pu nous communiquer.
+                    cibler les publicités en fonction de vos centres
+                    d&apos;intérêt. Les données sont récupérées de manière
+                    anonyme et ne contiennent pas d&apos;informations
+                    personnelles que vous auriez pu nous communiquer.
                   </p>
                 </div>
                 <div className="col-12 tw-mt-6 tw-flex tw-flex-row tw-justify-center">
@@ -135,16 +138,7 @@ const CookieBtn = (props) => {
           className="tw-fixed tw-z-50 tw-bottom-3 tw-left-3 tw-w-[36px] tw-h-[36px] md:tw-w-[50px] md:tw-h-[50px] tw-bg-gray-700 tw-flex tw-items-center tw-justify-center tw-cursor-pointer tw-rounded-lg"
           onClick={() => setCookieModal(true)}
         >
-          <IoShieldCheckmarkSharp
-            size={
-              typeof window !== "undefined"
-                ? window.innerWidth >= 768
-                  ? 36
-                  : 25
-                : 25
-            }
-            color="white"
-          />
+          <IoShieldCheckmarkSharp size={36} color="white" />
         </div>
       </div>
     </>

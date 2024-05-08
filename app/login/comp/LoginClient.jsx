@@ -9,7 +9,7 @@ import ReactGA from "react-ga4";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Swal from "sweetalert2";
-
+import { signIn } from "next-auth/react";
 const LoginClient = () => {
   const router = useRouter();
 
@@ -25,11 +25,6 @@ const LoginClient = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-
-    Swal.fire({
-      icon: "question",
-      title: "Vous êtes déjà connecté!",
-    });
     try {
       const { ok, error } = await signIn("credentials", {
         email: data.email,
@@ -55,10 +50,9 @@ const LoginClient = () => {
 
       if (error) {
         setError(error);
-        
       }
     } catch (error) {
-      setError(error?.response?.data?.message);   
+      setError(error?.response?.data?.message);
     }
   };
   const [clicked, setClicked] = useState(false);
@@ -265,7 +259,7 @@ const LoginClient = () => {
 
             <div className="col-lg-4  col-md-12 col-sm-12 col-12 ">
               <div className="account_form tw-flex tw-flex-grow tw-h-full tw-flex-col tw-gap-4 tw-justify-start tw-items-center">
-                <h3 className="tw-font-bold tw-text-xl">S'inscrire</h3>
+                <h3 className="tw-font-bold tw-text-xl">S&apos;inscrire</h3>
                 <Link href="/register">
                   <button
                     className="theme-btn-one btn-black-overlay btn_md tw-bg-black"

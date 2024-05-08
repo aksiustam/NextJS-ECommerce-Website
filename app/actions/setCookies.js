@@ -7,9 +7,11 @@ export default async function setCookies(props) {
       gacheck: props.gacheck,
       advertcheck: props.advertcheck,
     };
+    const oneMonth = 12 * 30 * 24 * 60 * 60 * 1000;
+
     cookies().set("cookie", JSON.stringify(formData), {
-      secure: true,
       path: "/",
+      expires: Date.now() + oneMonth,
     });
 
     return true;

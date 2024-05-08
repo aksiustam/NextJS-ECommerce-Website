@@ -1,5 +1,8 @@
 import logo from "@/public/assets/img/common/logo-web-alt.png";
-import payment from "@/public/assets/img/common/payment.png";
+import cart1 from "@/public/assets/img/common/cart1.jpg";
+import cart2 from "@/public/assets/img/common/cart2.webp";
+import cart3 from "@/public/assets/img/common/cart3.jpg";
+import cart4 from "@/public/assets/img/common/cart4.png";
 import Cookie from "./Cookie";
 import Feature from "../Feature";
 import Trending from "../Trending";
@@ -13,7 +16,7 @@ import { cookies } from "next/headers";
 const Footer = () => {
   const cookieStore = cookies();
   const hasCookie = cookieStore.has("cookie");
-  const getCookie = cookieStore.get("cookie");
+  const getCookie = cookieStore.get("cookie") || null;
 
   const FooterData = [
     {
@@ -170,13 +173,34 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-              <div className="tw-flex tw-justify-end">
+              <div className="tw-flex tw-items-center tw-gap-2 tw-justify-end">
                 <Image
-                  src={payment}
+                  src={cart1}
                   alt="payment"
-                  width={300}
-                  height={50}
-                  className="tw-w-full tw-h-full tw-object-contain"
+                  width={500}
+                  height={500}
+                  className="tw-w-[40px] tw-h-full tw-object-contain"
+                />
+                <Image
+                  src={cart2}
+                  alt="payment"
+                  width={500}
+                  height={500}
+                  className="tw-w-[40px] tw-h-full tw-object-contain"
+                />
+                <Image
+                  src={cart3}
+                  alt="payment"
+                  width={500}
+                  height={500}
+                  className="tw-w-[40px] tw-h-full tw-object-contain"
+                />
+                <Image
+                  src={cart4}
+                  alt="payment"
+                  width={500}
+                  height={500}
+                  className="tw-w-[40px] tw-h-full tw-object-contain"
                 />
               </div>
             </div>

@@ -1,9 +1,6 @@
-import { API_URL } from "@/lib/config";
-import axios from "axios";
-
+import getSettings from "@/app/actions/getSettings";
 const MenuData = async () => {
-  const response = await axios.get(API_URL + "/settings/all");
-  const settings = response.data;
+  const settings = await getSettings();
 
   let MenuData = [];
 

@@ -3,14 +3,14 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
 import "./style.css";
-import { API_URL } from "@/lib/config";
-import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import Image from "next/image";
 
-const Banner = () => {
+const Banner = (props) => {
+  const { settings } = props;
+
+  const data = settings?.banner;
   let slidersettings = {
     autoplay: true,
     arrows: false,
@@ -22,25 +22,16 @@ const Banner = () => {
     slidesToScroll: 1,
     initialSlide: 0,
   };
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(API_URL + "/settings/all");
-      const settings = response.data.banner;
-      setData(settings);
-    };
-    fetchData();
-  }, []);
 
   return (
     <>
       <section
         id="banner_one"
         style={{
-          backgroundImage: `${data !== null ? `url(${API_URL}${data?.bannerRes?.url})`: "" } `,
+          backgroundImage: `url(${data?.banner?.imageurl})`,
         }}
       >
-        <div className="container ">
+        <div className="container">
           <div className="row">
             <div className="col-6 tw-px-0">
               <div className="banner_text_one">
@@ -70,7 +61,7 @@ const Banner = () => {
                       borderColor: data?.bannercolor,
                     }}
                   >
-                    {data?.button}
+                    {data?.buttonName}
                   </Link>
                 )}
               </div>
@@ -78,13 +69,15 @@ const Banner = () => {
 
             <div className="col-6 tw-pr-0">
               <Slider {...slidersettings} className="tw-absolute">
-                {data?.bannerYan.map((item, index) => {
+                {data?.banneryan?.map((item, index) => {
                   return (
-                    <img
-                      src={API_URL + item?.url}
-                      alt="img"
-                      className="tw-w-full tw-h-[200px] lg:tw-h-[600px] tw-object-contain"
+                    <Image
                       key={index}
+                      src={item?.imageurl}
+                      alt="Nilrio BannerYan"
+                      width={800}
+                      height={800}
+                      className="tw-w-full tw-h-[200px] lg:tw-h-[600px] tw-object-contain"
                     />
                   );
                 })}

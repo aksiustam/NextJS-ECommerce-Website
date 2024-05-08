@@ -1965,6 +1965,8 @@ textarea:focus {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  padding-left: 30px;
+  padding-bottom: 30px;
 }
 .banner_text_one h1 {
   padding: 100px 0 0 0;
@@ -2001,7 +2003,7 @@ textarea:focus {
    Banner Area Mobile
 ---------------------------*/
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   #banner_one {
     padding: 20px 0 0 0;
   }
@@ -2106,13 +2108,13 @@ textarea:focus {
 }
 
 .tabs_center_button .nav-tabs li a {
-  margin-left: 50px;
+ 
   transition: inherit;
   font-size: 16px;
   font-weight: 500;
   text-transform: capitalize;
   background: transparent;
-  padding-bottom: 5px;
+  padding-bottom: 6px;
 }
 
 .tabs_center_button .nav-tabs li:first-child a {
@@ -3962,9 +3964,7 @@ textarea:focus {
   padding-bottom: 10px;
 }
 
-.product_details_tabs ul li {
-  padding-right: 30px;
-}
+
 
 .product_details_tabs .nav-tabs li a {
   font-size: 18px;
@@ -3972,9 +3972,7 @@ textarea:focus {
   color: #afafaf;
 }
 
-.product_details_tabs ul li a.active {
-  color: var(--main-theme-color);
-}
+
 
 #description .product_description {
   padding-top: 20px;
@@ -8459,9 +8457,7 @@ table {
   padding-bottom: 30px;
 }
 
-#explore_product_jewellary .tabs_center_button {
-  padding-bottom: 40px;
-}
+
 
 #jewellary_customer_service {
   background: #f4f4f4;
@@ -8574,9 +8570,7 @@ table {
   padding-top: 10px;
 }
 
-#baby_trending_product .tabs_center_button {
-  padding-bottom: 40px;
-}
+
 
 #baby_offer_banner {
   padding: 150px 0;

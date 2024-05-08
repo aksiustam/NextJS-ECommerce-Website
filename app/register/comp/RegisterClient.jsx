@@ -86,7 +86,6 @@ const RegisterClient = () => {
               });
               router.push("/");
               router.refresh();
-
             }
 
             if (callback?.error) {
@@ -96,7 +95,6 @@ const RegisterClient = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
-
             }
           });
         }
@@ -215,7 +213,9 @@ const RegisterClient = () => {
             <div className="col-lg-2 col-md-12 col-sm-12 col-12"></div>
             <div className="col-lg-4 col-md-12 col-sm-12 col-12">
               <div className="account_form">
-                <h3 className="tw-mb-2 tw-font-bold tw-text-xl">S'inscrire</h3>
+                <h3 className="tw-mb-2 tw-font-bold tw-text-xl">
+                  S&apos;inscrire
+                </h3>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="default-form-box">

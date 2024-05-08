@@ -4,7 +4,8 @@ datasource db {
 }
 
 generator client {
-    provider = "prisma-client-js"
+    provider      = "prisma-client-js"
+    binaryTargets = ["native", "debian-openssl-1.0.x"]
 }
 
 model User {
@@ -20,77 +21,100 @@ model User {
     createdAt     DateTime? @default(now())
     updatedAt     DateTime? @updatedAt
     Siparis       Siparis[]
-    role          Role      @default(USER)
+    Role          Role      @default(USER)
     Account       Account[]
 
     @@index([email])
 }
 
 model Product {
-    id          Int                @id @default(autoincrement())
-    name        String
-    slug        String             @unique
-    desc        String?
-    gender      String
-    categoryId  Int
-    category    Category           @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-    brand       Brand[]
-    price       Float
-    inprice     Float
-    colorsize   ProductColorSize[]
-    parcelgram  Json?
-    indirimsize String?
-    indirim     Boolean?
-    yeni        Boolean?
-    ilk         Boolean?
-    ofg         Boolean?
-    bio         Boolean?
-    onclick     Int?
-    sells       Int?
-    archive     Boolean?
-    guideurl    String?
-    quill       Json?
-    createdAt   DateTime?          @default(now())
-    updatedAt   DateTime?          @updatedAt
+    id               Int                @id @default(autoincrement())
+    name             String
+    slug             String             @unique
+    desc             String?
+    gender           String?
+    categoryId       Int
+    Category         Category           @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    Brand            Brand[]
+    price            Float
+    inprice          Float
+    ProductColorSize ProductColorSize[]
+    ParcelGram       ParcelGram[]
+    indirimsize      String?
+    indirim          Boolean?
+    yeni             Boolean?
+    ilk              Boolean?
+    ofg              Boolean?
+    bio              Boolean?
+    onclick          Int?
+    sells            Int?
+    archive          Boolean?
+    guideurl         Json?
+    quill            Json?
+    createdAt        DateTime?          @default(now())
+    updatedAt        DateTime?          @updatedAt
 
-    @@unique([categoryId])
     @@index([slug])
 }
 
 model ProductColorSize {
-    id         Int         @id @default(autoincrement())
-    type       SizeType    @relation(fields: [sizeTypeId], references: [id])
-    stocks     Sizestock[]
-    color      Color       @relation(fields: [colorId], references: [id], onDelete: Cascade)
-    colorId    Int
-    images     Json?
-    product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
-    productId  Int
-    sizeTypeId Int
-
-    @@unique([colorId, productId])
+    id        Int         @id @default(autoincrement())
+    SizeStock SizeStock[]
+    Color     Color?      @relation(fields: [colorId], references: [id], onDelete: Cascade)
+    images    Json?
+    Product   Product?    @relation(fields: [productId], references: [id])
+    productId Int?
+    colorId   Int?
 }
 
-model Sizestock {
+model SizeStock {
     id                 Int               @id @default(autoincrement())
-    stock              Int
-    productColorSizeId Int
-    sizeId             Int
-    size               Size              @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+    stock              Int?
+    productColorSizeId Int?
+    sizeId             Int?
+    Size               Size?             @relation(fields: [sizeId], references: [id], onDelete: Cascade)
     ProductColorSize   ProductColorSize? @relation(fields: [productColorSizeId], references: [id], onDelete: Cascade)
 }
 
-model Brand {
-    id         Int       @id @default(autoincrement())
-    index      Int?
-    name       String?
-    archive    Boolean?
-    Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-    categoryId Int?
-    Product    Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
-    productId  Int?
+model ParcelGram {
+    id        Int      @id @default(autoincrement())
+    gram      Int?
+    sizeId    Int?
+    Size      Size?    @relation(fields: [sizeId], references: [id])
+    Product   Product? @relation(fields: [productId], references: [id])
+    productId Int?
 
-    @@unique([categoryId, productId])
+    @@unique([sizeId, productId])
+}
+
+model Size {
+    id         Int          @id @default(autoincrement()) // 1 
+    index      Int? // 1
+    name       String? // XL
+    archive    Boolean?
+    SizeType   SizeType?    @relation(fields: [sizeTypeId], references: [id])
+    sizeTypeId Int?
+    SizeStock  SizeStock[]
+    ParcelGram ParcelGram[]
+}
+
+model SizeType {
+    id       Int        @id @default(autoincrement())
+    name     String?
+    type     String?
+    Category Category[]
+    Size     Size[]
+
+    @@index([type])
+}
+
+model Brand {
+    id       Int        @id @default(autoincrement())
+    index    Int?
+    name     String?
+    archive  Boolean?
+    Category Category[]
+    Product  Product[]
 }
 
 model Category {
@@ -98,17 +122,17 @@ model Category {
     index      Int?
     name       String
     slug       String    @unique
-    brand      Brand[]
+    Brand      Brand[]
     desc       String?
     keywords   String?
     gender     String?
-    type       SizeType  @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
+    cattype    String?
+    SizeType   SizeType? @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
     season     String?
     archive    Boolean?
     sizeTypeId Int
     Product    Product[]
 
-    @@unique([sizeTypeId])
     @@index([slug])
 }
 
@@ -124,31 +148,10 @@ model Color {
     @@index([slug])
 }
 
-model Size {
-    id         Int         @id @default(autoincrement()) // 1 
-    type       SizeType    @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade) // dress
-    index      Int? // 1
-    name       String? // XL
-    archive    Boolean?
-    sizeTypeId Int
-    Sizestock  Sizestock[]
-
-    @@unique([sizeTypeId])
-}
-
-model SizeType {
-    id               Int                @id @default(autoincrement())
-    name             String?
-    type             String?
-    Category         Category[]
-    Size             Size[]
-    ProductColorSize ProductColorSize[]
-}
-
 model Siparis {
     id         Int      @id @default(autoincrement())
     username   String
-    user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    User       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId     Int?
     email      String
     billadress Json
@@ -181,11 +184,12 @@ enum Role {
 }
 
 model Ayarlar {
-    id           String  @id @default(cuid())
+    id           Int     @id
+    desc         String?
     keywords     String?
     header       Json?
     banner       Json?
-    bannerb      String?
+    bannerb      Json?
     discountset  Json?
     discountpage Json?
     settings     Json?
@@ -207,7 +211,7 @@ model Account {
     id_token                 String? @db.Text
     session_state            String?
     refresh_token_expires_in Int?
-    user                     User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    User                     User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

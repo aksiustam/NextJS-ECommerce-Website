@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import React from "react";
 
 const Banner = (props) => {
   return (
@@ -13,7 +12,7 @@ const Banner = (props) => {
                 <h2 className="tw-capitalize tw-text-white">{props.title}</h2>
                 <ul>
                   <li>
-                    <Link href="/">Page D'acceuil</Link>
+                    <Link href="/">Page D&apos;acceuil</Link>
                   </li>
                   <li className="slash">/</li>
                   <li className="active !tw-text-gray-300 tw-capitalize">
