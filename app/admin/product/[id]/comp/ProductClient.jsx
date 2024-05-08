@@ -16,7 +16,7 @@ import Tabs from "react-bootstrap/Tabs";
 import "./tabstyle.css";
 const ProductClient = (props) => {
   const { product, allcategory } = props;
-  const { brand, color } = allcategory;
+  const { brand, color, category } = allcategory;
   const size = allcategory.size.filter(
     (item) => item.SizeType.type === product.Category.cattype
   );
@@ -166,7 +166,24 @@ const ProductClient = (props) => {
                     </div>
                   </div>
 
-                  <div className="col-lg-6">
+                  <div className="col-lg-4">
+                    <div className="fotm-group">
+                      <label htmlFor="product_cat">Kategori</label>
+                      <select
+                        name="category"
+                        id="p_category"
+                        {...register("category")}
+                        disabled
+                      >
+                        {category?.map((category) => (
+                          <option key={category.id} value={category.id}>
+                            {category.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
                     <div className="fotm-group">
                       <label htmlFor="product_price">
                         Fiyat
@@ -181,7 +198,7 @@ const ProductClient = (props) => {
                       />
                     </div>
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-4">
                     <div className="fotm-group">
                       <label htmlFor="product_inprice">İndirimli Fiyat</label>
                       (Fiyat Küsüratı Nokta ile)

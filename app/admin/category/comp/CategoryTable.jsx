@@ -11,6 +11,7 @@ const CategoryTable = (props) => {
   const data = props.category;
   const brand = props.brand;
   const sizetype = props.sizetype;
+  const cattype = props.cattype;
   const value =
     brand?.map((item) => {
       return { label: item?.name, value: item?.id };
@@ -92,7 +93,7 @@ const CategoryTable = (props) => {
         setMessage(JSON.stringify(error.response.data));
       });
   };
-
+  console.log(modalData);
   return (
     <>
       <Modal
@@ -225,7 +226,7 @@ const CategoryTable = (props) => {
                     <select
                       name="type"
                       id="product_type"
-                      defaultValue={modalData?.cattype}
+                      defaultValue={modalData?.CategoryType?.type}
                       onBlur={(e) => {
                         registermodal(`cattype`, {
                           shouldUnregister: true,
@@ -233,10 +234,11 @@ const CategoryTable = (props) => {
                         });
                       }}
                     >
-                      <option value="dress">Vétements</option>
-                      <option value="acc">Accessoires</option>
-                      <option value="under">PİJAMA VE İÇ ÇAMAŞIRLAR</option>
-                      <option value="shoe">Chaussures</option>
+                      {cattype?.map((item) => (
+                        <option key={item.id} value={item.type}>
+                          {item.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="fotm-group tw-flex tw-flex-col tw-w-full">
@@ -345,7 +347,7 @@ const CategoryTable = (props) => {
                           {item?.name}
                         </td>
                         <td>{item?.gender}</td>
-                        <td>{item?.cattype}</td>
+                        <td>{item?.CategoryType?.name}</td>
                         <td>
                           <button
                             onClick={() => {
@@ -475,10 +477,11 @@ const CategoryTable = (props) => {
                         {...registerCat("cattype")}
                         required
                       >
-                        <option value="dress">Vétements</option>
-                        <option value="acc">Accessoires</option>
-                        <option value="under">PİJAMA VE İÇ ÇAMAŞIRLAR</option>
-                        <option value="shoe">Chaussures</option>
+                        {cattype?.map((item) => (
+                          <option key={item.id} value={item.type}>
+                            {item.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="fotm-group tw-flex tw-flex-col tw-w-full">

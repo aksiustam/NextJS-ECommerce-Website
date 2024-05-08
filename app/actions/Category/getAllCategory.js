@@ -9,6 +9,7 @@ export default async function getAllCategory() {
       include: {
         SizeType: true,
         Brand: true,
+        CategoryType: true,
       },
     });
     const brand = await prisma.brand.findMany({
@@ -30,12 +31,14 @@ export default async function getAllCategory() {
       },
     });
     const sizetype = await prisma.SizeType.findMany();
+    const cattype = await prisma.CategoryType.findMany();
     const data = {
       category: category,
       brand: brand,
       color: color,
       sizetype: sizetype,
       size: size,
+      cattype: cattype,
     };
     return data;
   } catch (error) {

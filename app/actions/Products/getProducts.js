@@ -8,7 +8,12 @@ export default async function getProducts() {
       },
       include: {
         ParcelGram: true,
-        Category: true,
+        Category: {
+          include: {
+            CategoryType: true,
+            SizeType: true,
+          },
+        },
         Brand: true,
         ProductColorSize: {
           include: {

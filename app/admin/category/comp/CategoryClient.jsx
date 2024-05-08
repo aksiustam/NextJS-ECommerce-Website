@@ -5,11 +5,12 @@ import ColorTable from "./ColorTable";
 import DressSizeTable from "./DressSizeTable";
 import ShoeSizeTable from "./ShoeSizeTable";
 import SizeTypeTable from "./SizeTypeTable";
+import CatTypeTable from "./CatTypeTable";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 const CategoryClient = (props) => {
   const { AllCategory } = props;
-  const { category, brand, color, size, sizetype } = AllCategory;
+  const { category, brand, color, size, sizetype, cattype } = AllCategory;
 
   return (
     <div className="row -tw-mt-16">
@@ -21,6 +22,7 @@ const CategoryClient = (props) => {
                 category={category}
                 brand={brand}
                 sizetype={sizetype}
+                cattype={cattype}
               />
             </Tab>
             <Tab eventKey="brand" title="Çeşit">
@@ -39,6 +41,9 @@ const CategoryClient = (props) => {
 
             <Tab eventKey="sizetype" title="SizeType">
               <SizeTypeTable sizetype={sizetype} />
+            </Tab>
+            <Tab eventKey="cattype" title="CatType">
+              <CatTypeTable cattype={cattype} />
             </Tab>
             <Tab eventKey="contact" title="BaşkaBoyutlar" disabled>
               Tab content for Contact

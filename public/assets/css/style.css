@@ -3768,6 +3768,7 @@ textarea:focus {
 
 .shop_sidebar_wrapper {
   padding-top: 30px;
+  width: 85%;
 }
 
 .shop_Search {

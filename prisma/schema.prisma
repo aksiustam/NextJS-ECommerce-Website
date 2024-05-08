@@ -108,6 +108,15 @@ model SizeType {
     @@index([type])
 }
 
+model CategoryType {
+    id       Int        @id @default(autoincrement())
+    name     String?
+    type     String?
+    Category Category[]
+
+    @@index([type])
+}
+
 model Brand {
     id       Int        @id @default(autoincrement())
     index    Int?
@@ -118,20 +127,21 @@ model Brand {
 }
 
 model Category {
-    id         Int       @id @default(autoincrement())
-    index      Int?
-    name       String
-    slug       String    @unique
-    Brand      Brand[]
-    desc       String?
-    keywords   String?
-    gender     String?
-    cattype    String?
-    SizeType   SizeType? @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
-    season     String?
-    archive    Boolean?
-    sizeTypeId Int
-    Product    Product[]
+    id             Int           @id @default(autoincrement())
+    index          Int?
+    name           String
+    slug           String        @unique
+    Brand          Brand[]
+    desc           String?
+    keywords       String?
+    gender         String?
+    CategoryType   CategoryType? @relation(fields: [categoryTypeId], references: [id])
+    SizeType       SizeType?     @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
+    season         String?
+    archive        Boolean?
+    sizeTypeId     Int
+    Product        Product[]
+    categoryTypeId Int?
 
     @@index([slug])
 }

@@ -4,18 +4,14 @@ import SideBar from "./SideBar";
 import ProductCard from "../../components/Products/ProductCard";
 import ofgimg from "@/public/assets/img/common/logo-france.png";
 import bioimg from "@/public/assets/img/common/bio.png";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-
 const ShopPage = (props) => {
   const { products, allcategory } = props;
+
   const [filteredData, setFilteredData] = useState([]);
 
   const [drawer, setDrawer] = useState("normal");
   const [sort, setSort] = useState("all");
-  const searchParams = useSearchParams();
-
-  const searchProduct = searchParams.get("type") || "all";
 
   const [filterProducts, setFilterProducts] = useState([]);
   useEffect(() => {
@@ -29,6 +25,7 @@ const ShopPage = (props) => {
       const maxPrice = filteredData?.maxprice || 3000;
       const selectedBio = filteredData?.bio || false;
       const selectedOfg = filteredData?.ofg || false;
+
       return products.filter((product) => {
         const categoryMatch =
           selectedCategories.length === 0 ||
@@ -49,8 +46,7 @@ const ShopPage = (props) => {
             );
           return colorMatch && sizeMatch;
         });
-        const slugMatch =
-          product.Category.CategoryType.name === searchProduct ? true : false;
+        const slugMatch = product.yeni === true ? true : false;
 
         const priceMatch =
           product.price >= minPrice && product.price <= maxPrice;
@@ -91,7 +87,7 @@ const ShopPage = (props) => {
         case "all":
           return data;
         default:
-          return data;
+          return [];
       }
     };
     const filteredProducts = sortMyProducts(filterMyProducts());
@@ -148,7 +144,6 @@ const ShopPage = (props) => {
           <div className="row">
             <SideBar
               onFilterChange={setFilteredData}
-              searchProduct={searchProduct}
               allcategory={allcategory}
             />
             <div className="col-lg-9">
@@ -161,7 +156,6 @@ const ShopPage = (props) => {
                     height={25}
                     className="tw-w-5 tw-h-5"
                   />
-
                   <span className="tw-font-bold">Bio</span>
                 </div>
                 <div className="tw-flex tw-gap-3 tw-ml-4">
@@ -172,11 +166,10 @@ const ShopPage = (props) => {
                     height={25}
                     className="tw-w-5 tw-h-5"
                   />
-
                   <span className="tw-font-bold">Origine France Garantie</span>
                 </div>
               </div>
-              <div className="row tw-justify-center md:tw-justify-end tw-mx-2">
+              <div className="row tw-justify-center  md:tw-justify-end tw-mx-2">
                 <div className="product_shot">
                   <div className="product_shot_title ">
                     <p className="tw-text-sm lg:tw-text-lg">Trier par :</p>
@@ -228,8 +221,8 @@ const ShopPage = (props) => {
               </div>
 
               <div className="row">
-                <div className="col-lg-12 col-md-12 col-sm-12 col-12 tw-hidden">
-                  <h1 className="tw-font-bold tw-text-xl">Boutique</h1>
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <h1 className="tw-font-bold tw-text-xl tw-hidden">HEY</h1>
                 </div>
                 {pagiProducts?.map((data) => {
                   if (drawer === "normal")

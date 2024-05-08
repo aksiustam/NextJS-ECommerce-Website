@@ -1,22 +1,15 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
-import Switch from "./Switch";
+import Switch from "../comp/Switch";
 
 const SideBar = (props) => {
-  const { onFilterChange, searchProduct, allcategory } = props;
-
+  const { onFilterChange, allcategory } = props;
   const [sidebar, setSidebar] = useState({
-    cat: allcategory.category.filter(
-      (item) => item.CategoryType.name === searchProduct
-    ),
+    cat: allcategory.category,
     brand: { id: [], data: [] },
     color: allcategory.color,
-    size: allcategory.size.filter(
-      (item) => item.SizeType.name === searchProduct
-    ),
+    size: allcategory.size.filter((item) => item.name !== "null"),
   });
 
   const [filter, setFilter] = useState({
@@ -68,7 +61,7 @@ const SideBar = (props) => {
 
   return (
     <>
-      <div className="col-lg-3 ">
+      <div className="col-lg-3">
         <div className="shop_sidebar_wrapper">
           <div
             className="tw-flex md:tw-hidden tw-justify-center tw-items-center"
@@ -105,19 +98,15 @@ const SideBar = (props) => {
                       type="checkbox"
                       name="checkbox1"
                       onChange={() => {
-                        setFilter((prev) => {
-                          return {
-                            ...prev,
-                            mycat: Array.isArray(prev.mycat)
-                              ? prev.mycat.includes(item.id)
-                                ? prev.mycat.filter(
-                                    (catId) => catId !== item.id
-                                  )
-                                : [...prev.mycat, item.id]
-                              : [item.id],
-                            mybrand: [],
-                          };
-                        });
+                        setFilter((prev) => ({
+                          ...prev,
+                          mycat: Array.isArray(prev.mycat)
+                            ? prev.mycat.includes(item.id)
+                              ? prev.mycat.filter((catId) => catId !== item.id)
+                              : [...prev.mycat, item.id]
+                            : [item.id],
+                          mybrand: [],
+                        }));
 
                         setSidebar((prev) => {
                           let oldid = prev.brand.id;
@@ -139,14 +128,13 @@ const SideBar = (props) => {
                           } else {
                             let uniqueData = {};
 
-                            prev?.cat?.forEach((filterdata) => {
+                            sidebar?.cat?.forEach((filterdata) => {
                               if (oldid.includes(filterdata.id)) {
                                 filterdata.Brand.forEach(
                                   (item) => (uniqueData[item.id] = item)
                                 );
                               }
                             });
-
                             data = Object.values(uniqueData);
 
                             return {
@@ -169,8 +157,8 @@ const SideBar = (props) => {
               isSidebarOpen ? "tw-block" : "tw-hidden"
             }`}
           >
-            <p className="tw-font-extrabold">Types</p>
-            {sidebar?.brand?.data?.map((item) => {
+            <p className="tw-font-extrabold tw-pb-4">Types</p>
+            {sidebar.brand?.data?.map((item) => {
               return (
                 <label key={item?.id} className="custom_boxed tw-font-bold">
                   {item?.name}
@@ -256,7 +244,7 @@ const SideBar = (props) => {
                   className="tw-pl-8 tw-pr-4 tw-py-1 tw-border tw-rounded-md tw-w-28"
                 />
               </div>
-              <div>ve</div>
+              <div>&</div>
               <div className="tw-relative">
                 <span className="tw-absolute tw-inset-y-0 tw-left-0 tw-pl-2 tw-flex tw-items-center">
                   €
@@ -284,9 +272,9 @@ const SideBar = (props) => {
           >
             <p className="tw-font-extrabold tw-mb-4">Couleur</p>
             <div className="product-variable-color">
-              {sidebar?.color?.map((item) => (
+              {sidebar.color?.map((item, index) => (
                 <label
-                  key={item.id}
+                  key={index}
                   className={
                     filter?.mycolor?.includes(item.id)
                       ? "tw-border-[3.5px] tw-border-stone-300"
@@ -325,29 +313,25 @@ const SideBar = (props) => {
             <div id="sizes_input">
               <p className="tw-font-extrabold tw-mb-3">Taille</p>
               <div className="tw-flex tw-gap-1 tw-flex-wrap">
-                {sidebar?.size
-                  ?.filter((item) => item.name !== "null")
-                  .map((item) => (
-                    <label key={item.id} className="custom_boxed tw-font-bold">
-                      {item.name}
-                      <input
-                        type="checkbox"
-                        name="checkbox4"
-                        onChange={() => {
-                          setFilter((prev) => ({
-                            ...prev,
-                            mysize: prev.mysize.includes(item.id)
-                              ? prev.mysize.filter(
-                                  (sizeId) => sizeId !== item.id
-                                )
-                              : [...prev.mysize, item.id],
-                          }));
-                        }}
-                        checked={filter?.mysize?.includes(item.id)}
-                      />
-                      <span className="checkmark"></span>
-                    </label>
-                  ))}
+                {sidebar.size?.map((item, index) => (
+                  <label key={index} className="custom_boxed tw-font-bold">
+                    {item.name}
+                    <input
+                      type="checkbox"
+                      name="checkbox4"
+                      onChange={() => {
+                        setFilter((prev) => ({
+                          ...prev,
+                          mysize: prev.mysize.includes(item.id)
+                            ? prev.mysize.filter((sizeId) => sizeId !== item.id)
+                            : [...prev.mysize, item.id],
+                        }));
+                      }}
+                      checked={filter?.mysize?.includes(item.id)}
+                    />
+                    <span className="checkmark"></span>
+                  </label>
+                ))}
               </div>
             </div>
           </div>

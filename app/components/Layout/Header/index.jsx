@@ -173,12 +173,11 @@ const Header = (props) => {
                           href={item.href !== "" ? item.href : "#!"}
                           className="main-menu-link !tw-text-white"
                           onClick={() => {
-                            if (gacheck)
-                              ReactGA.event({
-                                category: "event",
-                                action: item?.name,
-                                label: item?.name + " a gitti",
-                              });
+                            ReactGA.event({
+                              category: "event",
+                              action: item?.name,
+                              label: item?.name + " a gitti",
+                            });
                           }}
                         >
                           {item?.name}
@@ -194,12 +193,11 @@ const Header = (props) => {
                                   href={data.href}
                                   className="!tw-font-bold"
                                   onClick={() => {
-                                    if (gacheck)
-                                      ReactGA.event({
-                                        category: "event",
-                                        action: data?.name,
-                                        label: data?.name + " a gitti",
-                                      });
+                                    ReactGA.event({
+                                      category: "event",
+                                      action: data?.name,
+                                      label: data?.name + " a gitti",
+                                    });
                                   }}
                                 >
                                   {data?.name}
