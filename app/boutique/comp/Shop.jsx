@@ -26,7 +26,7 @@ const ShopPage = (props) => {
       const selectedSizes = filteredData?.mysize || [];
 
       const minPrice = filteredData?.minprice || 0;
-      const maxPrice = filteredData?.maxprice || 3000;
+      const maxPrice = filteredData?.maxprice || 500;
       const selectedBio = filteredData?.bio || false;
       const selectedOfg = filteredData?.ofg || false;
       return products.filter((product) => {

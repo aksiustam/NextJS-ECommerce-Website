@@ -41,11 +41,11 @@ model Product {
     ProductColorSize ProductColorSize[]
     ParcelGram       ParcelGram[]
     indirimsize      String?
-    indirim          Boolean?
-    yeni             Boolean?
-    ilk              Boolean?
-    ofg              Boolean?
-    bio              Boolean?
+    indirim          Boolean? // promotions
+    yeni             Boolean? // nouveautes
+    ilk              Boolean? // tendances
+    ofg              Boolean? //ofg
+    bio              Boolean? //bio
     onclick          Int?
     sells            Int?
     archive          Boolean?

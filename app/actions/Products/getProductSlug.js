@@ -1,10 +1,10 @@
 import prisma from "@/lib/prismadb";
 
-export default async function getProductOne(id) {
+export default async function getProductOne(slug) {
   try {
-    const productsWithDetails = await prisma.product.findFirst({
+    const productsWithDetails = await prisma.product.findUnique({
       where: {
-        id: parseInt(id),
+        slug: slug,
         archive: false,
       },
       include: {

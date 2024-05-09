@@ -46,7 +46,6 @@ const ShopPage = (props) => {
             );
           return colorMatch && sizeMatch;
         });
-        const slugMatch = product.yeni === true ? true : false;
 
         const priceMatch =
           product.price >= minPrice && product.price <= maxPrice;
@@ -57,7 +56,6 @@ const ShopPage = (props) => {
           selectedOfg === true ? product.ofg === selectedOfg : true;
 
         return (
-          slugMatch &&
           categoryMatch &&
           brandMatch &&
           colorSizeMatch &&
@@ -90,7 +88,12 @@ const ShopPage = (props) => {
           return [];
       }
     };
-    const filteredProducts = sortMyProducts(filterMyProducts());
+    const clickMyProducts = (data) => {
+      return data.sort((a, b) => b.onclick - a.onclick);
+    };
+    const filteredProducts = sortMyProducts(
+      clickMyProducts(filterMyProducts())
+    );
 
     setFilterProducts(filteredProducts);
   }, [products, filteredData, sort]);

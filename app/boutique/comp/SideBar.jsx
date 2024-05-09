@@ -25,7 +25,7 @@ const SideBar = (props) => {
     mycolor: [],
     mysize: [],
     minPrice: 0,
-    maxPrice: 3000,
+    maxPrice: 500,
     bio: false,
     ofg: false,
   });
@@ -37,7 +37,7 @@ const SideBar = (props) => {
       mycolor: filter.mycolor || [],
       mysize: filter.mysize || [],
       minprice: filter.minPrice || 0,
-      maxprice: filter.maxPrice || 3000,
+      maxprice: filter.maxPrice || 500,
       bio: filter.bio,
       ofg: filter.ofg,
     });
@@ -50,7 +50,7 @@ const SideBar = (props) => {
       mycolor: [],
       mysize: [],
       minPrice: 0,
-      maxPrice: 3000,
+      maxPrice: 500,
       bio: false,
       ofg: false,
     });
@@ -227,7 +227,7 @@ const SideBar = (props) => {
 
             <RangeSlider
               min={0}
-              max={3000}
+              max={500}
               value={[filter?.minPrice, filter?.maxPrice]}
               onInput={(values) => {
                 setFilter((prev) => ({
@@ -246,6 +246,8 @@ const SideBar = (props) => {
                 <input
                   type="number"
                   id="minPrice"
+                  min={0}
+                  max={500}
                   value={filter?.minPrice}
                   onChange={(e) =>
                     setFilter((prev) => ({
@@ -264,6 +266,8 @@ const SideBar = (props) => {
                 <input
                   type="number"
                   id="maxPrice"
+                  min={0}
+                  max={500}
                   value={filter?.maxPrice}
                   onChange={(e) =>
                     setFilter((prev) => ({

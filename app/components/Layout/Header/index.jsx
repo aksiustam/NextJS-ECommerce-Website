@@ -15,20 +15,20 @@ import { MdClose } from "react-icons/md";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoExit } from "react-icons/io5";
 import { FaBars } from "react-icons/fa6";
+import { FaTrashAlt } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
 import ReactGA from "react-ga4";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
-
+import UseCart from "@/hooks/useCart";
 const Header = (props) => {
   const MenuData = props.headerdata;
   const User = props.user;
-
   const { register, handleSubmit } = useForm();
-
   const router = useRouter();
+
   const onSubmit = async (data) => {
     handleSearch();
     router.push(`/search/${data.search}`);
@@ -36,15 +36,7 @@ const Header = (props) => {
   const [click, setClick] = useState(false);
   const [show, setShow] = useState();
 
-  const basket = [];
-
-  // const { basket } = useSelector((state) => state.basket);
-
-  const rmBasket = async (id, color, size) => {
-    const data = { id: id, color: color, size: size };
-
-    // await dispatch(removeBasket(data));
-  };
+  const { removeBasket, basket } = UseCart();
 
   const cartTotal = () => {
     return basket
@@ -528,8 +520,8 @@ const Header = (props) => {
                     className="offcanvas-wishlist-item-image-link"
                   >
                     <Image
-                      src={data.image?.url ? API_URL + data.image?.url : errimg}
-                      alt={data.image?.name}
+                      src={data.image?.imageurl}
+                      alt={data.name}
                       width={300}
                       height={300}
                       className="offcanvas-wishlist-image"
@@ -560,9 +552,9 @@ const Header = (props) => {
                   <a
                     href="#!"
                     className="offcanvas-wishlist-item-delete"
-                    onClick={() => rmBasket(data.id, data.color, data.size)}
+                    onClick={() => removeBasket(data)}
                   >
-                    <i className="fa fa-trash"></i>
+                    <FaTrashAlt size={20} color="red" />
                   </a>
                 </div>
               </li>

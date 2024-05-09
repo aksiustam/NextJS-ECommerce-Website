@@ -1,0 +1,17 @@
+.slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    color: black;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .right-arrow {
+    right: 10px;
+  }
+  
+  .left-arrow {
+    left: 10px;
+  }

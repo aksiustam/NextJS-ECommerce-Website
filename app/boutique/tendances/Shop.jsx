@@ -46,7 +46,7 @@ const ShopPage = (props) => {
             );
           return colorMatch && sizeMatch;
         });
-        const slugMatch = product.yeni === true ? true : false;
+        const slugMatch = product.ilk === true ? true : false;
 
         const priceMatch =
           product.price >= minPrice && product.price <= maxPrice;
