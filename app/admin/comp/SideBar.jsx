@@ -7,6 +7,10 @@ import { MdOutlineCategory } from "react-icons/md";
 import { BiAperture } from "react-icons/bi";
 import { FaTshirt } from "react-icons/fa";
 import { MdDiscount } from "react-icons/md";
+import { FaShopify } from "react-icons/fa";
+import { FaHouseUser } from "react-icons/fa";
+import { MdConnectWithoutContact } from "react-icons/md";
+
 const SideBar = () => {
   const pathname = usePathname();
 
@@ -63,7 +67,7 @@ const SideBar = () => {
                 className={pathname === "/admin/order" ? "active" : null}
               >
                 <div className="tw-flex tw-gap-2 tw-items-center">
-                  <BiWorld size={20} /> Siparişler
+                  <FaShopify size={20} /> Siparişler
                 </div>
               </Link>
             </li>
@@ -94,7 +98,7 @@ const SideBar = () => {
                 className={pathname === "/admin/user" ? "active" : null}
               >
                 <div className="tw-flex tw-gap-2 tw-items-center">
-                  <BiWorld size={20} /> Kullanıcılar
+                  <FaHouseUser size={20} /> Kullanıcılar
                 </div>
               </Link>
             </li>
@@ -104,7 +108,7 @@ const SideBar = () => {
                 className={pathname === "/admin/contact" ? "active" : null}
               >
                 <div className="tw-flex tw-gap-2 tw-items-center">
-                  <BiWorld size={20} /> İletişim
+                  <MdConnectWithoutContact size={20} /> İletişim
                 </div>
               </Link>
             </li>

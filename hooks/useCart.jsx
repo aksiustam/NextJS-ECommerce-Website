@@ -7,8 +7,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import toast from "react-hot-toast";
-
 const CartContext = createContext(null);
 
 export const CartContextProvider = (props) => {
@@ -25,9 +23,6 @@ export const CartContextProvider = (props) => {
   const addToBasket = useCallback(
     (newItem) => {
       let upBasket = [...basket];
-      if (newItem.quantity === 10) {
-        return toast.error("Daha fazla ekleyemezsin...");
-      }
 
       const Index = upBasket.findIndex(
         (item) =>
@@ -37,7 +32,6 @@ export const CartContextProvider = (props) => {
       );
       if (Index !== -1) {
         upBasket[Index].quantity += newItem.quantity || 1;
-        if (upBasket[Index].quantity > 10) upBasket[Index].quantity = 10;
       } else {
         upBasket = [...upBasket, newItem];
       }
@@ -67,10 +61,16 @@ export const CartContextProvider = (props) => {
     [basket]
   );
 
+  const emptyBasket = useCallback(() => {
+    setBasket([]);
+    localStorage.setItem("cart", JSON.stringify([]));
+  }, []);
+
   let value = {
     basket,
     addToBasket,
     removeBasket,
+    emptyBasket,
   };
   return <CartContext.Provider value={value} {...props} />;
 };

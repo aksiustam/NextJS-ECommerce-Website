@@ -5,6 +5,7 @@ import Tabs from "react-bootstrap/Tabs";
 import HeaderSet from "./HeaderSet";
 import BannerSet from "./Resimler/BannerSet";
 import BannerBSet from "./Resimler/BannerBSet";
+import SettingsClient from "./SettingsClient";
 const SetClient = (props) => {
   const { category, ayarlar } = props;
 
@@ -21,7 +22,7 @@ const SetClient = (props) => {
               <BannerBSet />
             </Tab>
             <Tab eventKey="ayar" title="Mail Ayarlar">
-              <div>HEYY</div>
+              <SettingsClient settings={ayarlar} />
             </Tab>
           </Tabs>
         </div>

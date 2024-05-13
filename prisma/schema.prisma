@@ -23,8 +23,23 @@ model User {
     Siparis       Siparis[]
     Role          Role      @default(USER)
     Account       Account[]
+    Address       Address[]
 
     @@index([email])
+}
+
+model Address {
+    id         Int     @id @default(autoincrement())
+    name       String?
+    adress     String?
+    state      String?
+    country    String?
+    zipcode    String?
+    category   String?
+    company    String?
+    companytva String?
+    User       User?   @relation(fields: [userId], references: [id])
+    userId     Int?
 }
 
 model Product {
@@ -47,12 +62,12 @@ model Product {
     ofg              Boolean? //ofg
     bio              Boolean? //bio
     onclick          Int?
-    sells            Int?
     archive          Boolean?
     guideurl         Json?
     quill            Json?
     createdAt        DateTime?          @default(now())
     updatedAt        DateTime?          @updatedAt
+    StockMail        StockMail[]
 
     @@index([slug])
 }
@@ -65,6 +80,7 @@ model ProductColorSize {
     Product   Product?    @relation(fields: [productId], references: [id])
     productId Int?
     colorId   Int?
+    sells     Int?
 }
 
 model SizeStock {
@@ -150,7 +166,7 @@ model Color {
     id               Int                @id @default(autoincrement())
     index            Int?
     name             String?
-    slug             String             @unique
+    slug             String?            @unique
     hex              String?
     archive          Boolean?
     ProductColorSize ProductColorSize[]
@@ -159,24 +175,23 @@ model Color {
 }
 
 model Siparis {
-    id         Int      @id @default(autoincrement())
-    username   String
-    User       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id         Int       @id @default(autoincrement())
+    username   String?
+    User       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId     Int?
-    email      String
-    billadress Json
-    sendadress Json
-    basket     Json
-    amount     Float
+    email      String?
+    billadress Json?
+    sendadress Json?
+    basket     Json?
+    amount     Float?
     note       String?
-    sendmail   String
+    sendmail   String?
     shipping   Json?
     status     String?
     error      String?
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-
-    @@unique([userId])
+    kargono    String?
+    createdAt  DateTime? @default(now())
+    updatedAt  DateTime? @updatedAt
 }
 
 model Contact {
@@ -226,6 +241,20 @@ model Account {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@unique([provider, providerAccountId])
     @@index([userId])
+}
+
+model StockMail {
+    id        Int      @id @default(autoincrement())
+    mail      String?
+    Product   Product? @relation(fields: [productId], references: [id])
+    name      String?
+    color     String?
+    size      String?
+    productId Int?
+}
+
+model NewsMail {
+    id   Int     @id @default(autoincrement())
+    mail String?
 }

@@ -1,17 +1,20 @@
 import MenuData from "../components/Layout/Header/MenuData";
-import LoginClient from "./comp/LoginClient";
 import Header from "../components/Layout/Header";
-import Banner from "../components/Layout/Banner/Banner";
 import Footer from "../components/Layout/Footer";
+import { getCurrentUser } from "../actions/getCurrentUser";
+import Banner from "../components/Layout/Banner/Banner";
+import CartClient from "./CartClient";
+
 const page = async () => {
   const headerdata = await MenuData();
+  const user = await getCurrentUser();
 
   return (
     <>
-      <Header headerdata={headerdata} />
-      <Banner title="Se Connecter" />
+      <Header headerdata={headerdata} user={user} />
+      <Banner title="Panier" />
       <main>
-        <LoginClient />
+        <CartClient />
       </main>
       <Footer />
     </>

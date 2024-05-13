@@ -156,7 +156,7 @@ export async function PUT(req, { params }) {
   const size = await prisma.size.findMany({
     where: {
       archive: false,
-      SizeType: { type: product.Category.cattype },
+      SizeType: { type: product.Category.SizeType.type },
     },
     include: {
       SizeType: true,

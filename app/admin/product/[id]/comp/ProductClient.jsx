@@ -18,7 +18,7 @@ const ProductClient = (props) => {
   const { product, allcategory } = props;
   const { brand, color, category } = allcategory;
   const size = allcategory.size.filter(
-    (item) => item.SizeType.type === product.Category.cattype
+    (item) => item.SizeType.type === product.Category.SizeType.type
   );
 
   const bvalue = brand?.map((item) => {
@@ -279,14 +279,15 @@ const ProductClient = (props) => {
                             className="tw-mr-4"
                           >
                             <div>
-                              {product?.Category?.cattype === "dress" && (
+                              {product?.Category?.SizeType?.type ===
+                                "dress" && (
                                 <>
                                   <div className="row tw-mt-6">
                                     {size
                                       ?.filter(
                                         (item) =>
                                           item.SizeType.type ===
-                                          product?.Category?.cattype
+                                          product?.Category?.SizeType?.type
                                       )
                                       .map((item) => {
                                         const defvalue =
@@ -328,7 +329,7 @@ const ProductClient = (props) => {
                                   </div>
                                 </>
                               )}
-                              {product?.Category?.cattype === "acc" && (
+                              {product?.Category?.SizeType?.type === "acc" && (
                                 <>
                                   <div className="row tw-mt-6">
                                     <div className="col-lg-12">
@@ -364,7 +365,7 @@ const ProductClient = (props) => {
                                 (items) => items?.Color?.name === item
                               );
 
-                            if (product?.Category?.cattype === "acc") {
+                            if (product?.Category?.SizeType.type === "acc") {
                               return (
                                 <Tab
                                   key={index}
@@ -386,7 +387,9 @@ const ProductClient = (props) => {
                                   />
                                 </Tab>
                               );
-                            } else if (product?.Category?.cattype === "dress") {
+                            } else if (
+                              product?.Category?.SizeType.type === "dress"
+                            ) {
                               return (
                                 <Tab
                                   key={index}

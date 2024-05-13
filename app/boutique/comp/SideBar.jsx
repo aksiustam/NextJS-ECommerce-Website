@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import Switch from "./Switch";
+import { FaCheck } from "react-icons/fa";
 
 const SideBar = (props) => {
   const { onFilterChange, searchProduct, allcategory } = props;
 
   const [sidebar, setSidebar] = useState({
-    cat: allcategory.category.filter(
-      (item) => item.CategoryType.name === searchProduct
+    cat: allcategory.category.filter((item) =>
+      item.CategoryType.name === searchProduct || searchProduct === "all"
+        ? true
+        : false
     ),
     brand: { id: [], data: [] },
     color: allcategory.color,
@@ -287,14 +290,14 @@ const SideBar = (props) => {
             }`}
           >
             <p className="tw-font-extrabold tw-mb-4">Couleur</p>
-            <div className="product-variable-color">
+            <div className="product-variable-color tw-gap-2 ">
               {sidebar?.color?.map((item) => (
                 <label
                   key={item.id}
                   className={
                     filter?.mycolor?.includes(item.id)
-                      ? "tw-border-[3.5px] tw-border-stone-300"
-                      : "tw-border-[2px]"
+                      ? "tw-ring-[3.5px] tw-ring-stone-300"
+                      : "tw-ring-[2px]"
                   }
                 >
                   <input
@@ -316,7 +319,9 @@ const SideBar = (props) => {
                     style={{
                       backgroundColor: item.hex,
                     }}
-                  ></span>
+                  >
+                    <FaCheck className="iconsvg" size={18} color="white" />
+                  </span>
                 </label>
               ))}
             </div>

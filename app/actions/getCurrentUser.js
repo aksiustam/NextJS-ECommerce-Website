@@ -17,6 +17,11 @@ export async function getCurrentUser() {
       where: {
         email: session?.user?.email,
       },
+      include: {
+        Address: true,
+        Account: true,
+        Siparis: true,
+      },
     });
     if (!currentUser) {
       return null;

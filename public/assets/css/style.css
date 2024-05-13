@@ -3425,6 +3425,9 @@ textarea:focus {
   border-radius: 2px;
   cursor: pointer;
 }
+.product-variable-color  {
+  display: flex;
+}
 .product-variable-color label {
   line-height: 0;
   margin-right: 5px;
@@ -3442,10 +3445,20 @@ textarea:focus {
   position: relative;
   width: 30px;
   height: 30px;
-  display: inline-block;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 2px;
   cursor: pointer;
+}
+.product-variable-color label span .iconsvg {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: none;
+}
+.product-variable-color label input:checked + span .iconsvg {
+  display: block;
 }
 
 .product-variable-color label .product-color-red {
@@ -3473,20 +3486,14 @@ textarea:focus {
 }
 
 .product-variable-color label span::after {
-  position: absolute;
+
   color: #fff;
   content: "";
   display: inline-block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-weight: 900;
 }
 
-.product-variable-color label input:checked ~ span::after {
-  font-family: FontAwesome;
-  content: "\f00c";
-}
+
 
 .modal_share_icons_one {
   padding-top: 15px;

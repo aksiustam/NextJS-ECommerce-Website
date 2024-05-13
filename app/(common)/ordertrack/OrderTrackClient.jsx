@@ -1,0 +1,166 @@
+"use client";
+import { useEffect, useState } from "react";
+import { Form, InputGroup, Button } from "react-bootstrap";
+import axios from "axios";
+import { API_URL } from "../../../lib/config";
+const OrderTrackClient = () => {
+  const [email, setEmail] = useState("");
+  const [sipdata, setSipData] = useState(null);
+  const [error, setError] = useState("");
+  const [clicked, setClicked] = useState(false);
+  useEffect(() => {
+    const lastClickedTime = localStorage.getItem("lastClickedTime");
+    if (lastClickedTime) {
+      const elapsedTime = Date.now() - parseInt(lastClickedTime);
+      if (elapsedTime < 100000) {
+        // Eğer son tıklama 3 dakika içinde yapıldıysa
+        setClicked(true);
+        setTimeout(() => {
+          setClicked(false); // 3 dakika sonra tekrar tıklamaya izin ver
+        }, 100000 - elapsedTime);
+      }
+    }
+  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!clicked) {
+      setClicked(true);
+      localStorage.setItem("lastClickedTime", Date.now().toString());
+      const formData = { email: email };
+      await axios
+        .post(`${API_URL}/order/get-order-email`, formData)
+        .then((response) => {
+          setSipData(response.data);
+        })
+        .catch((error) => {
+          setError(error.response.data.message);
+        });
+      setTimeout(() => {
+        setClicked(false); // 3 dakika sonra tekrar tıklamaya izin ver
+      }, 180000);
+    } else {
+      setError("Réessayer dans 3 minute");
+    }
+  };
+
+  return (
+    <>
+      <section id="order-track" className="tw-my-8">
+        <div className="container">
+          <div className="account_form  tw-flex tw-flex-col tw-gap-4 tw-justify-center tw-items-center">
+            <div className="default-form-box">
+              <form onSubmit={handleSubmit} className="tw-text-center">
+                <label>
+                  Entrez votre adresse e-mail
+                  <span className="text-danger">*</span>
+                </label>
+                <label>
+                  <span className="text-danger">{error}</span>
+                </label>
+                <InputGroup>
+                  <Form.Control
+                    className="!tw-min-h-4"
+                    type="email"
+                    placeholder="Votre Adresse E-Mail"
+                    aria-label="Email Gir"
+                    aria-describedby="basic-addon2"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    variant="outline-secondary"
+                    id="button-addon2"
+                    className="tw-text-black tw-bg-slate-100"
+                  >
+                    OK
+                  </Button>
+                </InputGroup>
+              </form>
+            </div>
+            <div className="table_page table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No commande</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Nombre D’article</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sipdata
+                    ?.sort((a, b) => b?.siparisid - a?.siparisid)
+                    .map((item, index) => {
+                      const createdAt = item.createdAt;
+                      const date = new Date(createdAt);
+                      const options = {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      };
+                      const formattedDate = date.toLocaleDateString(
+                        "fr-FR",
+                        options
+                      );
+                      const total = item.basket.reduce((acc, item) => {
+                        return acc + item.quantity;
+                      }, 0);
+
+                      return (
+                        <tr key={item?.siparisid}>
+                          <td>#{item?.siparisid}</td>
+                          <td>{formattedDate}</td>
+                          <td>
+                            {item?.status === "paid" && (
+                              <span className="badge badge-info">
+                                En cours de traitement
+                              </span>
+                            )}
+                            {item?.status === "send" && (
+                              <div className="tw-flex tw-gap-2 tw-items-center tw-justify-center">
+                                <span className="badge badge-success">
+                                  Envoyée
+                                </span>
+                                <a
+                                  href={
+                                    sipdata?.shipping?.name === "colissimo"
+                                      ? ``
+                                      : `https://www.chronopost.fr/tracking-no-cms/suivi-page?listeNumerosLT=${
+                                          sipdata?.kargono || ""
+                                        }&langue=fr`
+                                  }
+                                  className="badge badge-success"
+                                >
+                                  Suivre mon colis
+                                </a>
+                              </div>
+                            )}
+                            {item?.status === "error" && (
+                              <span className="badge badge-danger">
+                                Erreur Consultez votre mail
+                              </span>
+                            )}
+                          </td>
+                          <td>{total}</td>
+                          <td>
+                            {item?.status === "error"
+                              ? item?.error
+                              : `${item?.amount?.toFixed(2)}€ `}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default OrderTrackClient;

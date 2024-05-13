@@ -120,7 +120,7 @@ const Header = (props) => {
       : header.classList.remove("is-sticky");
   };
 
-  const logout = async () => {
+  const logout = () => {
     signOut();
     router.push("/");
     router.refresh();

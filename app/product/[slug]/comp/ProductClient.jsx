@@ -3,16 +3,16 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ProductInfo from "./ProductInfo";
-
 import ProductImage from "./ProductImage";
 import axios from "axios";
 import { TfiRulerAlt } from "react-icons/tfi";
 import ReactGA from "react-ga4";
 import Modal from "react-bootstrap/Modal";
-import { FaMinus } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaCheck } from "react-icons/fa";
 import UseCart from "@/hooks/useCart";
 import toast from "react-hot-toast";
+import Image from "next/image";
+import Link from "next/link";
 const ProductClient = (props) => {
   const { product, user } = props;
   const { addToBasket, basket } = UseCart();
@@ -21,10 +21,12 @@ const ProductClient = (props) => {
 
   const [count, setCount] = useState(1);
   const [color, setColor] = useState(product.ProductColorSize[0]);
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState(
+    product.Category.SizeType.type === "acc" ? color.SizeStock[0] : ""
+  );
   const [news, setNews] = useState(false);
 
-  const [stocksShown, setStocksShown] = useState({ stock: 0, bool: false });
+  const [stocksShown, setStocksShown] = useState({ stock: 1, bool: false });
   const [clicked, setClicked] = useState(false);
   useEffect(() => {
     const lastClickedTime = localStorage.getItem("lastClickedTime");
@@ -233,15 +235,23 @@ const ProductClient = (props) => {
                                 defaultChecked={index === 0 && true}
                                 onChange={() => {
                                   setColor(item);
-                                  setSize("");
+                                  product.Category.SizeType.type === "acc"
+                                    ? setSize(item.SizeStock[0])
+                                    : setSize("");
                                 }}
                               />
                               <span
-                                className="tw-border-2 tw-border-gray-300"
+                                className="tw-border-2 tw-border-gray-300  "
                                 style={{
                                   backgroundColor: item?.Color?.hex,
                                 }}
-                              ></span>
+                              >
+                                <FaCheck
+                                  className="iconsvg"
+                                  size={18}
+                                  color="white"
+                                />
+                              </span>
                             </label>
                           );
                         })}
@@ -390,8 +400,8 @@ const ProductClient = (props) => {
             <div className="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-12 col-12">
               <div className="empty_cart_area">
                 <h2>Produit non trouvé </h2>
-                <h3>Le produit que vous recherchez n'a pas été trouvé</h3>
-                <Link to="/shop" className="btn btn-black-overlay btn_sm">
+                <h3>Le produit que vous recherchez n&apos;a pas été trouvé</h3>
+                <Link href="/shop" className="btn btn-black-overlay btn_sm">
                   Continuez Vos Achats
                 </Link>
               </div>
@@ -414,9 +424,11 @@ const ProductClient = (props) => {
             className="modal-dialog modal-dialog-centered modal-lg "
             role="document"
           >
-            <img
+            <Image
               src={product?.url}
-              alt="guides"
+              alt="guidestaile"
+              width={1000}
+              height={1000}
               className="tw-object-contain"
             />
           </div>

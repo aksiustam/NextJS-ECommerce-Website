@@ -23,8 +23,8 @@ const ProductInfo = (props) => {
                 <div className="product_additional">
                   <ul className="tw-pl-5 tw-pt-5">
                     <li className="tw-list-disc">
-                      Les livraisons standard s'effectuent habituellement sous 3
-                      à 5
+                      Les livraisons standard s&apos;effectuent habituellement
+                      sous 3 à 5
                     </li>
                     <li className="tw-list-disc">
                       Les retours sont toujours gratuits

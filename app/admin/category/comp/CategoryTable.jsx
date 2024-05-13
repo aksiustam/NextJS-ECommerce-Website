@@ -93,7 +93,6 @@ const CategoryTable = (props) => {
         setMessage(JSON.stringify(error.response.data));
       });
   };
-  console.log(modalData);
   return (
     <>
       <Modal

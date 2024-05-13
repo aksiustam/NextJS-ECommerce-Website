@@ -1,13 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import SideBar from "./SideBar";
 import ProductCard from "../../components/Products/ProductCard";
 import ofgimg from "@/public/assets/img/common/logo-france.png";
 import bioimg from "@/public/assets/img/common/bio.png";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-
+import Loader from "../../components/Layout/Loader";
 const ShopPage = (props) => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <ShopContent props={props} />
+    </Suspense>
+  );
+};
+const ShopContent = ({ props }) => {
   const { products, allcategory } = props;
   const [filteredData, setFilteredData] = useState([]);
 
@@ -49,8 +56,12 @@ const ShopPage = (props) => {
             );
           return colorMatch && sizeMatch;
         });
+
         const slugMatch =
-          product.Category.CategoryType.name === searchProduct ? true : false;
+          product.Category.CategoryType.name === searchProduct ||
+          searchProduct === "all"
+            ? true
+            : false;
 
         const priceMatch =
           product.price >= minPrice && product.price <= maxPrice;
@@ -97,7 +108,7 @@ const ShopPage = (props) => {
     const filteredProducts = sortMyProducts(filterMyProducts());
 
     setFilterProducts(filteredProducts);
-  }, [products, filteredData, sort]);
+  }, [products, filteredData, sort, searchProduct]);
 
   const [page, setPage] = useState(1);
   const itemsPerPage = 12;

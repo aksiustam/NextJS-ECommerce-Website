@@ -50,7 +50,7 @@ const Footer = () => {
       links: [
         { linkTitle: "Suivez votre commande", link: "/ordertrack" },
 
-        { linkTitle: "Guide des tailles", link: "/taille" },
+        { linkTitle: "Guide des tailles", link: "/guidetaille" },
       ],
     },
   ];
