@@ -1,12 +1,14 @@
 "use client";
-import axios from "axios";
+
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-
+import { useRouter } from "next/navigation";
+import setAllCategory from "@/app/actions/Category/setAllCategory";
+import putAllCategory from "@/app/actions/Category/putAllCategory";
+import delAllCategory from "@/app/actions/Category/delAllCategory";
 const ColorTable = (props) => {
   const data = props.color;
 
@@ -16,7 +18,7 @@ const ColorTable = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const [modalcolor, setModalColor] = useState("");
   const [message, setMessage] = useState("");
-
+  const router = useRouter();
   const onDelete = async (data) => {
     Swal.fire({
       title: data.name + " Adlı Renk Arşivlenecek!! ",
@@ -26,22 +28,21 @@ const ColorTable = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const formData = { ...data, archive: true };
-        await axios
-          .put("/api/catbrand/color", formData)
-          .then(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Başarıyla Arşivlendi",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: JSON.stringify(error.response.data),
-            });
+        const res = await delAllCategory("color", formData);
+        if (res === true)
+          Swal.fire({
+            icon: "success",
+            title: "Başarıyla Arşivlendi",
+            showConfirmButton: false,
+            timer: 1500,
           });
+        else {
+          Swal.fire({
+            icon: "error",
+            title: JSON.stringify(res.message),
+          });
+        }
+        router.refresh();
       }
     });
   };
@@ -55,35 +56,31 @@ const ColorTable = (props) => {
       });
     } else {
       const formData = { name: name, hex: hex, index: index };
-
-      await axios
-        .post("/api/catbrand/color", formData)
-        .then(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Başarıyla Eklendi",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        })
-        .catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: JSON.stringify(error.response.data),
-          });
+      const res = await setAllCategory("color", formData);
+      if (res === true)
+        Swal.fire({
+          icon: "success",
+          title: "Başarıyla Eklendi",
+          showConfirmButton: false,
+          timer: 1500,
         });
+      else {
+        Swal.fire({
+          icon: "error",
+          title: JSON.stringify(res.message),
+        });
+      }
+      router.refresh();
     }
   };
 
   const updateColor = async () => {
-    await axios
-      .put("/api/catbrand/color", modalcolor)
-      .then(() => {
-        setMessage("Başarıyla Değiştirildi");
-      })
-      .catch((error) => {
-        setMessage(JSON.stringify(error.response.data));
-      });
+    const res = await putAllCategory("color", modalcolor);
+    if (res === true) setMessage("Başarıyla değiştirildi");
+    else {
+      setMessage(res.message);
+    }
+    router.refresh();
   };
 
   return (

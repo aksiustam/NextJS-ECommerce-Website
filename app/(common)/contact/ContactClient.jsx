@@ -1,8 +1,8 @@
 "use client";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Link from "next/link";
+import setContact from "../../actions/Contact/setContact";
 
 const ContactClient = () => {
   const {
@@ -14,10 +14,9 @@ const ContactClient = () => {
   const onSubmit = async (data) => {
     try {
       const formData = { ...data };
-      const response = await axios.post("/api/settings/contact", formData);
-      if (response.data) {
+      const res = await setContact(formData);
+      if (res === true)
         Swal.fire("Merci", "Merci, votre message a bien été envoyé", "success");
-      }
     } catch (error) {
       Swal.fire({
         icon: "error",

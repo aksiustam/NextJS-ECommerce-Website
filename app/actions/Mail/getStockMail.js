@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/lib/prismadb";
 
-export default async function getAllUser() {
+export default async function getStockMail() {
   try {
     const mail = await prisma.StockMail.findMany({
       include: {

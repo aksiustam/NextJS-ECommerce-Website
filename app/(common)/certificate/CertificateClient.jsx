@@ -56,7 +56,9 @@ const CertificateClient = () => {
                       alt="sertifika3"
                       className="tw-w-[240px] tw-h-[240px] tw-object-contain"
                     />
-                    <div className="tw-text-center tw-mt-4 ">Avenir</div>
+                    <div className="tw-text-center tw-mt-4 ">
+                      Hohenstein Textile
+                    </div>
                   </Nav.Link>
                 </li>
                 <li>
@@ -110,7 +112,14 @@ const CertificateClient = () => {
                         </div>
                       </Tab.Pane>
                       <Tab.Pane eventKey="ser3">
-                        <div className="tw-text-xl tw-text-center">Avenir</div>
+                        <div className="tw-text-xl tw-text-center">
+                          Ce certificat prouve que le textile est totalement
+                          dépourvu de substances nocives. Les instituts
+                          indépendants Hohenstein testent tous les articles à
+                          chaque phase de production. Seuls les articles
+                          répondant aux normes de qualité les plus élevées se
+                          retrouvent dans votre armoire.
+                        </div>
                       </Tab.Pane>
                       <Tab.Pane eventKey="ser2">
                         <div className="tw-text-xl tw-text-center">

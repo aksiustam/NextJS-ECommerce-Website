@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Form, InputGroup, Button } from "react-bootstrap";
-import axios from "axios";
-import { API_URL } from "../../../lib/config";
+import getSiparisMail from "@/app/actions/Siparis/getSiparisMail";
 const OrderTrackClient = () => {
   const [email, setEmail] = useState("");
-  const [sipdata, setSipData] = useState(null);
+  const [sipdata, setSipData] = useState([]);
   const [error, setError] = useState("");
   const [clicked, setClicked] = useState(false);
   useEffect(() => {
@@ -27,17 +26,14 @@ const OrderTrackClient = () => {
     if (!clicked) {
       setClicked(true);
       localStorage.setItem("lastClickedTime", Date.now().toString());
-      const formData = { email: email };
-      await axios
-        .post(`${API_URL}/order/get-order-email`, formData)
-        .then((response) => {
-          setSipData(response.data);
-        })
-        .catch((error) => {
-          setError(error.response.data.message);
-        });
+
+      const res = await getSiparisMail(email);
+      console.log(res);
+      if (res.message) setError(res.message);
+      else setSipData(res);
+
       setTimeout(() => {
-        setClicked(false); // 3 dakika sonra tekrar tıklamaya izin ver
+        setClicked(false);
       }, 180000);
     } else {
       setError("Réessayer dans 3 minute");
@@ -92,7 +88,7 @@ const OrderTrackClient = () => {
                 </thead>
                 <tbody>
                   {sipdata
-                    ?.sort((a, b) => b?.siparisid - a?.siparisid)
+                    ?.sort((a, b) => b?.id - a?.id)
                     .map((item, index) => {
                       const createdAt = item.createdAt;
                       const date = new Date(createdAt);
@@ -110,8 +106,8 @@ const OrderTrackClient = () => {
                       }, 0);
 
                       return (
-                        <tr key={item?.siparisid}>
-                          <td>#{item?.siparisid}</td>
+                        <tr key={item?.id}>
+                          <td>#{item?.id}</td>
                           <td>{formattedDate}</td>
                           <td>
                             {item?.status === "paid" && (

@@ -168,12 +168,11 @@ const CartClient = () => {
                         href="/checkout"
                         className="theme-btn-one btn-black-overlay btn_sm"
                         onClick={() => {
-                          if (gacheck)
-                            ReactGA.event({
-                              category: "event",
-                              action: "SepetDevamEt",
-                              label: "Sepetten Satın Almaya Gitti",
-                            });
+                          ReactGA.event({
+                            category: "event",
+                            action: "SepetDevamEt",
+                            label: "Sepetten Satın Almaya Gitti",
+                          });
                         }}
                       >
                         Valider la commande

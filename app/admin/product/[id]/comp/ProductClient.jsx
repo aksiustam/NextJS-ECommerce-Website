@@ -94,6 +94,7 @@ const ProductClient = (props) => {
       });
   };
 
+  console.log(mycolor);
   return (
     <section id="add_product_area">
       <div className="container">
@@ -388,7 +389,7 @@ const ProductClient = (props) => {
                                 </Tab>
                               );
                             } else if (
-                              product?.Category?.SizeType.type === "dress"
+                              product?.Category?.SizeType.type !== "acc"
                             ) {
                               return (
                                 <Tab

@@ -128,7 +128,8 @@ export const AdminSiparis = ({ sipdata }) => {
               </thead>
               <tbody>
                 {sipdata?.basket?.map((item) => (
-                  <tr key={item?._id}>
+                  <tr key={item?.id}>
+                    <td>{item?.id}</td>
                     <td>{item?.name}</td>
                     <td>{item?.color}</td>
                     <td>{item?.size === "null" ? "Yok" : item?.size}</td>

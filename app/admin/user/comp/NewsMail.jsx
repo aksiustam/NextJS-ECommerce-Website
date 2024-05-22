@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import deleteMail from "@/app/actions/Mail/deleteMail";
+import { useRouter } from "next/navigation";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const NewsMail = (props) => {
   const mailData = props.newsmail;
 
   const [search, setSearch] = useState("");
-
+  const router = useRouter();
   const [page, setPage] = useState(1);
   const itemsPerPage = 12;
 
@@ -65,23 +68,16 @@ const NewsMail = (props) => {
       denyButtonText: "Hayır",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .delete(`${API_URL}/mail/delmail/${id}`)
-          .then((res) => {
-            Swal.fire({
-              icon: "success",
-              title: "Başarıyla Silindi",
-              showConfirmButton: false,
-              timer: 1100,
-            });
-            location.reload();
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: JSON.stringify(error.response.data),
-            });
+        const res = await deleteMail("news", id);
+        if (res === true) {
+          Swal.fire({
+            icon: "success",
+            title: "Başarıyla Silindi",
+            showConfirmButton: false,
+            timer: 1100,
           });
+          router.refresh();
+        }
       }
     });
   };
@@ -113,13 +109,10 @@ const NewsMail = (props) => {
               return (
                 <tr key={data.id}>
                   <td>{data.id}</td>
-                  <td>{data.mail}</td>
+                  <td>{data.email}</td>
                   <td>
-                    <button
-                      className="tw-text-red-700"
-                      onClick={() => DeleteMail(data._id)}
-                    >
-                      <i className="fa fa-trash fa-lg"></i>
+                    <button onClick={() => DeleteMail(data)}>
+                      <FaRegTrashAlt size={26} color="red" />
                     </button>
                   </td>
                 </tr>

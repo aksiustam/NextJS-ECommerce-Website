@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": ["./*"]
-    }
-  }
+    },
+    
+  },
+  "exclude": ["node_modules"]
 }

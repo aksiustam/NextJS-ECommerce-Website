@@ -35,7 +35,7 @@ const CategoryClient = (props) => {
               <DressSizeTable size={size} />
             </Tab>
 
-            <Tab eventKey="shoesize" title="AyakBoyut" disabled>
+            <Tab eventKey="shoesize" title="AyakBoyut">
               <ShoeSizeTable size={size} />
             </Tab>
 

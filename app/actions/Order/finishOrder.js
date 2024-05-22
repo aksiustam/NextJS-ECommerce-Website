@@ -89,6 +89,16 @@ export default async function finishOrder(formdata) {
           },
         });
         if (pcs) {
+          await prisma.product.update({
+            where: {
+              id: parseInt(basketitem.id),
+            },
+            data: {
+              sells: {
+                increment: parseInt(basketitem.quantity),
+              },
+            },
+          });
           await prisma.ProductColorSize.update({
             where: {
               id: parseInt(pcs.id),

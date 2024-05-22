@@ -334,10 +334,36 @@ const SideBar = (props) => {
             <div id="sizes_input">
               <p className="tw-font-extrabold tw-mb-3">Taille</p>
               <div className="tw-flex tw-gap-1 tw-flex-wrap">
-                {sidebar?.size
-                  ?.filter((item) => item.name !== "null")
-                  .map((item) => (
-                    <label key={item.id} className="custom_boxed tw-font-bold">
+                {sidebar.size
+                  ?.filter((data) => data.SizeType.type === "dress")
+                  .map((item, index) => (
+                    <label key={index} className="custom_boxed tw-font-bold">
+                      {item.name}
+                      <input
+                        type="checkbox"
+                        name="checkbox4"
+                        onChange={() => {
+                          setFilter((prev) => ({
+                            ...prev,
+                            mysize: prev.mysize.includes(item.id)
+                              ? prev.mysize.filter(
+                                  (sizeId) => sizeId !== item.id
+                                )
+                              : [...prev.mysize, item.id],
+                          }));
+                        }}
+                        checked={filter?.mysize?.includes(item.id)}
+                      />
+                      <span className="checkmark"></span>
+                    </label>
+                  ))}
+              </div>
+              <div className="tw-border-b tw-border-black tw-my-2" />
+              <div className="tw-flex tw-gap-1 tw-flex-wrap">
+                {sidebar.size
+                  ?.filter((data) => data.SizeType.type === "shoe")
+                  .map((item, index) => (
+                    <label key={index} className="custom_boxed tw-font-bold">
                       {item.name}
                       <input
                         type="checkbox"

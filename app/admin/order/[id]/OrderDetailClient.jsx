@@ -91,6 +91,7 @@ const OrderDetailClient = (props) => {
 
     saveAs(blob, "invoice.html");
   };
+
   return (
     <section id="add_product_area">
       <div className="container">
@@ -103,7 +104,7 @@ const OrderDetailClient = (props) => {
                   <div className="col-lg-6">
                     <ul>
                       <li>
-                        Siparis Id : <span>{data?.siparisid}</span>
+                        Siparis Id : <span>{data?.id}</span>
                       </li>
                       <li>
                         Kullanıcı Adı : <span>{data?.username}</span>
@@ -111,7 +112,7 @@ const OrderDetailClient = (props) => {
                       <li>
                         Kullanıcı Id :{" "}
                         <span>
-                          {data?.user !== null ? data?.user?._id : "Yok"}
+                          {data?.userId !== null ? data?.userId : "Yok"}
                         </span>
                       </li>
                       <li>

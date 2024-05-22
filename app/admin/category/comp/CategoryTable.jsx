@@ -6,7 +6,10 @@ import { useForm } from "react-hook-form";
 import Modal from "react-bootstrap/Modal";
 import { MultiSelect } from "react-multi-select-component";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-
+import setAllCategory from "@/app/actions/Category/setAllCategory";
+import putAllCategory from "@/app/actions/Category/putAllCategory";
+import delAllCategory from "@/app/actions/Category/delAllCategory";
+import { useRouter } from "next/navigation";
 const CategoryTable = (props) => {
   const data = props.category;
   const brand = props.brand;
@@ -18,7 +21,7 @@ const CategoryTable = (props) => {
     }) || [];
 
   const [mybrand, setMyBrand] = useState([]);
-
+  const router = useRouter();
   const [modalShow, setModalShow] = useState(false);
   const [modalData, setModalData] = useState({});
   const [modalbrand, setModalBrand] = useState([]);
@@ -37,44 +40,43 @@ const CategoryTable = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const formData = { ...data, archive: true };
-        await axios
-          .put(`/api/catbrand/category`, formData)
-          .then(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Başarıyla Arşivlendi",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: JSON.stringify(error.response.data),
-            });
+
+        const res = await delAllCategory("category", formData);
+        if (res === true)
+          Swal.fire({
+            icon: "success",
+            title: "Başarıyla Arşivlendi",
+            showConfirmButton: false,
+            timer: 1500,
           });
+        else {
+          Swal.fire({
+            icon: "error",
+            title: JSON.stringify(res.message),
+          });
+        }
+        router.refresh();
       }
     });
   };
   const onSubmit = async (data) => {
     const formData = { ...data, brand: mybrand };
 
-    await axios
-      .post("/api/catbrand/category", formData)
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Başarıyla Eklendi",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: JSON.stringify(error.response.data),
-        });
+    const res = await setAllCategory("category", formData);
+    if (res === true)
+      Swal.fire({
+        icon: "success",
+        title: "Başarıyla Eklendi",
+        showConfirmButton: false,
+        timer: 1500,
       });
+    else {
+      Swal.fire({
+        icon: "error",
+        title: JSON.stringify(res.message),
+      });
+    }
+    router.refresh();
   };
 
   const onModalSubmit = async (data) => {
@@ -84,14 +86,12 @@ const CategoryTable = (props) => {
       brand: modalbrand,
     };
 
-    await axios
-      .put(`/api/catbrand/category`, formData)
-      .then(() => {
-        setMessage("Başarıyla değiştirildi");
-      })
-      .catch((error) => {
-        setMessage(JSON.stringify(error.response.data));
-      });
+    const res = await putAllCategory("category", formData);
+    if (res === true) setMessage("Başarıyla değiştirildi");
+    else {
+      setMessage(res.message);
+    }
+    router.refresh();
   };
   return (
     <>
@@ -225,7 +225,7 @@ const CategoryTable = (props) => {
                     <select
                       name="type"
                       id="product_type"
-                      defaultValue={modalData?.CategoryType?.type}
+                      defaultValue={modalData?.CategoryType?.id}
                       onBlur={(e) => {
                         registermodal(`cattype`, {
                           shouldUnregister: true,
@@ -234,7 +234,7 @@ const CategoryTable = (props) => {
                       }}
                     >
                       {cattype?.map((item) => (
-                        <option key={item.id} value={item.type}>
+                        <option key={item.id} value={item.id}>
                           {item.name}
                         </option>
                       ))}
@@ -477,7 +477,7 @@ const CategoryTable = (props) => {
                         required
                       >
                         {cattype?.map((item) => (
-                          <option key={item.id} value={item.type}>
+                          <option key={item.id} value={item.id}>
                             {item.name}
                           </option>
                         ))}

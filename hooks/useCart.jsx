@@ -7,16 +7,19 @@ import {
   useEffect,
   useState,
 } from "react";
+import updateProducts from "@/app/actions/Products/updateProducts";
 const CartContext = createContext(null);
 
 export const CartContextProvider = (props) => {
   const [basket, setBasket] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     let getItem = localStorage.getItem("cart");
     let getItemParse = JSON.parse(getItem);
     if (getItemParse) {
-      setBasket(getItemParse);
+      const res = await updateProducts(getItemParse);
+      localStorage.setItem("cart", JSON.stringify(res));
+      setBasket(res);
     }
   }, []);
 

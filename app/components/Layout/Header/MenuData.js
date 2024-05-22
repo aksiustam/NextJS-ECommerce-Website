@@ -1,4 +1,5 @@
 import getSettings from "@/app/actions/getSettings";
+
 const MenuData = async () => {
   const settings = await getSettings();
 

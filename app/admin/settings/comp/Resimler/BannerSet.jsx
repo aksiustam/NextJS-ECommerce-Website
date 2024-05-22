@@ -31,8 +31,8 @@ const BannerSet = (props) => {
 
     await axios
       .post("/api/settings/banner", formData)
-      .then((response) => {
-        Swal.fire({
+      .then(async (response) => {
+        await Swal.fire({
           icon: "success",
           title: "Başarıyla Kaydedildi",
           showConfirmButton: false,
@@ -55,6 +55,11 @@ const BannerSet = (props) => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="row">
+          <div className="col-lg-12">
+            <div className="tw-text-red-600 tw-underline tw-mb-2">
+              Resmi Yükledikten sonra Lütfen Kaydet e Basınız...{" "}
+            </div>
+          </div>
           <div className="col-lg-4">
             <div className="fotm-group">
               <Form.Label htmlFor="exampleColorInput">Banner Rengi</Form.Label>

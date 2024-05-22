@@ -9,6 +9,7 @@ import Footer from "./components/Layout/Footer";
 import { getCurrentUser } from "./actions/getCurrentUser";
 import getSettings from "./actions/getSettings";
 import getProducts from "./actions/Products/getProducts";
+
 export default async function Home() {
   const headerdata = await MenuData();
   const user = await getCurrentUser();

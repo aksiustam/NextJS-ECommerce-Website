@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { MdClose } from "react-icons/md";
 
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
+import deletePColor from "@/app/actions/Products/deletePColor";
 const SizeStock = (params) => {
   const { data, slug, color, size, register, setValue } = params;
 
@@ -24,34 +24,30 @@ const SizeStock = (params) => {
       setMySize((prevSize) => [...prevSize, { stock: null, sizename: size }]);
     }
   };
-
+  const router = useRouter();
   const deleteColor = async () => {
-    const formData = { role: "DELETE" };
-
     Swal.fire({
-      title: data?.color?.name + " Adlı Renk SİLİNECEKTİR!! ",
+      title: data?.Color?.name + " Adlı Renk SİLİNECEKTİR!! ",
       showDenyButton: true,
       confirmButtonText: "Sil",
       denyButtonText: "Hayır",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .post(`/admin/product/delcolor/${data.id}`, formData)
-          .then(async () => {
-            Swal.fire({
-              icon: "success",
-              title: "Başarıyla Silindi",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            window.location.reload();
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: JSON.stringify(error?.response?.data),
-            });
+        const res = await deletePColor(data.id);
+        if (res === true)
+          await Swal.fire({
+            icon: "success",
+            title: "Başarıyla Silindi",
+            showConfirmButton: false,
+            timer: 1500,
           });
+        else
+          Swal.fire({
+            icon: "error",
+            title: JSON.stringify(res?.message),
+          });
+
+        router.refresh();
       }
     });
   };
@@ -87,6 +83,11 @@ const SizeStock = (params) => {
       </div>
       <input hidden {...register(`Image_${color}`)} />
       <div className="row ">
+        <div className="col-lg-12">
+          <div className="tw-text-red-600 tw-underline tw-mb-2">
+            Resmi Yükledikten sonra Lütfen Kaydet e Basınız...
+          </div>
+        </div>
         <div className="col-lg-12 col-md-12 col-sm-12 col-12">
           <label className="tw-mr-4">
             Resim<span className="text-danger">*</span> (620x650)

@@ -2110,16 +2110,18 @@ textarea:focus {
 .tabs_center_button .nav-tabs li a {
  
   transition: inherit;
+  text-wrap: nowrap;
   font-size: 16px;
   font-weight: 500;
   text-transform: capitalize;
   background: transparent;
   padding-bottom: 6px;
+  margin-bottom: 0;
+border: none;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
 }
 
-.tabs_center_button .nav-tabs li:first-child a {
-  margin-left: 0px;
-}
 
 .tabs_center_button .nav-tabs li a:hover {
   color: var(--main-theme-color);
@@ -2128,6 +2130,12 @@ textarea:focus {
 .tabs_center_button .nav-tabs li .active {
   color: var(--main-theme-color) !important;
   border-bottom: 2px solid var(--main-theme-color);
+  background-color: initial;
+border-color: initial;
+width: calc(100% - 40px);
+margin: 0 auto;
+display: flex;
+    justify-content: center;
 }
 
 .tabs_mobile_button ul li a:hover {

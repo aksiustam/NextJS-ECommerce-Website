@@ -19,7 +19,7 @@ const ProductCard = (props) => {
       action: product?.name,
       label: product?.name + " detayına gitti",
     });
-    router.push(`/product/${product.slug}`);
+    router.push(`/product/${product?.slug}`);
   };
 
   return (
@@ -27,37 +27,31 @@ const ProductCard = (props) => {
       <div className="product_wrappers_one">
         <div className="thumb">
           <Link
-            href={`/product/${product.slug}`}
+            href={`/product/${product?.slug}?color=${color?.Color?.name}`}
             className="image"
             onClick={handleLinkClick}
           >
             <Image
-              src={color?.images[0]?.imageurl}
+              src={color?.images[0]?.imageurl || errimg}
               alt={product?.name}
               width={1200}
               height={1200}
-              onError={(e) => {
-                e.target.src = errimg;
-              }}
               className="tw-max-w-[750px] tw-max-h-[900px] tw-object-contain"
             />
             <Image
-              src={color?.images[1]?.imageurl}
+              src={color?.images[1]?.imageurl || errimg}
               alt={product?.name}
               width={1200}
               height={1200}
-              onError={(e) => {
-                e.target.src = errimg;
-              }}
               className="hover-image tw-max-w-[750px] tw-max-h-[900px] tw-object-contain"
             />
           </Link>
           <span className="badges">
             <span className="indirim !tw-text-xs md:!tw-text-sm">
-              {product.indirim ? "Reductions" : ""}
+              {product?.indirim ? "Reductions" : ""}
             </span>
             <span className="yeni !tw-text-xs md:!tw-text-sm">
-              {product.yeni ? "Nouveau" : ""}
+              {product?.yeni ? "Nouveau" : ""}
             </span>
           </span>
           <span className="newbadges">
@@ -88,7 +82,7 @@ const ProductCard = (props) => {
         <div className="content">
           <h3 className="title tw-italic tw-font-bold ">
             <Link
-              href={`/product/${product?.slug}`}
+              href={`/product/${product?.slug}?color=${color?.Color?.name}`}
               className="hover:!tw-text-slate-600"
             >
               {product?.name}
@@ -120,7 +114,7 @@ const ProductCard = (props) => {
           </div>
           <span className="price">
             <span className="new tw-italic">
-              {product.indirim === true ? product?.inprice : product?.price}€
+              {product?.indirim === true ? product?.inprice : product?.price}€
             </span>
           </span>
         </div>

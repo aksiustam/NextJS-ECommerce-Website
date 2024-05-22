@@ -13,14 +13,24 @@ import UseCart from "@/hooks/useCart";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
+import RelatedProduct from "./RelatedProduct";
+import setStockMail from "@/app/actions/Mail/setStockMail";
+import { useRouter, useSearchParams } from "next/navigation";
 const ProductClient = (props) => {
-  const { product, user } = props;
+  const { product, user, products } = props;
   const { addToBasket, basket } = UseCart();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedColor = searchParams.get("color");
 
   const [modalShow, setModalShow] = useState(false);
 
   const [count, setCount] = useState(1);
-  const [color, setColor] = useState(product.ProductColorSize[0]);
+  const [color, setColor] = useState(
+    product.ProductColorSize.find(
+      (item) => item.Color.name === selectedColor
+    ) || product.ProductColorSize[0]
+  );
   const [size, setSize] = useState(
     product.Category.SizeType.type === "acc" ? color.SizeStock[0] : ""
   );
@@ -141,9 +151,6 @@ const ProductClient = (props) => {
   };
 
   const onMailSubmit = async () => {
-    const mysize = size === "" ? "" : size?.size?.name;
-    const name = product.name + " " + color?.color?.name + " " + mysize;
-
     if (clicked) {
       await Swal.fire(
         "Question",
@@ -157,30 +164,19 @@ const ProductClient = (props) => {
         setClicked(true);
         localStorage.setItem("lastClickedTime", Date.now().toString());
         const formData = {
-          mail: user.email,
-          data: {
-            id: product._id,
-            name: name,
-            color: color?.color?.name,
-            size: mysize,
-          },
+          email: user.email,
+          name: product.name,
+          color: color?.Color?.name,
+          size: size.Size.name,
+          productId: product.id,
         };
-        await axios
-          .post(API_URL + "/mail/stockadd", formData)
-          .then(async () => {
-            await Swal.fire(
-              "Succès",
-              "Merci, nous vous tiendrons au courant.",
-              "success"
-            );
-            window.location.reload();
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: JSON.stringify(error.response.data),
-            });
-          });
+        const res = await setStockMail(formData);
+        if (res === true)
+          await Swal.fire(
+            "Succès",
+            "Merci, nous vous tiendrons au courant.",
+            "success"
+          );
 
         setTimeout(() => {
           setClicked(false); // 3 dakika sonra tekrar tıklamaya izin ver
@@ -221,7 +217,7 @@ const ProductClient = (props) => {
                         {product?.price}€{" "}
                       </span>
                     )}
-                    <div className=" tw-border-b-[1px]  tw-border-black tw-w-full md:tw-w-96 tw-mt-3" />
+                    <div className=" tw-border-b-[1px] tw-border-black tw-w-full md:tw-w-96 tw-mt-3" />
                     <div className="variable-single-item ">
                       <span>Couleur</span>
                       <div className="product-variable-color ">
@@ -232,8 +228,11 @@ const ProductClient = (props) => {
                                 name="modal-product-color"
                                 className="color-select"
                                 type="radio"
-                                defaultChecked={index === 0 && true}
+                                defaultChecked={color.id === item.id && true}
                                 onChange={() => {
+                                  router.replace(`?color=${item.Color.name}`, {
+                                    scroll: false,
+                                  });
                                   setColor(item);
                                   product.Category.SizeType.type === "acc"
                                     ? setSize(item.SizeStock[0])
@@ -410,7 +409,7 @@ const ProductClient = (props) => {
         </div>
       )}
 
-      {/* <RelatedProduct /> */}
+      <RelatedProduct products={products} />
 
       <Modal
         show={modalShow}
@@ -425,10 +424,10 @@ const ProductClient = (props) => {
             role="document"
           >
             <Image
-              src={product?.url}
+              src={product?.guideurl?.imageurl}
               alt="guidestaile"
-              width={1000}
-              height={1000}
+              width={1500}
+              height={1500}
               className="tw-object-contain"
             />
           </div>

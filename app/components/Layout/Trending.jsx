@@ -1,11 +1,9 @@
-"use client"
+"use client";
 
-import axios from "axios";
 import { useEffect, useState } from "react";
-
 import Swal from "sweetalert2";
-import { API_URL } from "../../../lib/config";
 import { Form, InputGroup, Button } from "react-bootstrap";
+import setNewsMail from "../../actions/Mail/setNewsMail";
 
 const Trending = () => {
   const [email, setEmail] = useState("");
@@ -30,22 +28,20 @@ const Trending = () => {
       localStorage.setItem("lastClickedTime", Date.now().toString());
       const formData = { email: email };
 
-      await axios
-        .post(API_URL + "/mail/mailadd", formData)
-        .then(async () => {
-          Swal.fire(
-            "Succès",
-            "Merci,Nous avons bien pris en compte votre inscription à la newsletter.",
-            "success"
-          );
-          //window.location.reload();
-        })
-        .catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: JSON.stringify(error.response.data),
-          });
+      const res = await setNewsMail(formData);
+      if (res === true) {
+        Swal.fire(
+          "Succès",
+          "Merci,Nous avons bien pris en compte votre inscription à la newsletter.",
+          "success"
+        );
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: JSON.stringify(res),
         });
+      }
+
       setTimeout(() => {
         setClicked(false); // 3 dakika sonra tekrar tıklamaya izin ver
       }, 120000);

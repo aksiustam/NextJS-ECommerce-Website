@@ -34,6 +34,11 @@ const BannerBSet = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="row">
+        <div className="col-lg-12">
+          <div className="tw-text-red-600 tw-underline tw-mb-2">
+            Videoyu Yükledikten sonra Lütfen Kaydet e Basınız...
+          </div>
+        </div>
         <div className="col-lg-4">
           <div className="fotm-group">
             <label className="tw-mr-4">

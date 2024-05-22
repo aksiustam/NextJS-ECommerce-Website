@@ -1,14 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
 
+import Swal from "sweetalert2";
+import { FaRegTrashAlt } from "react-icons/fa";
+import deleteMail from "@/app/actions/Mail/deleteMail";
+import { useRouter } from "next/navigation";
 const StockMail = (props) => {
   const mailData = props.stockmail;
 
   const [search, setSearch] = useState("");
-  const [checkdata, setCheckData] = useState("");
 
+  const router = useRouter();
   const [page, setPage] = useState(1);
   const itemsPerPage = 12;
 
@@ -65,71 +67,20 @@ const StockMail = (props) => {
       denyButtonText: "Hayır",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .delete(`${API_URL}/mail/delmail/${id}`)
-          .then((res) => {
-            Swal.fire({
-              icon: "success",
-              title: "Başarıyla Silindi",
-              showConfirmButton: false,
-              timer: 1100,
-            });
-            window.location.reload();
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: JSON.stringify(error.response.data),
-            });
+        const res = await deleteMail("stock", id);
+        if (res === true) {
+          Swal.fire({
+            icon: "success",
+            title: "Başarıyla Silindi",
+            showConfirmButton: false,
+            timer: 1100,
           });
+          router.refresh();
+        }
       }
     });
   };
   filteredData?.reverse();
-
-  const TableRow = ({ data }) => {
-    return (
-      <>
-        <tr>
-          <td
-            className="hover:tw-bg-slate-100 tw-cursor-pointer"
-            onClick={() => setCheckData(data)}
-          >
-            {data.id}
-          </td>
-          <td
-            className="hover:tw-bg-slate-100 tw-cursor-pointer"
-            onClick={() => setCheckData(data)}
-          >
-            {data.product[0]?.name}
-          </td>
-          <td
-            className="hover:tw-bg-slate-100 tw-cursor-pointer"
-            onClick={() => setCheckData(data)}
-          >
-            {data.mail}
-          </td>
-          <td>
-            <button
-              className="tw-text-red-700"
-              onClick={() => DeleteMail(data._id)}
-            >
-              <i className="fa fa-trash fa-lg"></i>
-            </button>
-          </td>
-        </tr>
-        {checkdata?._id === data._id &&
-          checkdata.product.map((item, index) => (
-            <tr key={index} className="tw-py-0 tw-my-0 tw-text-xs">
-              <td></td>
-              <td>{item.name}</td>
-              <td></td>
-              <td></td>
-            </tr>
-          ))}
-      </>
-    );
-  };
 
   return (
     <>
@@ -148,14 +99,29 @@ const StockMail = (props) => {
           <thead className="thead-light">
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Ad</th>
+              <th scope="col">Ürün Adı</th>
               <th scope="col">Email</th>
               <th scope="col">Sil</th>
             </tr>
           </thead>
           <tbody>
             {filteredData?.map((data) => (
-              <TableRow key={data._id} data={data} />
+              <tr key={data.id}>
+                <td className="hover:tw-bg-slate-100 tw-cursor-pointer">
+                  {data.id}
+                </td>
+                <td className="hover:tw-bg-slate-100 tw-cursor-pointer">
+                  {data.name} {data.color} {data.size}
+                </td>
+                <td className="hover:tw-bg-slate-100 tw-cursor-pointer">
+                  {data.email}
+                </td>
+                <td>
+                  <button onClick={() => DeleteMail(data)}>
+                    <FaRegTrashAlt size={26} color="red" />
+                  </button>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>

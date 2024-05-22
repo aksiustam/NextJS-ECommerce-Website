@@ -143,6 +143,7 @@ const Header = (props) => {
                           alt={"logo"}
                           width={100}
                           heigth={100}
+                          className="tw-w-[100px] tw-h-[100px]  tw-object-contain"
                         />
                       </Link>
                     </div>

@@ -38,7 +38,7 @@ model Address {
     category   String?
     company    String?
     companytva String?
-    User       User?   @relation(fields: [userId], references: [id])
+    User       User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId     Int?
 }
 
@@ -65,6 +65,7 @@ model Product {
     archive          Boolean?
     guideurl         Json?
     quill            Json?
+    sells            Int?
     createdAt        DateTime?          @default(now())
     updatedAt        DateTime?          @updatedAt
     StockMail        StockMail[]
@@ -77,7 +78,7 @@ model ProductColorSize {
     SizeStock SizeStock[]
     Color     Color?      @relation(fields: [colorId], references: [id], onDelete: Cascade)
     images    Json?
-    Product   Product?    @relation(fields: [productId], references: [id])
+    Product   Product?    @relation(fields: [productId], references: [id], onDelete: Cascade)
     productId Int?
     colorId   Int?
     sells     Int?
@@ -96,11 +97,9 @@ model ParcelGram {
     id        Int      @id @default(autoincrement())
     gram      Int?
     sizeId    Int?
-    Size      Size?    @relation(fields: [sizeId], references: [id])
-    Product   Product? @relation(fields: [productId], references: [id])
+    Size      Size?    @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+    Product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
     productId Int?
-
-    @@unique([sizeId, productId])
 }
 
 model Size {
@@ -108,7 +107,7 @@ model Size {
     index      Int? // 1
     name       String? // XL
     archive    Boolean?
-    SizeType   SizeType?    @relation(fields: [sizeTypeId], references: [id])
+    SizeType   SizeType?    @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
     sizeTypeId Int?
     SizeStock  SizeStock[]
     ParcelGram ParcelGram[]
@@ -151,7 +150,7 @@ model Category {
     desc           String?
     keywords       String?
     gender         String?
-    CategoryType   CategoryType? @relation(fields: [categoryTypeId], references: [id])
+    CategoryType   CategoryType? @relation(fields: [categoryTypeId], references: [id], onDelete: Cascade)
     SizeType       SizeType?     @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
     season         String?
     archive        Boolean?
@@ -218,8 +217,6 @@ model Ayarlar {
     discountset  Json?
     discountpage Json?
     settings     Json?
-    stockmail    Json?
-    newsmail     Json?
 }
 
 model Account {
@@ -246,8 +243,8 @@ model Account {
 
 model StockMail {
     id        Int      @id @default(autoincrement())
-    mail      String?
-    Product   Product? @relation(fields: [productId], references: [id])
+    email     String?
+    Product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
     name      String?
     color     String?
     size      String?
@@ -255,6 +252,6 @@ model StockMail {
 }
 
 model NewsMail {
-    id   Int     @id @default(autoincrement())
-    mail String?
+    id    Int     @id @default(autoincrement())
+    email String?
 }

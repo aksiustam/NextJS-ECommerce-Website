@@ -73,6 +73,23 @@ const ProfileClient = (props) => {
                       </div>
                     </div>
                   </div>
+                </>
+              );
+            })}
+          {sipdata
+            ?.sort((a, b) => b?.id - a?.id)
+            .map((item) => {
+              const createdAt = item?.createdAt;
+              const date = new Date(createdAt);
+              const options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              };
+              const formattedDate = date.toLocaleDateString("fr-FR", options);
+
+              return (
+                <>
                   <div
                     className="col-sm-12 col-md-12 col-lg-12 col-12  tw-mb-3 tw-text-sm tw-hidden md:tw-block"
                     key={item?.id}

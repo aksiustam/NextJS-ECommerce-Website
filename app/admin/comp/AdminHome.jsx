@@ -88,19 +88,19 @@ const AdminHome = (props) => {
                   <tr
                     key={data?.id}
                     className="hover:tw-bg-slate-100 tw-cursor-pointer"
-                    onClick={() => router.push("/admin/order/${data?._id}")}
+                    onClick={() => router.push(`/admin/order/${data?.id}`)}
                   >
                     <td>
                       <Link
-                        href={`/admin/order/${data?._id}`}
+                        href={`/admin/order/${data?.id}`}
                         className="text-primary"
                       >
-                        #{data?.siparisid}
+                        #{data?.id}
                       </Link>
                     </td>
                     <td>
                       <Link
-                        href={`/admin/order/${data?._id}`}
+                        href={`/admin/order/${data?.id}`}
                         className="text-primary"
                       >
                         {data?.basket[0]?.name}

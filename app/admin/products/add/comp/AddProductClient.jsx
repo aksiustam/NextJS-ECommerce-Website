@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 
@@ -9,6 +8,8 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 import "react-quill/dist/quill.snow.css";
 import { MultiSelect } from "react-multi-select-component";
+import setProduct from "@/app/actions/Products/setProduct";
+import { useRouter } from "next/navigation";
 const AddProductClient = (props) => {
   const { allcategory } = props;
   const { category, brand } = allcategory;
@@ -20,7 +21,7 @@ const AddProductClient = (props) => {
   const [quillValue, setQuillValue] = useState("");
 
   const { register, handleSubmit } = useForm();
-
+  const router = useRouter();
   const onSubmit = async (data) => {
     if (mybrand.length === 0) {
       await Swal.fire({
@@ -32,24 +33,21 @@ const AddProductClient = (props) => {
       return;
     }
     const formData = { ...data, brand: mybrand, quill: quillValue };
-
-    await axios
-      .post(`/api/products`, formData)
-      .then(async () => {
-        await Swal.fire({
-          icon: "success",
-          title: "Başarıyla Eklendi",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        location.reload();
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: JSON.stringify(error.response.data),
-        });
+    const res = await setProduct(formData);
+    if (res === true)
+      Swal.fire({
+        icon: "success",
+        title: "Başarıyla Eklendi",
+        showConfirmButton: false,
+        timer: 1500,
       });
+    else {
+      Swal.fire({
+        icon: "error",
+        title: JSON.stringify(res.message),
+      });
+    }
+    router.refresh();
   };
 
   return (

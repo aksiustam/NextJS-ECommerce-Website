@@ -1,15 +1,18 @@
-import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-bootstrap/Modal";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import setAllCategory from "@/app/actions/Category/setAllCategory";
+import putAllCategory from "@/app/actions/Category/putAllCategory";
+import delAllCategory from "@/app/actions/Category/delAllCategory";
 const BrandTable = (props) => {
   const data = props.brand;
 
   const [index, setIndex] = useState("");
   const [name, setName] = useState("");
   const [modalbrand, setModalBrand] = useState({});
-
+  const router = useRouter();
   const [modalShow, setModalShow] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -22,22 +25,21 @@ const BrandTable = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const formData = { ...data, archive: true };
-        await axios
-          .put("/api/catbrand/brand", formData)
-          .then(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Başarıyla Arşivlendi",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: JSON.stringify(error.response.data),
-            });
+        const res = await delAllCategory("brand", formData);
+        if (res === true)
+          Swal.fire({
+            icon: "success",
+            title: "Başarıyla Arşivlendi",
+            showConfirmButton: false,
+            timer: 1500,
           });
+        else {
+          Swal.fire({
+            icon: "error",
+            title: JSON.stringify(res.message),
+          });
+        }
+        router.refresh();
       }
     });
   };
@@ -51,34 +53,31 @@ const BrandTable = (props) => {
       });
     } else {
       const formData = { name: name, index: index };
-      await axios
-        .post("/api/catbrand/brand", formData)
-        .then(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Başarıyla Eklendi",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        })
-        .catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: JSON.stringify(error.response.data),
-          });
+      const res = await setAllCategory("brand", formData);
+      if (res === true)
+        Swal.fire({
+          icon: "success",
+          title: "Başarıyla Eklendi",
+          showConfirmButton: false,
+          timer: 1500,
         });
+      else {
+        Swal.fire({
+          icon: "error",
+          title: JSON.stringify(res.message),
+        });
+      }
+      router.refresh();
     }
   };
 
   const updateBrand = async () => {
-    await axios
-      .put("/api/catbrand/brand", modalbrand)
-      .then(() => {
-        setMessage("Başarıyla Değiştirildi");
-      })
-      .catch((error) => {
-        setMessage(JSON.stringify(error.response.data));
-      });
+    const res = await putAllCategory("brand", modalbrand);
+    if (res === true) setMessage("Başarıyla değiştirildi");
+    else {
+      setMessage(res.message);
+    }
+    router.refresh();
   };
 
   return (
