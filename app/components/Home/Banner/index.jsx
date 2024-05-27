@@ -11,7 +11,7 @@ const Banner = (props) => {
   const { settings } = props;
 
   const data = settings?.banner;
-  console.log(data);
+
   let slidersettings = {
     autoplay: true,
     arrows: false,
