@@ -13,7 +13,13 @@ const Loader = ({ children }) => {
     <>
       {loading ? (
         <div className="loader_wrapper">
-          <Image src={img} alt="Logo" width={200} height={200} />
+          <Image
+            src={img}
+            alt="Logo"
+            width={200}
+            height={200}
+            loading="eager"
+          />
         </div>
       ) : (
         children

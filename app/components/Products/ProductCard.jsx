@@ -36,6 +36,7 @@ const ProductCard = (props) => {
               alt={product?.name}
               width={1200}
               height={1200}
+              loading="eager"
               className="tw-max-w-[750px] tw-max-h-[900px] tw-object-contain"
             />
             <Image
@@ -43,6 +44,7 @@ const ProductCard = (props) => {
               alt={product?.name}
               width={1200}
               height={1200}
+              loading="eager"
               className="hover-image tw-max-w-[750px] tw-max-h-[900px] tw-object-contain"
             />
           </Link>
@@ -61,6 +63,7 @@ const ProductCard = (props) => {
                 alt="bio"
                 width={25}
                 height={25}
+                loading="eager"
                 className="tw-w-5 tw-h-5"
               />
             ) : (
@@ -72,6 +75,7 @@ const ProductCard = (props) => {
                 alt="ofg"
                 width={25}
                 height={25}
+                loading="eager"
                 className="tw-w-5 tw-h-5"
               />
             ) : (

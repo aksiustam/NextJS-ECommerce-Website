@@ -219,6 +219,7 @@ const ProductClient = (props) => {
                         alt="Guide"
                         width={200}
                         height={200}
+                        loading="eager"
                         className="tw-w-[170px] tw-h-[120px] tw-object-contain"
                       />
                       <CldUploadWidget

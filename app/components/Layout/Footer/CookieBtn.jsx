@@ -38,6 +38,7 @@ const CookieBtn = (props) => {
                     alt="Nilrio Logo"
                     width={100}
                     height={100}
+                    loading="eager"
                     className="tw-w-[50px] tw-h-[50px] lg:tw-w-[90px] lg:tw-h-[90px] tw-object-contain"
                   />
                 </div>

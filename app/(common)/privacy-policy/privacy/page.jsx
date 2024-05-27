@@ -21,6 +21,7 @@ const page = async () => {
                   src={"/img/nilrio-logo.png"}
                   width={1000}
                   height={500}
+                  loading="eager"
                   alt="Nilrio Logo"
                   className="tw-w-64 tw-h-auto"
                 />

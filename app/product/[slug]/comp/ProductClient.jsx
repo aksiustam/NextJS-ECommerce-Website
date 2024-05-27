@@ -428,6 +428,7 @@ const ProductClient = (props) => {
               alt="guidestaile"
               width={1500}
               height={1500}
+              loading="eager"
               className="tw-object-contain"
             />
           </div>

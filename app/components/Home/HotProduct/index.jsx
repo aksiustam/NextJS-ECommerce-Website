@@ -54,6 +54,7 @@ const HotProduct = (props) => {
                       alt="bio"
                       width={25}
                       height={25}
+                      loading="eager"
                       className="tw-w-6 tw-h-6"
                     />
                     Produits Bio
@@ -69,6 +70,7 @@ const HotProduct = (props) => {
                       alt="bio"
                       width={25}
                       height={25}
+                      loading="eager"
                       className="tw-w-6 tw-h-6"
                     />
                     Origine France Garantie

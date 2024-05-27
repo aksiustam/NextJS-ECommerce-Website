@@ -170,6 +170,7 @@ const ShopContent = ({ props }) => {
                     alt="bio"
                     width={25}
                     height={25}
+                    loading="eager"
                     className="tw-w-5 tw-h-5"
                   />
 
@@ -181,6 +182,7 @@ const ShopContent = ({ props }) => {
                     alt="ofg"
                     width={25}
                     height={25}
+                    loading="eager"
                     className="tw-w-5 tw-h-5"
                   />
 

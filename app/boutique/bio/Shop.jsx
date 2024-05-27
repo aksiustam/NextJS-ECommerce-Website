@@ -154,6 +154,7 @@ const ShopPage = (props) => {
                     alt="bio"
                     width={25}
                     height={25}
+                    loading="eager"
                     className="tw-w-5 tw-h-5"
                   />
                   <span className="tw-font-bold">Bio</span>
@@ -164,6 +165,7 @@ const ShopPage = (props) => {
                     alt="ofg"
                     width={25}
                     height={25}
+                    loading="eager"
                     className="tw-w-5 tw-h-5"
                   />
                   <span className="tw-font-bold">Origine France Garantie</span>

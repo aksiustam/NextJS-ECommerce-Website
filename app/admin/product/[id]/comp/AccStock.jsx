@@ -63,6 +63,7 @@ const AccStock = (params) => {
               alt="Resim"
               width={500}
               height={500}
+              loading="eager"
               className="tw-w-full tw-h-[120px] tw-object-contain"
             />
           );

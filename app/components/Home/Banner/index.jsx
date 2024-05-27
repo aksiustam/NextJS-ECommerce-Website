@@ -11,6 +11,7 @@ const Banner = (props) => {
   const { settings } = props;
 
   const data = settings?.banner;
+  console.log(data);
   let slidersettings = {
     autoplay: true,
     arrows: false,
@@ -68,20 +69,32 @@ const Banner = (props) => {
             </div>
 
             <div className="col-6 tw-pr-0">
-              <Slider {...slidersettings} className="tw-absolute">
-                {data?.banneryan?.map((item, index) => {
-                  return (
-                    <Image
-                      key={index}
-                      src={item?.imageurl}
-                      alt="Nilrio BannerYan"
-                      width={800}
-                      height={800}
-                      className="tw-w-full tw-h-[200px] lg:tw-h-[600px] tw-object-contain"
-                    />
-                  );
-                })}
-              </Slider>
+              {data?.banneryan?.length > 1 ? (
+                <Slider {...slidersettings} className="tw-absolute">
+                  {data?.banneryan?.map((item, index) => {
+                    return (
+                      <Image
+                        key={index}
+                        src={item?.imageurl}
+                        alt="Nilrio BannerYan"
+                        width={800}
+                        height={800}
+                        loading="eager"
+                        className="tw-w-full tw-h-[200px] lg:tw-h-[600px] tw-object-contain"
+                      />
+                    );
+                  })}
+                </Slider>
+              ) : (
+                <Image
+                  src={data?.banneryan[0]?.imageurl}
+                  alt="Nilrio BannerYan"
+                  width={800}
+                  height={800}
+                  loading="eager"
+                  className="tw-w-full tw-h-[200px] lg:tw-h-[600px] tw-object-contain"
+                />
+              )}
             </div>
           </div>
         </div>

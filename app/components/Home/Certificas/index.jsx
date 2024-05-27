@@ -29,6 +29,7 @@ const index = () => {
                 alt="sertifika1"
                 width={500}
                 height={500}
+                loading="eager"
                 className="tw-w-[55px] tw-h-[55px] md:tw-w-[135px] md:tw-h-[135px]  tw-object-contain"
               />
 
@@ -37,6 +38,7 @@ const index = () => {
                 alt="sertifika2"
                 width={500}
                 height={500}
+                loading="eager"
                 className="tw-w-[55px] tw-h-[55px] md:tw-w-[135px] md:tw-h-[135px]  tw-object-contain"
               />
               <Image
@@ -44,6 +46,7 @@ const index = () => {
                 alt="sertifika3"
                 width={500}
                 height={500}
+                loading="eager"
                 className="tw-w-[55px] tw-h-[55px] md:tw-w-[135px] md:tw-h-[135px]  tw-object-contain"
               />
               <Image
@@ -51,6 +54,7 @@ const index = () => {
                 alt="sertifika4"
                 width={500}
                 height={500}
+                loading="eager"
                 className="tw-w-[55px] tw-h-[55px] md:tw-w-[135px] md:tw-h-[135px]  tw-object-contain"
               />
               <Image
@@ -58,6 +62,7 @@ const index = () => {
                 alt="sertifika5"
                 width={500}
                 height={500}
+                loading="eager"
                 className="tw-w-[55px] tw-h-[55px] md:tw-w-[135px] md:tw-h-[135px]  tw-object-contain"
               />
             </div>

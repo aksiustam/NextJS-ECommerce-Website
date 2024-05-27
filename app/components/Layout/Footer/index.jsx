@@ -127,7 +127,7 @@ const Footer = () => {
                     alt="Nilrio Logo"
                     width={300}
                     height={300}
-                    priority
+                    loading="eager"
                     className="tw-w-[100px] tw-h-[100px] md:tw-w-[170px] md:tw-h-[170px] tw-object-contain"
                   />
                 </Link>
@@ -164,8 +164,8 @@ const Footer = () => {
           <div className="row">
             <div className="col-lg-6 col-md-6 col-sm-6 col-12">
               <div className="copyright_left">
-                <h4 className="tw-text-white">
-                  © CopyRight {datenow?.getFullYear()}{" "}
+                <h4 className="tw-text-white tw-font-bold tw-text-xs">
+                  © CopyRight {datenow?.getFullYear()} NILRIO By{" "}
                   <a href="https://www.aydtanitim.com/">
                     <span>AYDTanıtım</span>
                   </a>
@@ -179,6 +179,7 @@ const Footer = () => {
                   alt="payment"
                   width={500}
                   height={500}
+                  loading="eager"
                   className="tw-w-[40px] tw-h-full tw-object-contain"
                 />
                 <Image
@@ -186,6 +187,7 @@ const Footer = () => {
                   alt="payment"
                   width={500}
                   height={500}
+                  loading="eager"
                   className="tw-w-[40px] tw-h-full tw-object-contain"
                 />
                 <Image
@@ -193,6 +195,7 @@ const Footer = () => {
                   alt="payment"
                   width={500}
                   height={500}
+                  loading="eager"
                   className="tw-w-[40px] tw-h-full tw-object-contain"
                 />
                 <Image
@@ -200,6 +203,7 @@ const Footer = () => {
                   alt="payment"
                   width={500}
                   height={500}
+                  loading="eager"
                   className="tw-w-[40px] tw-h-full tw-object-contain"
                 />
               </div>

@@ -446,6 +446,7 @@ const ProductsTable = (props) => {
                                   alt="image"
                                   width={70}
                                   height={70}
+                                  loading="eager"
                                   className="tw-object-contain"
                                 />
                               </Link>

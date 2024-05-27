@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import deleteMail from "@/app/actions/Mail/deleteMail";
 import { useRouter } from "next/navigation";

@@ -18,6 +18,7 @@ const page = async () => {
               width={1000}
               height={500}
               alt="Nilrio Logo"
+              loading="eager"
               className="tw-w-96 tw-h-auto tw-mb-6"
             />
 

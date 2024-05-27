@@ -83,6 +83,7 @@ const CartClient = () => {
                                     alt={item.name}
                                     width={300}
                                     height={300}
+                                    loading="eager"
                                   />
                                 </Link>
                               </td>

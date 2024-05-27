@@ -143,6 +143,7 @@ const Header = (props) => {
                           alt={"logo"}
                           width={100}
                           heigth={100}
+                          loading="eager"
                           className="tw-w-[100px] tw-h-[100px]  tw-object-contain"
                         />
                       </Link>
@@ -271,7 +272,13 @@ const Header = (props) => {
                 </ul>
               </li>
               <li>
-                <Image src={frflag} alt="france" width={25} height={25} />
+                <Image
+                  src={frflag}
+                  alt="france"
+                  width={25}
+                  height={25}
+                  loading="eager"
+                />
               </li>
             </ul>
           </div>
@@ -292,6 +299,7 @@ const Header = (props) => {
                           alt={"logo"}
                           width={125}
                           heigth={80}
+                          loading="eager"
                         />
                       </div>
                     </Link>
@@ -367,7 +375,13 @@ const Header = (props) => {
                     </ul>
                   </li>
                   <li>
-                    <Image src={frflag} alt="france" width={25} height={25} />
+                    <Image
+                      src={frflag}
+                      alt="france"
+                      width={25}
+                      height={25}
+                      loading="eager"
+                    />
                   </li>
                   <li>
                     <a
@@ -467,6 +481,7 @@ const Header = (props) => {
                   alt="Nilrio Logo White"
                   width={400}
                   height={400}
+                  loading="eager"
                 />
               </Link>
             </div>
@@ -507,7 +522,13 @@ const Header = (props) => {
       >
         <div className="offcanvas-header text-right">
           <button className="offcanvas-close" onClick={handleClick}>
-            <Image src={svg} alt="close icon" width={50} height={50} />
+            <Image
+              src={svg}
+              alt="close icon"
+              width={50}
+              height={50}
+              loading="eager"
+            />
           </button>
         </div>
         <div className="offcanvas-add-cart-wrapper">
@@ -525,6 +546,7 @@ const Header = (props) => {
                       alt={data.name}
                       width={300}
                       height={300}
+                      loading="eager"
                       className="offcanvas-wishlist-image"
                       onError={(e) => {
                         e.target.src = errimg;
@@ -595,7 +617,13 @@ const Header = (props) => {
 
       <div id="search" className="search-modal">
         <button type="button" className="close" onClick={handleSearch}>
-          <Image src={svg} alt="close icon" width={50} height={50} />
+          <Image
+            src={svg}
+            alt="close icon"
+            width={50}
+            height={50}
+            loading="eager"
+          />
         </button>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input

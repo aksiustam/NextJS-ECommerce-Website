@@ -25,6 +25,7 @@ const page = async () => {
                   alt="guides1"
                   width={1500}
                   height={1000}
+                  loading="eager"
                   className="tw-object-contain"
                 />
                 <Image
@@ -32,6 +33,7 @@ const page = async () => {
                   alt="guides2"
                   width={1500}
                   height={1000}
+                  loading="eager"
                   className="tw-object-contain"
                 />
                 <Image
@@ -39,6 +41,7 @@ const page = async () => {
                   alt="guides3"
                   width={1500}
                   height={1000}
+                  loading="eager"
                   className="tw-object-contain"
                 />
               </div>

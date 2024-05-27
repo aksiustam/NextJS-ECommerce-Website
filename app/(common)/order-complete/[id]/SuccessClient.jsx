@@ -193,6 +193,7 @@ const OrderSuccess = React.forwardRef(function OrderSuccess(props, ref) {
                             alt="nilriologo"
                             width={350}
                             height={350}
+                            loading="eager"
                             style={{
                               width: "100%",
                               maxWidth: "120px",

@@ -23,6 +23,7 @@ const CertificateClient = () => {
                       width={500}
                       height={500}
                       alt="sertifika1"
+                      loading="eager"
                       className="tw-w-[240px] tw-h-[240px] tw-object-contain"
                     />
 
@@ -38,6 +39,7 @@ const CertificateClient = () => {
                       width={500}
                       height={500}
                       alt="sertifika4"
+                      loading="eager"
                       className="tw-w-[240px] tw-h-[240px] tw-object-contain"
                     />
 
@@ -54,6 +56,7 @@ const CertificateClient = () => {
                       width={500}
                       height={500}
                       alt="sertifika3"
+                      loading="eager"
                       className="tw-w-[240px] tw-h-[240px] tw-object-contain"
                     />
                     <div className="tw-text-center tw-mt-4 ">
@@ -68,6 +71,7 @@ const CertificateClient = () => {
                       width={500}
                       height={500}
                       alt="sertifika2"
+                      loading="eager"
                       className="tw-w-[240px] tw-h-[240px] tw-object-contain"
                     />
 
@@ -81,6 +85,7 @@ const CertificateClient = () => {
                       width={500}
                       height={500}
                       alt="sertifika5"
+                      loading="eager"
                       className="tw-w-[240px] tw-h-[240px] tw-object-contain"
                     />
 
