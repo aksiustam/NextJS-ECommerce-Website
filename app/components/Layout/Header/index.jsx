@@ -7,16 +7,21 @@ import logoWhite from "@/public/assets/img/logo-white.png";
 import errimg from "@/public/assets/img/common/defproductimg.webp";
 import frflag from "@/public/assets/img/svg/flag-france.svg";
 import svg from "@/public/assets/img/svg/cancel.svg";
-import { FaUser } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa";
+
+import {
+  FaTrashAlt,
+  FaShoppingBasket,
+  FaSearch,
+  FaUser,
+  FaUserCircle,
+  FaBars,
+  FaYoutubeSquare,
+  FaWhatsappSquare,
+  FaInstagramSquare,
+} from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { FaSearch } from "react-icons/fa";
-import { MdClose } from "react-icons/md";
-import { FaShoppingBasket } from "react-icons/fa";
+import { MdClose, MdAdminPanelSettings } from "react-icons/md";
 import { IoExit } from "react-icons/io5";
-import { FaBars } from "react-icons/fa6";
-import { FaTrashAlt } from "react-icons/fa";
-import { MdAdminPanelSettings } from "react-icons/md";
 import ReactGA from "react-ga4";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
@@ -101,24 +106,20 @@ const Header = (props) => {
   // Sticky Menu Area
   useEffect(() => {
     const header = document.querySelector(".header-section");
-    const scrollTop = window.scrollY;
-    scrollTop >= 75
-      ? header.classList.add("is-sticky")
-      : header.classList.remove("is-sticky");
+
+    const isSticky = () => {
+      const scrollTop = window.scrollY;
+      scrollTop >= 75
+        ? header.classList.add("is-sticky")
+        : header.classList.remove("is-sticky");
+    };
+
     window.addEventListener("scroll", isSticky);
 
     return () => {
       window.removeEventListener("scroll", isSticky);
     };
-  });
-
-  const isSticky = (e) => {
-    const header = document.querySelector(".header-section");
-    const scrollTop = window.scrollY;
-    scrollTop >= 75
-      ? header.classList.add("is-sticky")
-      : header.classList.remove("is-sticky");
-  };
+  }, []);
 
   const logout = () => {
     signOut();
@@ -129,7 +130,7 @@ const Header = (props) => {
 
   return (
     <>
-      <header className="header-section d-none d-xl-block tw-w-full tw-fixed tw-z-20 ">
+      <header className="header-section d-none d-xl-block tw-w-full tw-z-20 tw-bg-black">
         <div className="header-wrapper">
           <div className="header-bottom  section-fluid sticky-header sticky-color--golden ">
             <div className="container">
@@ -137,14 +138,15 @@ const Header = (props) => {
                 <div className="col-12 d-flex align-items-center justify-content-center">
                   <div className="header-logo">
                     <div className="logo">
-                      <Link href="/">
+                      <Link href="/" scroll={false}>
                         <Image
                           src={logo}
-                          alt={"logo"}
-                          width={100}
-                          heigth={100}
+                          alt="Nilrio Logo"
+                          width={350}
+                          heigth={350}
                           loading="eager"
-                          className="tw-w-[100px] tw-h-[100px]  tw-object-contain"
+                          priority="true"
+                          className=" tw-h-[105px] tw-w-[105px] tw-object-contain"
                         />
                       </Link>
                     </div>
@@ -222,14 +224,14 @@ const Header = (props) => {
                     onClick={handleClick}
                   >
                     <FaShoppingBasket size={25} color="white" />
-                    <span className="item-count tw-absolute tw-top-0 tw-left-3">
+                    <span className="tw-absolute tw-bottom-3 tw-left-3">
                       {basket.length}
                     </span>
                   </a>
                 ) : (
                   <a href="#!" className="offcanvas-toggle">
                     <FaShoppingBasket size={25} color="white" />
-                    <span className="item-count tw-absolute tw-top-0  tw-left-3">
+                    <span className="tw-absolute tw-bottom-3 tw-left-3">
                       {basket.length}
                     </span>
                   </a>
@@ -292,7 +294,7 @@ const Header = (props) => {
               <div className="mobile-header-left">
                 <ul className="mobile-menu-logo">
                   <li>
-                    <Link href="/">
+                    <Link href="/" scroll={false}>
                       <div className="logo">
                         <Image
                           src={logoWhite}
@@ -326,14 +328,14 @@ const Header = (props) => {
                         onClick={handleClick}
                       >
                         <FaShoppingBasket size={25} color="white" />
-                        <span className="item-count tw-absolute tw-top-0 tw-left-3">
+                        <span className="tw-absolute tw-top-0 tw-left-3">
                           {basket.length}
                         </span>
                       </a>
                     ) : (
                       <a href="#!" className="offcanvas-toggle">
                         <FaShoppingBasket size={25} color="white" />
-                        <span className="item-count tw-absolute tw-top-0  tw-left-3">
+                        <span className="tw-absolute tw-top-0 tw-left-3">
                           {basket.length}
                         </span>
                       </a>
@@ -405,7 +407,7 @@ const Header = (props) => {
       >
         <div className="offcanvas-header text-right">
           <button className="offcanvas-close" onClick={handlemenu}>
-            <MdClose size={32} color="white" />
+            <MdClose size={24} color="white" />
           </button>
         </div>
         <div className="offcanvas-mobile-menu-wrapper">
@@ -417,16 +419,15 @@ const Header = (props) => {
                     <li key={index}>
                       <Link
                         href={item.href !== "" ? item.href : "#!"}
-                        className="main-menu-link !tw-text-white"
+                        className="main-menu-link tw-italic"
                         onClick={() => {
                           handleShow(item.name);
                           item.children.length === 0 && closeMenu();
-                          if (gacheck)
-                            ReactGA.event({
-                              category: "event",
-                              action: item?.name,
-                              label: item?.name + " a gitti",
-                            });
+                          ReactGA.event({
+                            category: "event",
+                            action: item?.name,
+                            label: item?.name + " a gitti",
+                          });
                         }}
                       >
                         {item?.name}
@@ -435,11 +436,7 @@ const Header = (props) => {
                         <ul className="mobile-sub-menu tw-mt-2 tw-ml-4">
                           <li>
                             <Link
-                              href={`/boutique/?type=${
-                                item.children[0].type === "dress"
-                                  ? "vetements"
-                                  : "accessoires"
-                              }`}
+                              href={item.href}
                               onClick={() => closeMenu()}
                               className="tw-italic"
                             >
@@ -452,12 +449,11 @@ const Header = (props) => {
                                 href={data?.href}
                                 onClick={() => {
                                   closeMenu();
-                                  if (gacheck)
-                                    ReactGA.event({
-                                      category: "event",
-                                      action: data?.name,
-                                      label: data?.name + " a gitti",
-                                    });
+                                  ReactGA.event({
+                                    category: "event",
+                                    action: data?.name,
+                                    label: data?.name + " a gitti",
+                                  });
                                 }}
                                 className="tw-italic"
                               >
@@ -475,12 +471,12 @@ const Header = (props) => {
           </div>
           <div className="mobile-contact-info">
             <div className="logo">
-              <Link href="/">
+              <Link href="/" scroll={false}>
                 <Image
                   src={logoWhite}
                   alt="Nilrio Logo White"
-                  width={400}
-                  height={400}
+                  width={200}
+                  height={70}
                   loading="eager"
                 />
               </Link>
@@ -492,18 +488,18 @@ const Header = (props) => {
             <ul className="social-link">
               <li>
                 <a href="https://api.whatsapp.com/send?phone=33781825139">
-                  <i className="fa fa-lg fa-whatsapp"></i>
+                  <FaYoutubeSquare size={32} color="white" />
                 </a>
               </li>
 
               <li>
                 <a href="https://www.instagram.com/nilrio_/">
-                  <i className="fa fa-lg fa-instagram"></i>
+                  <FaWhatsappSquare size={32} color="white" />
                 </a>
               </li>
               <li>
                 <a href="https://www.youtube.com/@nilrio">
-                  <i className="fa fa-lg fa-youtube-play"></i>
+                  <FaInstagramSquare size={32} color="white" />
                 </a>
               </li>
             </ul>

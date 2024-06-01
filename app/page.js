@@ -16,6 +16,8 @@ export default async function Home() {
   const settings = await getSettings();
   const products = await getProducts();
 
+  const checkbox = settings?.discountpage?.checkbox;
+
   return (
     <>
       <Header headerdata={headerdata} user={user} />
@@ -23,7 +25,7 @@ export default async function Home() {
         <Banner settings={settings} />
         <BannerBottom settings={settings} />
         <HotProduct products={products} />
-        <OfferTime settings={settings} />
+        {checkbox === "true" && <OfferTime settings={settings} />}
         <Certificas />
       </main>
       <Footer />

@@ -65,7 +65,7 @@ model Product {
     archive          Boolean?
     guideurl         Json?
     quill            Json?
-    sells            Int?
+    sells            Int?               @default(0)
     createdAt        DateTime?          @default(now())
     updatedAt        DateTime?          @updatedAt
     StockMail        StockMail[]
@@ -81,12 +81,12 @@ model ProductColorSize {
     Product   Product?    @relation(fields: [productId], references: [id], onDelete: Cascade)
     productId Int?
     colorId   Int?
-    sells     Int?
+    sells     Int?        @default(0)
 }
 
 model SizeStock {
     id                 Int               @id @default(autoincrement())
-    stock              Int?
+    stock              Int?              @default(0)
     productColorSizeId Int?
     sizeId             Int?
     Size               Size?             @relation(fields: [sizeId], references: [id], onDelete: Cascade)
@@ -95,7 +95,7 @@ model SizeStock {
 
 model ParcelGram {
     id        Int      @id @default(autoincrement())
-    gram      Int?
+    gram      Int?     @default(0)
     sizeId    Int?
     Size      Size?    @relation(fields: [sizeId], references: [id], onDelete: Cascade)
     Product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
@@ -106,7 +106,7 @@ model Size {
     id         Int          @id @default(autoincrement()) // 1 
     index      Int? // 1
     name       String? // XL
-    archive    Boolean?
+    archive    Boolean?     @default(false)
     SizeType   SizeType?    @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
     sizeTypeId Int?
     SizeStock  SizeStock[]
@@ -136,7 +136,7 @@ model Brand {
     id       Int        @id @default(autoincrement())
     index    Int?
     name     String?
-    archive  Boolean?
+    archive  Boolean?   @default(false)
     Category Category[]
     Product  Product[]
 }
@@ -153,7 +153,7 @@ model Category {
     CategoryType   CategoryType? @relation(fields: [categoryTypeId], references: [id], onDelete: Cascade)
     SizeType       SizeType?     @relation(fields: [sizeTypeId], references: [id], onDelete: Cascade)
     season         String?
-    archive        Boolean?
+    archive        Boolean?      @default(false)
     sizeTypeId     Int
     Product        Product[]
     categoryTypeId Int?
@@ -167,7 +167,7 @@ model Color {
     name             String?
     slug             String?            @unique
     hex              String?
-    archive          Boolean?
+    archive          Boolean?           @default(false)
     ProductColorSize ProductColorSize[]
 
     @@index([slug])

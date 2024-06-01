@@ -1,6 +1,5 @@
 "use server";
 import prisma from "@/lib/prismadb";
-import nodemailer from "nodemailer";
 
 function sendMail(mailOptions, transporter) {
   return new Promise((resolve, reject) => {
@@ -16,6 +15,7 @@ function sendMail(mailOptions, transporter) {
 export default async function sendOrderMail(formdata) {
   try {
     const { email, html, htmladmin, sipid } = formdata;
+    const nodemailer = await import("nodemailer");
 
     let transporter = nodemailer.createTransport({
       host: "mail.nilrio.com",

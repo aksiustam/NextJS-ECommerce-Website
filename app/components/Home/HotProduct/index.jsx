@@ -47,15 +47,15 @@ const HotProduct = (props) => {
                 <li>
                   <Nav.Link
                     eventKey="bio"
-                    className="!tw-font-bold tw-flex tw-gap-2"
+                    className="!tw-font-bold tw-flex tw-items-center tw-gap-2"
                   >
                     <Image
                       src={bioimg}
                       alt="bio"
-                      width={25}
-                      height={25}
+                      width={50}
+                      height={50}
                       loading="eager"
-                      className="tw-w-6 tw-h-6"
+                      className="tw-w-4 tw-h-4 md:tw-w-6 md:tw-h-6 "
                     />
                     Produits Bio
                   </Nav.Link>
@@ -63,15 +63,15 @@ const HotProduct = (props) => {
                 <li>
                   <Nav.Link
                     eventKey="ofg"
-                    className="!tw-font-bold tw-flex tw-gap-2"
+                    className="!tw-font-bold tw-flex tw-items-center tw-gap-2"
                   >
                     <Image
                       src={ofgimg}
                       alt="bio"
-                      width={25}
-                      height={25}
+                      width={50}
+                      height={50}
                       loading="eager"
-                      className="tw-w-6 tw-h-6"
+                      className="tw-w-4 tw-h-4 md:tw-w-6 md:tw-h-6 "
                     />
                     Origine France Garantie
                   </Nav.Link>

@@ -1,6 +1,5 @@
 import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 
 const CheckStockMail = async (product, pcs, sizestock) => {
   const stockmail = await prisma.StockMail.findMany({
@@ -23,6 +22,8 @@ const CheckStockMail = async (product, pcs, sizestock) => {
   }
 
   if (mails.length > 0) {
+    const nodemailer = await import("nodemailer");
+
     let transporter = nodemailer.createTransport({
       host: "mail.nilrio.com",
       port: 465,

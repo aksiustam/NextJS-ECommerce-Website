@@ -1,8 +1,7 @@
 "use server";
 import prisma from "@/lib/prismadb";
-import nodemailer from "nodemailer";
 import { HaberlereAbone } from "../../reactemail/haberlereabone";
-import { render } from "@react-email/render";
+
 export default async function setNewsMail(data) {
   try {
     const { email } = data;
@@ -13,6 +12,9 @@ export default async function setNewsMail(data) {
       },
     });
 
+    const nodemailer = await import("nodemailer");
+
+    const { render } = await import("@react-email/render");
     const html = render(<HaberlereAbone />);
 
     let transporter = nodemailer.createTransport({

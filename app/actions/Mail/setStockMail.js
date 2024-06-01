@@ -1,8 +1,7 @@
 "use server";
 import prisma from "@/lib/prismadb";
-import nodemailer from "nodemailer";
 import { StockBittiAbone } from "../../reactemail/stockbittiabone";
-import { render } from "@react-email/render";
+
 export default async function setStockMail(formData) {
   try {
     await prisma.StockMail.create({
@@ -14,7 +13,9 @@ export default async function setStockMail(formData) {
         productId: formData.productId,
       },
     });
+    const nodemailer = await import("nodemailer");
 
+    const { render } = await import("@react-email/render");
     const html = render(<StockBittiAbone />);
 
     let transporter = nodemailer.createTransport({

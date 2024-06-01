@@ -10,13 +10,12 @@ const OfferTime = (props) => {
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
 
-  const data = settings?.discountset;
   const datapage = settings?.discountpage;
 
   let interval = useRef();
 
   const startTimer = () => {
-    const countdownDate = new Date(data.date).getTime();
+    const countdownDate = new Date(datapage.date).getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = countdownDate - now;
@@ -49,7 +48,7 @@ const OfferTime = (props) => {
       <section
         id="offer_timer_one"
         className="tw-mt-2 tw-mb-1 tw-py-2 md:tw-py-[130px] tw-hidden md:tw-block"
-        style={{ backgroundImage: `url(${datapage?.bannerImageUrl})` }}
+        style={{ backgroundImage: `url(${datapage?.discres?.imageurl})` }}
       >
         <div className="container">
           <div className="row">

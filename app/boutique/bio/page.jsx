@@ -14,7 +14,7 @@ const page = async () => {
   return (
     <>
       <Header headerdata={headerdata} user={user} />
-      <Banner title="Boutique" />
+      <Banner title="Boutique" subtitle="Bio" />
       <main>
         <ShopPage products={products} allcategory={allcategory} />
       </main>

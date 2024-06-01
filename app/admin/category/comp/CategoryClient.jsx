@@ -8,6 +8,9 @@ import SizeTypeTable from "./SizeTypeTable";
 import CatTypeTable from "./CatTypeTable";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import GloveTable from "./GloveTable";
+import BeltTable from "./BeltTable";
+import SockTable from "./SockTable";
 const CategoryClient = (props) => {
   const { AllCategory } = props;
   const { category, brand, color, size, sizetype, cattype } = AllCategory;
@@ -31,22 +34,28 @@ const CategoryClient = (props) => {
             <Tab eventKey="color" title="Renk">
               <ColorTable color={color} />
             </Tab>
-            <Tab eventKey="dresssize" title="GiysiBoyut">
+            <Tab eventKey="dresssize" title="Giysi">
               <DressSizeTable size={size} />
             </Tab>
 
-            <Tab eventKey="shoesize" title="AyakBoyut">
+            <Tab eventKey="shoesize" title="Ayakkabı">
               <ShoeSizeTable size={size} />
             </Tab>
+            <Tab eventKey="glovesize" title="Eldiven">
+              <GloveTable size={size} />
+            </Tab>
+            <Tab eventKey="beltsize" title="Kemer">
+              <BeltTable size={size} />
+            </Tab>
+            <Tab eventKey="socksize" title="Çorap">
+              <SockTable size={size} />
+            </Tab>
 
-            <Tab eventKey="sizetype" title="SizeType">
+            <Tab eventKey="sizetype" title="Boyutlar">
               <SizeTypeTable sizetype={sizetype} />
             </Tab>
-            <Tab eventKey="cattype" title="CatType">
+            <Tab eventKey="cattype" title="Gruplar">
               <CatTypeTable cattype={cattype} />
-            </Tab>
-            <Tab eventKey="contact" title="BaşkaBoyutlar" disabled>
-              Tab content for Contact
             </Tab>
           </Tabs>
         </div>

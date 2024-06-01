@@ -8,25 +8,32 @@ import { useState } from "react";
 const BannerSet = (props) => {
   const { settings } = props;
 
-  const { register, handleSubmit } = useForm();
+  const data = settings.banner;
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      bannerAlt: data?.bannerAlt,
+      bannerUst: data?.bannerUst,
+      buttonUrl: data?.buttonUrl,
+      buttonName: data?.buttonName,
+      btncheck: data?.btncheck,
+    },
+  });
   const [image, setImage] = useState(null);
   const [bimage, setBImage] = useState([]);
   const onSubmit = async (data) => {
-    let formData = { ...data };
+    let formData = { ...data, banner: null, banneryan: null };
     if (image !== null) {
-      formData = {
-        ...formData,
-        banner: { imageid: image.public_id, imageurl: image.secure_url },
+      formData.banner = {
+        imageid: image.public_id,
+        imageurl: image.secure_url,
       };
     }
     if (bimage.length > 0) {
       const banneryan = bimage.map((item) => {
         return { imageid: item.public_id, imageurl: item.secure_url };
       });
-      formData = {
-        ...formData,
-        banneryan: banneryan,
-      };
+      formData.banneryan = banneryan;
     }
 
     await axios
@@ -147,12 +154,7 @@ const BannerSet = (props) => {
                 type="text"
                 className="form-control"
                 placeholder="Banner İsmi Ust"
-                onBlur={(e) => {
-                  register(`bannerUst`, {
-                    shouldUnregister: true,
-                    value: e.target.value,
-                  });
-                }}
+                {...register("bannerUst")}
               />
             </div>
           </div>
@@ -165,12 +167,7 @@ const BannerSet = (props) => {
                 type="text"
                 className="form-control"
                 placeholder="Banner İsmi Alt"
-                onBlur={(e) => {
-                  register(`bannerAlt`, {
-                    shouldUnregister: true,
-                    value: e.target.value,
-                  });
-                }}
+                {...register("bannerAlt")}
               />
             </div>
           </div>
@@ -183,12 +180,7 @@ const BannerSet = (props) => {
                 type="text"
                 className="form-control"
                 placeholder="Button Adı"
-                onBlur={(e) => {
-                  register(`buttonName`, {
-                    shouldUnregister: true,
-                    value: e.target.value,
-                  });
-                }}
+                {...register("buttonName")}
               />
             </div>
           </div>
@@ -201,12 +193,7 @@ const BannerSet = (props) => {
                 type="text"
                 className="form-control"
                 placeholder="Button Url"
-                onBlur={(e) => {
-                  register(`buttonUrl`, {
-                    shouldUnregister: true,
-                    value: e.target.value,
-                  });
-                }}
+                {...register("buttonUrl")}
               />
             </div>
           </div>
@@ -216,11 +203,7 @@ const BannerSet = (props) => {
                 Button Göster
                 <span className="text-danger">*</span>
               </label>
-              <select
-                id="btncheck"
-                defaultValue={settings?.banner?.btncheck}
-                {...register("btncheck")}
-              >
+              <select id="btncheck" {...register("btncheck")} required>
                 <option value="false">Hayır</option>
                 <option value="true">Evet</option>
               </select>

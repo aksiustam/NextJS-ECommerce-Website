@@ -12,12 +12,22 @@ const Banner = (props) => {
                 <h2 className="tw-capitalize tw-text-white">{props.title}</h2>
                 <ul>
                   <li>
-                    <Link href="/">Page D&apos;acceuil</Link>
+                    <Link href="/" scroll={false}>
+                      Page D&apos;acceuil
+                    </Link>
                   </li>
                   <li className="slash">/</li>
                   <li className="active !tw-text-gray-300 tw-capitalize">
                     {props.title}
                   </li>
+                  {props.subtitle && (
+                    <>
+                      <li className="slash">/</li>
+                      <li className="active !tw-text-gray-300 tw-capitalize">
+                        {props.subtitle}
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>

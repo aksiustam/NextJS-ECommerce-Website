@@ -8,10 +8,21 @@ import Form from "react-bootstrap/Form";
 import { CldUploadWidget } from "next-cloudinary";
 const IndirimYeriClient = (props) => {
   const { settings } = props;
-  const { register, handleSubmit } = useForm();
+  const data = settings?.discountpage;
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      bannerAlt: data?.bannerAlt,
+      bannerUst: data?.bannerUst,
+      buttonUrl: data?.buttonUrl,
+      buttonName: data?.buttonName,
+      checkbox: data?.checkbox,
+      date: data?.date,
+    },
+  });
   const [image, setImage] = useState(null);
   const onSubmit = async (data) => {
-    let formData = { ...data };
+    let formData = { ...data, discres: null };
     if (image !== null) {
       formData = {
         ...formData,
@@ -54,7 +65,7 @@ const IndirimYeriClient = (props) => {
             <Form.Control
               type="color"
               id="colorid"
-              defaultValue={settings?.discountpage?.bannerColor}
+              defaultValue={data?.bannerColor}
               {...register("bannerColor")}
             />
           </div>
@@ -142,6 +153,37 @@ const IndirimYeriClient = (props) => {
               className="form-control"
               placeholder="Button Url"
               {...register("buttonUrl")}
+            />
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <div className="fotm-group tw-flex tw-flex-col">
+            <label htmlFor="indirim_etkin">
+              Anasayfa İndirimi Etkinleştir
+              <span className="text-danger">*</span>
+            </label>
+            <select
+              name="checkbox"
+              id="indirim_etkin"
+              {...register("checkbox")}
+              required
+            >
+              <option value="false">Hayır</option>
+              <option value="true">Evet</option>
+            </select>
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <div className="fotm-group">
+            <label htmlFor="product_available">
+              İndirim Zamanı<span className="text-danger">*</span>
+            </label>
+            <input
+              type="date"
+              id="product_available"
+              className="form-control"
+              {...register("date")}
+              required
             />
           </div>
         </div>

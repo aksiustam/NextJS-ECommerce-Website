@@ -1,6 +1,5 @@
 "use server";
 import prisma from "@/lib/prismadb";
-import nodemailer from "nodemailer";
 function generateRandomCode() {
   let code = "";
   for (let i = 0; i < 6; i++) {
@@ -20,6 +19,7 @@ export default async function setUserResendCode(id, formData) {
         code: code,
       },
     });
+    const nodemailer = await import("nodemailer");
 
     let transporter = nodemailer.createTransport({
       host: "mail.nilrio.com",

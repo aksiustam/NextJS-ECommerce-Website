@@ -42,22 +42,23 @@ export async function POST(req, { params }) {
 
       break;
     case "banner":
-      let setbanner = set.banner;
-
-      setbanner = {
+      let formData2 = {
         bannercolor: data.bannercolor,
+        bannerUst: data.bannerUst,
+        bannerAlt: data.bannerAlt,
+        buttonName: data.buttonName,
+        buttonUrl: data.buttonUrl,
         btncheck: data.btncheck,
-        bannerUst: data.bannerUst ? data.bannerUst : setbanner.bannerUst,
-        bannerAlt: data.bannerAlt ? data.bannerAlt : setbanner.bannerAlt,
-        buttonName: data.buttonName ? data.buttonName : setbanner.buttonName,
-        buttonUrl: data.buttonUrl ? data.buttonUrl : setbanner.buttonUrl,
-        banner: data.banner ? data.banner : setbanner.banner,
-        banneryan: data.banneryan ? data.banneryan : setbanner.banneryan,
+        banner: set.banner.banner,
+        banneryan: set.banner.banneryan,
       };
+      if (data.banner !== null) formData2.banner = data.banner;
+      if (data.banneryan !== null) formData2.banneryan = data.banneryan;
+
       await prisma.ayarlar.update({
         where: { id: 1 },
         data: {
-          banner: setbanner,
+          banner: formData2,
         },
       });
 
@@ -72,26 +73,24 @@ export async function POST(req, { params }) {
       });
       break;
     case "discountpage":
-      let discountpage = set.discountpage;
-
-      discountpage = {
+      let formData = {
         bannerColor: data.bannerColor,
-        bannerUst: data.bannerUst ? data.bannerUst : discountpage.bannerUst,
-        bannerAlt: data.bannerAlt ? data.bannerAlt : discountpage.bannerAlt,
-        buttonName: data.buttonName ? data.buttonName : discountpage.buttonName,
-        buttonUrl: data.buttonUrl ? data.buttonUrl : discountpage.buttonUrl,
-        bannerImageId: data.discres.imageid
-          ? data.discres.imageid
-          : discountpage.bannerImageId,
-        bannerImageUrl: data.discres.imageurl
-          ? data.discres.imageurl
-          : discountpage.bannerImageUrl,
+        bannerUst: data.bannerUst,
+        bannerAlt: data.bannerAlt,
+        buttonName: data.buttonName,
+        buttonUrl: data.buttonUrl,
+        checkbox: data.checkbox,
+        date: data.date,
+        discres: set.discountpage.discres,
       };
+      if (data.discres !== null) {
+        formData.discres = data.discres;
+      }
 
       await prisma.ayarlar.update({
         where: { id: 1 },
         data: {
-          discountpage: discountpage,
+          discountpage: formData,
         },
       });
       break;
@@ -99,8 +98,6 @@ export async function POST(req, { params }) {
       let discountset = set.discountset;
 
       discountset = {
-        checkbox: data.checkbox,
-        date: data.date,
         indirim1: data.indirim1,
         indirim2: data.indirim2,
         indirim3: data.indirim3,

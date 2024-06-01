@@ -148,7 +148,9 @@ const ContactClient = () => {
                     </div>
                     <div className="contact_widget">
                       <i className="fa fa-globe"></i>
-                      <Link href="/">www.nilrio.com</Link>
+                      <Link href="/" scroll={false}>
+                        www.nilrio.com
+                      </Link>
                     </div>
                   </li>
                 </ul>
@@ -159,7 +161,7 @@ const ContactClient = () => {
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.1348270500957!2d2.4186303!3d48.8937676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66d01c818e3e9%3A0x8abe67da35f1795f!2s6%20Rue%20de%20Palestro%2C%2093500%20Pantin%2C%20France!5e0!3m2!1sfr!2str!4v1708334145480!5m2!1sfr!2str"
                       width="400"
                       height="300"
-                      allowFullscreen=""
+                      allowFullScreen=""
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>

@@ -479,17 +479,6 @@ textarea:focus {
   background: #24262b;
 }
 
-.sticky-header.sticky.sticky-color--golden {
-  background: #fef5ef;
-}
-
-.sticky-header.sticky.sticky-color--white {
-  background: #fff;
-}
-
-.sticky-header.sticky.sticky-color--black {
-  background: #24262b;
-}
 
 .search_width img {
   width: 28px;
@@ -795,9 +784,7 @@ textarea:focus {
   border-radius: 50%;
 }
 
-.offcanvas-close img {
-  height: 18px;
-}
+
 
 /*Action Style Color Normal*/
 
@@ -1204,13 +1191,13 @@ textarea:focus {
   transform: translateX(100%);
   box-shadow: none;
   background: #fff;
-  width: 300px;
+  max-width: 320px;
   overflow-x: hidden;
 }
 
 @media (min-width: 576px) {
   .offcanvas {
-    width: 450px;
+    max-width: 320px;
   }
 }
 
@@ -1244,17 +1231,15 @@ textarea:focus {
 }
 
 .offcanvas-close {
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   line-height: 25px;
   text-align: center;
   border-radius: 50%;
   transition: all 0.5s ease;
 }
 
-.offcanvas-close:hover {
-  color: red;
-}
+
 
 .offcanvas-title {
   margin-bottom: 40px;
@@ -1339,7 +1324,7 @@ textarea:focus {
 
 .mobile-contact-info .logo {
   margin: 0 auto;
-  width: 200px;
+  width: 150px;
 }
 
 .mobile-contact-info .logo img {
@@ -1348,12 +1333,13 @@ textarea:focus {
 }
 
 .mobile-contact-info .address {
-  margin-top: 30px;
+  margin-top: 20px;
   color: #fff;
 }
 
 .mobile-contact-info .address span {
   display: block;
+  font-size: 12px;
 }
 
 .mobile-contact-info .social-link li {
@@ -1365,31 +1351,16 @@ textarea:focus {
   margin-right: 0;
 }
 
-.mobile-contact-info .social-link li a {
-  display: block;
-  text-align: center;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 50%;
-  background: #2f3239;
-  color: #fff;
-  transition: all 0.5s ease;
-  font-size: 16px;
-}
 
-.mobile-contact-info .social-link li a:hover {
-  background: #fff;
-  color: #2f3239;
-}
+
 
 .mobile-contact-info .user-link {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .mobile-contact-info .user-link li {
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 11px;
 }
 
 .mobile-contact-info .user-link li:last-child {

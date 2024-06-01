@@ -92,7 +92,7 @@ const ProductClient = (props) => {
     postClick();
   }, [product]);
 
-  const addBasket = async () => {
+  const addBasket = () => {
     if (!product) {
       return;
     }

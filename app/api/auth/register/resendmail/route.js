@@ -1,6 +1,5 @@
 import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 
 function generateRandomCode() {
   let code = "";
@@ -30,6 +29,7 @@ export async function POST(req) {
         code: code,
       },
     });
+    const nodemailer = await import("nodemailer");
 
     let transporter = nodemailer.createTransport({
       host: "mail.nilrio.com",

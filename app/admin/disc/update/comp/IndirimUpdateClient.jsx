@@ -10,8 +10,6 @@ const IndirimUpdateClient = (props) => {
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      checkbox: data.checkbox,
-      date: data.date,
       indirim1: data.indirim1,
       indirim2: data.indirim2,
       indirim3: data.indirim3,
@@ -41,39 +39,6 @@ const IndirimUpdateClient = (props) => {
     <div className="container">
       <form className="add_product_form" onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
-          <div className="col-lg-4">
-            <div className="fotm-group tw-flex tw-flex-col">
-              <label htmlFor="indirim_etkin">
-                Anasayfa İndirimi Etkinleştir
-                <span className="text-danger">*</span>
-              </label>
-              <select
-                name="checkbox"
-                id="indirim_etkin"
-                {...register("checkbox")}
-                required
-              >
-                <option value="false">Hayır</option>
-                <option value="true">Evet</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="col-lg-4">
-            <div className="fotm-group">
-              <label htmlFor="product_available">
-                İndirim Zamanı<span className="text-danger">*</span>
-              </label>
-              <input
-                type="date"
-                id="product_available"
-                className="form-control"
-                {...register("date")}
-                required
-              />
-            </div>
-          </div>
-
           <div className="col-lg-4 tw-mt-4">
             <div className="fotm-group">
               <label htmlFor="indirim1">

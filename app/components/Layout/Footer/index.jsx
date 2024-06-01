@@ -121,7 +121,7 @@ const Footer = () => {
             </div>
             <div className="col-lg-3 col-md-12 col-sm-12 col-12 tw-py-8 ">
               <div className="tw-flex tw-items-center tw-justify-center tw-flex-col -tw-mt-6">
-                <Link href="/">
+                <Link href="/" scroll={false}>
                   <Image
                     src={logo}
                     alt="Nilrio Logo"

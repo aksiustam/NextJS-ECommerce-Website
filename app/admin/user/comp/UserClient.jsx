@@ -5,8 +5,21 @@ import StockMail from "./StockMail";
 import Link from "next/link";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import cronJobUser from "../../../actions/User/cronJobUser";
+import Swal from "sweetalert2";
 const UserClient = (props) => {
   const { users, stockmail, newsmail } = props;
+
+  const cronJob = async () => {
+    const res = await cronJobUser();
+    if (res === true)
+      await Swal.fire({
+        icon: "success",
+        title: "Bellek Boşaltıldı!",
+        showConfirmButton: false,
+        timer: 700,
+      });
+  };
   return (
     <>
       <div className="row">
@@ -30,6 +43,14 @@ const UserClient = (props) => {
                 >
                   Toplu Mail gönder
                 </Link>
+              </div>
+              <div className="tw-my-4">
+                <button
+                  className="theme-btn-one bg-black btn_sm "
+                  onClick={() => cronJob()}
+                >
+                  Kullanıcı Bellek Boşalt
+                </button>
               </div>
             </div>
             <Tabs defaultActiveKey="user" id="uncontrolled-tab-example">

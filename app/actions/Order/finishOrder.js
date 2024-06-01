@@ -88,6 +88,7 @@ export default async function finishOrder(formdata) {
             },
           },
         });
+        console.log(pcs);
         if (pcs) {
           await prisma.product.update({
             where: {

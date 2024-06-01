@@ -1,7 +1,5 @@
 import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
-
 export async function POST(req) {
   const { data, code } = await req.json();
 
@@ -28,6 +26,7 @@ export async function POST(req) {
         emailVerified: true,
       },
     });
+    const nodemailer = await import("nodemailer");
 
     let transporter = nodemailer.createTransport({
       host: "mail.nilrio.com",

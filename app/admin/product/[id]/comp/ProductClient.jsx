@@ -94,7 +94,6 @@ const ProductClient = (props) => {
       });
   };
 
-  console.log(mycolor);
   return (
     <section id="add_product_area">
       <div className="container">

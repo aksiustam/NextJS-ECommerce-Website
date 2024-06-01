@@ -7,6 +7,15 @@ import { useRouter } from "next/navigation";
 const AdminHome = (props) => {
   const { Products, Siparis } = props;
   const router = useRouter();
+  const siparis = Siparis.sort((item1, item2) => {
+    if (item1.status === "paid" && item2.status !== "paid") {
+      return -1; // item1'i item2'den önce sırala
+    } else if (item1.status !== "paid" && item2.status === "paid") {
+      return 1; // item2'yi item1'den önce sırala
+    } else {
+      return 0; // Değişiklik yapma, sıralama düzenini değiştirme
+    }
+  });
   return (
     <>
       <div className="row">
@@ -85,7 +94,7 @@ const AdminHome = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {Siparis?.map((data) => (
+                {siparis?.slice(0, 10)?.map((data) => (
                   <tr
                     key={data?.id}
                     className="hover:tw-bg-slate-100 tw-cursor-pointer"

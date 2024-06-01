@@ -56,7 +56,7 @@ const Banner = (props) => {
                 {data?.btncheck === "true" && (
                   <Link
                     href={data?.buttonUrl}
-                    className="theme-btn-one btn_sm tw-border-[3px] tw-rounded-2xl tw-text-xs lg:tw-text-xl"
+                    className=" btn_sm tw-border-b-[2px] tw-text-xs lg:tw-text-xl  hover:tw-bg-slate-100"
                     style={{
                       color: data?.bannercolor,
                       borderColor: data?.bannercolor,

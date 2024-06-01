@@ -56,7 +56,7 @@ const NewsMail = (props) => {
     search === ""
       ? pagiMails
       : pagiMails?.filter((data) =>
-          data?.mail?.toLowerCase().includes(search?.toLowerCase())
+          data?.email?.toLowerCase().includes(search?.toLowerCase())
         );
 
   const DeleteMail = async (id) => {

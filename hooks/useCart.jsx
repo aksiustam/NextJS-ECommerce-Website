@@ -13,14 +13,18 @@ const CartContext = createContext(null);
 export const CartContextProvider = (props) => {
   const [basket, setBasket] = useState([]);
 
-  useEffect(async () => {
-    let getItem = localStorage.getItem("cart");
-    let getItemParse = JSON.parse(getItem);
-    if (getItemParse) {
-      const res = await updateProducts(getItemParse);
-      localStorage.setItem("cart", JSON.stringify(res));
-      setBasket(res);
-    }
+  useEffect(() => {
+    const fetchAndUpdateCart = async () => {
+      let getItem = localStorage.getItem("cart");
+      let getItemParse = JSON.parse(getItem);
+      if (getItemParse) {
+        const res = await updateProducts(getItemParse);
+        localStorage.setItem("cart", JSON.stringify(res));
+        setBasket(res);
+      }
+    };
+
+    fetchAndUpdateCart();
   }, []);
 
   const addToBasket = useCallback(

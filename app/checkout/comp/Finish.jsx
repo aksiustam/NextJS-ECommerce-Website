@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import InvoiceEmail from "@/app/reactemail/invoicemail";
-import { render } from "@react-email/render";
 import AdminSiparis from "@/app/reactemail/adminsiparis";
 import Link from "next/link";
 import UseCart from "@/hooks/useCart";
@@ -13,6 +12,8 @@ const Finish = (props) => {
 
   useEffect(() => {
     const sendMail = async () => {
+      const { render } = await import("@react-email/render");
+
       emptyBasket();
 
       const html = render(<InvoiceEmail sipdata={finishBasket} />);

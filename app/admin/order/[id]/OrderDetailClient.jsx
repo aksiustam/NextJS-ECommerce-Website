@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 import "./styles.css";
 import { saveAs } from "file-saver";
 import { FaUser } from "react-icons/fa";
-import { render } from "@react-email/render";
 import InvoiceEmail from "@/app/reactemail/invoicemail";
 import axios from "axios";
 const OrderDetailClient = (props) => {
@@ -84,7 +83,9 @@ const OrderDetailClient = (props) => {
   const formattedTime = mydate.toLocaleTimeString("tr-TR");
   const time = formattedDate + ", Saat " + formattedTime;
 
-  const DownPdf = () => {
+  const DownPdf = async () => {
+    const { render } = await import("@react-email/render");
+
     const html = render(<InvoiceEmail sipdata={data} />);
 
     const blob = new Blob([html], { type: "text/html" });

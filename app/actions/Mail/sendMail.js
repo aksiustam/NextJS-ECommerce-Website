@@ -1,11 +1,14 @@
 "use server";
 
-import nodemailer from "nodemailer";
 import { EmailTaslak } from "../../reactemail/emailtaslak";
-import { render } from "@react-email/render";
+
 export default async function sendMail(formData) {
   try {
     const { mailto, text, mailBaslik } = formData;
+
+    const nodemailer = await import("nodemailer");
+
+    const { render } = await import("@react-email/render");
     let transporter = nodemailer.createTransport({
       host: "mail.nilrio.com",
       port: 465,
