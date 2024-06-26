@@ -3,7 +3,6 @@ import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import Switch from "../comp/Switch";
 import { FaCheck } from "react-icons/fa";
-
 const SideBar = (props) => {
   const { onFilterChange, allcategory } = props;
   const [sidebar, setSidebar] = useState({
@@ -54,6 +53,24 @@ const SideBar = (props) => {
     }));
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsSidebarOpen(false);
+      } else {
+        setIsSidebarOpen(true);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -70,7 +87,7 @@ const SideBar = (props) => {
           >
             <span className="tw-border-t tw-border-solid tw-border-black tw-flex-grow" />
             <span className="tw-py-2 tw-px-5 tw-bg-black tw-text-white tw-rounded-full tw-flex tw-gap-3 tw-items-center">
-              Trier Par
+              Filtrer
               <i className="fa fa-caret-down"></i>
             </span>
 

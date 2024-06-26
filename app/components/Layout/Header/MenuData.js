@@ -15,11 +15,9 @@ const MenuData = async () => {
           name: item.name,
           href: item.url,
           children: item.header.map((items) => {
-            const type = items.type === "acc" ? "accessoires" : "vetements";
             return {
-              type: items.type,
               name: items.name,
-              href: `/boutique/${items.url}?type=${type}`,
+              href: `/boutique/${items.url}`,
             };
           }),
         };

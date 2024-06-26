@@ -227,7 +227,9 @@ const ShopPage = (props) => {
 
               <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-                  <h1 className="tw-font-bold tw-text-xl tw-hidden">HEY</h1>
+                  <h1 className="tw-font-bold tw-text-xl tw-hidden">
+                    Top Ventes Produits
+                  </h1>
                 </div>
                 {pagiProducts?.map((data) => {
                   if (drawer === "normal")

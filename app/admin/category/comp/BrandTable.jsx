@@ -26,20 +26,20 @@ const BrandTable = (props) => {
       if (result.isConfirmed) {
         const formData = { ...data, archive: true };
         const res = await delAllCategory("brand", formData);
-        if (res === true)
+        if (res === true) {
           Swal.fire({
             icon: "success",
             title: "Başarıyla Arşivlendi",
             showConfirmButton: false,
             timer: 1500,
           });
-        else {
+          router.refresh();
+        } else {
           Swal.fire({
             icon: "error",
             title: JSON.stringify(res.message),
           });
         }
-        router.refresh();
       }
     });
   };
@@ -54,30 +54,31 @@ const BrandTable = (props) => {
     } else {
       const formData = { name: name, index: index };
       const res = await setAllCategory("brand", formData);
-      if (res === true)
+      if (res === true) {
         Swal.fire({
           icon: "success",
           title: "Başarıyla Eklendi",
           showConfirmButton: false,
           timer: 1500,
         });
-      else {
+        router.refresh();
+      } else {
         Swal.fire({
           icon: "error",
           title: JSON.stringify(res.message),
         });
       }
-      router.refresh();
     }
   };
 
   const updateBrand = async () => {
     const res = await putAllCategory("brand", modalbrand);
-    if (res === true) setMessage("Başarıyla değiştirildi");
-    else {
+    if (res === true) {
+      setMessage("Başarıyla değiştirildi");
+      window.location.reload();
+    } else {
       setMessage(res.message);
     }
-    router.refresh();
   };
 
   return (

@@ -155,134 +155,134 @@ const Header = (props) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="row tw-border-y-2">
-          <div className="col-2"></div>
-          <div className="col-8">
-            <div className="main-menu menu-color--black menu-hover-color--golden d-none d-xl-flex ">
-              <nav>
-                <ul>
-                  {MenuData?.map((item, index) => {
-                    return (
-                      <li className="has-dropdown" key={index}>
-                        <Link
-                          href={item.href !== "" ? item.href : "#!"}
-                          className="main-menu-link !tw-text-white"
-                          onClick={() => {
-                            ReactGA.event({
-                              category: "event",
-                              action: item?.name,
-                              label: item?.name + " a gitti",
-                            });
-                          }}
-                        >
-                          {item?.name}
+          <div className="row tw-border-y-2 tw-mx-0">
+            <div className="col-2"></div>
+            <div className="col-8">
+              <div className="main-menu menu-color--black menu-hover-color--golden d-none d-xl-flex ">
+                <nav>
+                  <ul>
+                    {MenuData?.map((item, index) => {
+                      return (
+                        <li className="has-dropdown" key={index}>
+                          <Link
+                            href={item.href !== "" ? item.href : "#!"}
+                            className="main-menu-link !tw-text-white"
+                            onClick={() => {
+                              ReactGA.event({
+                                category: "event",
+                                action: item?.name,
+                                label: item?.name + " a gitti",
+                              });
+                            }}
+                          >
+                            {item?.name}
+                            {item?.children?.length !== 0 && (
+                              <i className="fa fa-angle-down"></i>
+                            )}
+                          </Link>
                           {item?.children?.length !== 0 && (
-                            <i className="fa fa-angle-down"></i>
+                            <ul className="sub-menu">
+                              {item?.children?.map((data, index) => (
+                                <li key={index}>
+                                  <Link
+                                    href={data.href}
+                                    className="!tw-font-bold"
+                                    onClick={() => {
+                                      ReactGA.event({
+                                        category: "event",
+                                        action: data?.name,
+                                        label: data?.name + " a gitti",
+                                      });
+                                    }}
+                                  >
+                                    {data?.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
                           )}
-                        </Link>
-                        {item?.children?.length !== 0 && (
-                          <ul className="sub-menu">
-                            {item?.children?.map((data, index) => (
-                              <li key={index}>
-                                <Link
-                                  href={data.href}
-                                  className="!tw-font-bold"
-                                  onClick={() => {
-                                    ReactGA.event({
-                                      category: "event",
-                                      action: data?.name,
-                                      label: data?.name + " a gitti",
-                                    });
-                                  }}
-                                >
-                                  {data?.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </nav>
-            </div>
-          </div>
-          <div className="col-2 tw-flex tw-items-center tw-justify-center">
-            <ul className="header-action-link action-color--black action-hover-color--golden tw-flex tw-gap-4">
-              <li>
-                <a href="#!" className="search_width" onClick={handleSearch}>
-                  <FaSearch size={26} color="white" />
-                </a>
-              </li>
-              <li>
-                {basket.length ? (
-                  <a
-                    href="#!"
-                    className="offcanvas-toggle"
-                    onClick={handleClick}
-                  >
-                    <FaShoppingBasket size={25} color="white" />
-                    <span className="tw-absolute tw-bottom-3 tw-left-3">
-                      {basket.length}
-                    </span>
-                  </a>
-                ) : (
-                  <a href="#!" className="offcanvas-toggle">
-                    <FaShoppingBasket size={25} color="white" />
-                    <span className="tw-absolute tw-bottom-3 tw-left-3">
-                      {basket.length}
-                    </span>
-                  </a>
-                )}
-              </li>
-
-              <li className="after_login">
-                <FaUserCircle className="tw-text-white" size={26} />
-                <ul className="custom_dropdown">
-                  {User ? (
-                    <>
-                      <li className="tw-flex tw-items-center tw-gap-2">
-                        <FaUser size={16} />
-                        <Link href="/profile">Mon Profil</Link>
-                      </li>
-
-                      {User && User.Role === "ADMIN" ? (
-                        <li className="tw-flex tw-items-center tw-gap-2">
-                          <MdAdminPanelSettings size={16} />
-                          <Link href="/admin">Admin</Link>
                         </li>
-                      ) : (
-                        ""
-                      )}
-                      <li className="tw-flex tw-items-center tw-gap-2">
-                        <IoExit size={16} />
-                        <Link href="#!" onClick={logout}>
-                          Déconnexion
-                        </Link>
-                      </li>
-                    </>
+                      );
+                    })}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div className="col-2 tw-flex tw-items-center tw-justify-center">
+              <ul className="header-action-link action-color--black action-hover-color--golden tw-flex tw-gap-4">
+                <li>
+                  <a href="#!" className="search_width" onClick={handleSearch}>
+                    <FaSearch size={26} color="white" />
+                  </a>
+                </li>
+                <li>
+                  {basket.length ? (
+                    <a
+                      href="#!"
+                      className="offcanvas-toggle"
+                      onClick={handleClick}
+                    >
+                      <FaShoppingBasket size={25} color="white" />
+                      <span className="tw-absolute tw-bottom-3 tw-left-3">
+                        {basket.length}
+                      </span>
+                    </a>
                   ) : (
-                    <>
-                      <li className="tw-flex tw-items-center tw-gap-2">
-                        <FaUser size={16} />
-                        <Link href="/login">Se connecter / S’inscrire</Link>
-                      </li>
-                    </>
+                    <a href="#!" className="offcanvas-toggle">
+                      <FaShoppingBasket size={25} color="white" />
+                      <span className="tw-absolute tw-bottom-3 tw-left-3">
+                        {basket.length}
+                      </span>
+                    </a>
                   )}
-                </ul>
-              </li>
-              <li>
-                <Image
-                  src={frflag}
-                  alt="france"
-                  width={25}
-                  height={25}
-                  loading="eager"
-                />
-              </li>
-            </ul>
+                </li>
+
+                <li className="after_login">
+                  <FaUserCircle className="tw-text-white" size={26} />
+                  <ul className="custom_dropdown">
+                    {User ? (
+                      <>
+                        <li className="tw-flex tw-items-center tw-gap-2">
+                          <FaUser size={16} />
+                          <Link href="/profile">Mon Profil</Link>
+                        </li>
+
+                        {User && User.Role === "ADMIN" ? (
+                          <li className="tw-flex tw-items-center tw-gap-2">
+                            <MdAdminPanelSettings size={16} />
+                            <Link href="/admin">Admin</Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+                        <li className="tw-flex tw-items-center tw-gap-2">
+                          <IoExit size={16} />
+                          <Link href="#!" onClick={logout}>
+                            Déconnexion
+                          </Link>
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li className="tw-flex tw-items-center tw-gap-2">
+                          <FaUser size={16} />
+                          <Link href="/login">Se connecter / S’inscrire</Link>
+                        </li>
+                      </>
+                    )}
+                  </ul>
+                </li>
+                <li>
+                  <Image
+                    src={frflag}
+                    alt="france"
+                    width={25}
+                    height={25}
+                    loading="eager"
+                  />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </header>

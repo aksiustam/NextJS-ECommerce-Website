@@ -193,7 +193,10 @@ const CartClient = () => {
                 <div className="empaty_cart_area">
                   <h2>Votre panier et vide</h2>
 
-                  <Link href="/shop" className="btn btn-black-overlay btn_md">
+                  <Link
+                    href="/boutique"
+                    className="btn btn-black-overlay btn_md"
+                  >
                     Remplissez votre panier
                   </Link>
                 </div>

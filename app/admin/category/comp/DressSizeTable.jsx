@@ -25,31 +25,32 @@ const DressSizeTable = (props) => {
       if (result.isConfirmed) {
         const formData = { ...data, archive: true };
         const res = await delAllCategory("size", formData);
-        if (res === true)
+        if (res === true) {
           Swal.fire({
             icon: "success",
             title: "Başarıyla Arşivlendi",
             showConfirmButton: false,
             timer: 1500,
           });
-        else {
+          router.refresh();
+        } else {
           Swal.fire({
             icon: "error",
             title: JSON.stringify(res.message),
           });
         }
-        router.refresh();
       }
     });
   };
 
   const updateSize = async () => {
     const res = await putAllCategory("size", modalsize);
-    if (res === true) setMessage("Başarıyla değiştirildi");
-    else {
+    if (res === true) {
+      setMessage("Başarıyla değiştirildi");
+      window.location.reload();
+    } else {
       setMessage(res.message);
     }
-    router.refresh();
   };
   return (
     <>

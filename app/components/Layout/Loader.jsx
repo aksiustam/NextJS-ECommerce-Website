@@ -1,7 +1,7 @@
 "use client";
 import img from "@/public/assets/img/ecom-cart.gif";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Loader = ({ children }) => {
   const [loading, setLoading] = useState(true);

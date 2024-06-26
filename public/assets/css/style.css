@@ -3398,9 +3398,8 @@ display: flex;
 
 .product-variable-size label span {
   position: relative;
-  width: 35px;
-  height: 35px;
-
+  width: 50px;
+  height: 50px;
   border-radius: 2px;
   cursor: pointer;
 }
@@ -3754,7 +3753,11 @@ display: flex;
   padding-top: 30px;
   width: 85%;
 }
-
+@media (max-width: 768px) {
+  .shop_sidebar_wrapper {
+    width: 100%;
+  }
+}
 .shop_Search {
   position: relative;
 }

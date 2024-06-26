@@ -29,20 +29,20 @@ const ColorTable = (props) => {
       if (result.isConfirmed) {
         const formData = { ...data, archive: true };
         const res = await delAllCategory("color", formData);
-        if (res === true)
+        if (res === true) {
           Swal.fire({
             icon: "success",
             title: "Başarıyla Arşivlendi",
             showConfirmButton: false,
             timer: 1500,
           });
-        else {
+          router.refresh();
+        } else {
           Swal.fire({
             icon: "error",
             title: JSON.stringify(res.message),
           });
         }
-        router.refresh();
       }
     });
   };
@@ -57,30 +57,31 @@ const ColorTable = (props) => {
     } else {
       const formData = { name: name, hex: hex, index: index };
       const res = await setAllCategory("color", formData);
-      if (res === true)
+      if (res === true) {
         Swal.fire({
           icon: "success",
           title: "Başarıyla Eklendi",
           showConfirmButton: false,
           timer: 1500,
         });
-      else {
+        router.refresh();
+      } else {
         Swal.fire({
           icon: "error",
           title: JSON.stringify(res.message),
         });
       }
-      router.refresh();
     }
   };
 
   const updateColor = async () => {
     const res = await putAllCategory("color", modalcolor);
-    if (res === true) setMessage("Başarıyla değiştirildi");
-    else {
+    if (res === true) {
+      setMessage("Başarıyla değiştirildi");
+      window.location.reload();
+    } else {
       setMessage(res.message);
     }
-    router.refresh();
   };
 
   return (

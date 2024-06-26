@@ -5,7 +5,6 @@ import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import Switch from "./Switch";
 import { FaCheck } from "react-icons/fa";
-
 const SideBar = (props) => {
   const { onFilterChange, searchProduct, allcategory } = props;
 
@@ -18,7 +17,7 @@ const SideBar = (props) => {
     brand: { id: [], data: [] },
     color: allcategory.color,
     size: allcategory.size.filter(
-      (item) => item.SizeType.name === searchProduct
+      (item) => item.SizeType.name === searchProduct || searchProduct === "all"
     ),
   });
 
@@ -62,6 +61,23 @@ const SideBar = (props) => {
       brand: { id: [], data: [] },
     }));
   };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsSidebarOpen(false);
+      } else {
+        setIsSidebarOpen(true);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -79,7 +95,7 @@ const SideBar = (props) => {
           >
             <span className="tw-border-t tw-border-solid tw-border-black tw-flex-grow" />
             <span className="tw-py-2 tw-px-5 tw-bg-black tw-text-white tw-rounded-full tw-flex tw-gap-3 tw-items-center">
-              Trier Par
+              Filtrer
               <i className="fa fa-caret-down"></i>
             </span>
 
@@ -228,58 +244,60 @@ const SideBar = (props) => {
               </span>
             </div>
 
-            <RangeSlider
-              min={0}
-              max={500}
-              value={[filter?.minPrice, filter?.maxPrice]}
-              onInput={(values) => {
-                setFilter((prev) => ({
-                  ...prev,
-                  minPrice: values[0],
-                  maxPrice: values[1],
-                }));
-              }}
-            />
+            <div className="tw-flex tw-flex-col tw-w-72 lg:tw-w-full">
+              <RangeSlider
+                min={0}
+                max={500}
+                value={[filter?.minPrice, filter?.maxPrice]}
+                onInput={(values) => {
+                  setFilter((prev) => ({
+                    ...prev,
+                    minPrice: values[0],
+                    maxPrice: values[1],
+                  }));
+                }}
+              />
 
-            <div className="tw-flex tw-justify-center tw-items-center tw-mt-4 tw-gap-3 ">
-              <div className="tw-relative">
-                <span className="tw-absolute tw-inset-y-0 tw-left-0 tw-pl-2 tw-flex tw-items-center">
-                  €
-                </span>
-                <input
-                  type="number"
-                  id="minPrice"
-                  min={0}
-                  max={500}
-                  value={filter?.minPrice}
-                  onChange={(e) =>
-                    setFilter((prev) => ({
-                      ...prev,
-                      minPrice: e.target.value,
-                    }))
-                  }
-                  className="tw-pl-8 tw-pr-4 tw-py-1 tw-border tw-rounded-md tw-w-28"
-                />
-              </div>
-              <div>ve</div>
-              <div className="tw-relative">
-                <span className="tw-absolute tw-inset-y-0 tw-left-0 tw-pl-2 tw-flex tw-items-center">
-                  €
-                </span>
-                <input
-                  type="number"
-                  id="maxPrice"
-                  min={0}
-                  max={500}
-                  value={filter?.maxPrice}
-                  onChange={(e) =>
-                    setFilter((prev) => ({
-                      ...prev,
-                      maxPrice: e.target.value,
-                    }))
-                  }
-                  className="tw-pl-8 tw-pr-4 tw-py-1 tw-border tw-rounded-md tw-w-28"
-                />
+              <div className="tw-flex tw-justify-center tw-items-center tw-mt-4 tw-gap-3 ">
+                <div className="tw-relative">
+                  <span className="tw-absolute tw-inset-y-0 tw-left-0 tw-pl-2 tw-flex tw-items-center">
+                    €
+                  </span>
+                  <input
+                    type="number"
+                    id="minPrice"
+                    min={0}
+                    max={500}
+                    value={filter?.minPrice}
+                    onChange={(e) =>
+                      setFilter((prev) => ({
+                        ...prev,
+                        minPrice: e.target.value,
+                      }))
+                    }
+                    className="tw-pl-8 tw-pr-4 tw-py-1 tw-border tw-rounded-md tw-w-28"
+                  />
+                </div>
+                <div>ve</div>
+                <div className="tw-relative">
+                  <span className="tw-absolute tw-inset-y-0 tw-left-0 tw-pl-2 tw-flex tw-items-center">
+                    €
+                  </span>
+                  <input
+                    type="number"
+                    id="maxPrice"
+                    min={0}
+                    max={500}
+                    value={filter?.maxPrice}
+                    onChange={(e) =>
+                      setFilter((prev) => ({
+                        ...prev,
+                        maxPrice: e.target.value,
+                      }))
+                    }
+                    className="tw-pl-8 tw-pr-4 tw-py-1 tw-border tw-rounded-md tw-w-28"
+                  />
+                </div>
               </div>
             </div>
           </div>

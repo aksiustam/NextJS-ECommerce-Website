@@ -42,20 +42,20 @@ const CategoryTable = (props) => {
         const formData = { ...data, archive: true };
 
         const res = await delAllCategory("category", formData);
-        if (res === true)
+        if (res === true) {
           Swal.fire({
             icon: "success",
             title: "Başarıyla Arşivlendi",
             showConfirmButton: false,
             timer: 1500,
           });
-        else {
+          router.refresh();
+        } else {
           Swal.fire({
             icon: "error",
             title: JSON.stringify(res.message),
           });
         }
-        router.refresh();
       }
     });
   };
@@ -63,20 +63,20 @@ const CategoryTable = (props) => {
     const formData = { ...data, brand: mybrand };
 
     const res = await setAllCategory("category", formData);
-    if (res === true)
+    if (res === true) {
       Swal.fire({
         icon: "success",
         title: "Başarıyla Eklendi",
         showConfirmButton: false,
         timer: 1500,
       });
-    else {
+      router.refresh();
+    } else {
       Swal.fire({
         icon: "error",
         title: JSON.stringify(res.message),
       });
     }
-    router.refresh();
   };
 
   const onModalSubmit = async (data) => {
@@ -87,11 +87,12 @@ const CategoryTable = (props) => {
     };
 
     const res = await putAllCategory("category", formData);
-    if (res === true) setMessage("Başarıyla değiştirildi");
-    else {
+    if (res === true) {
+      setMessage("Başarıyla değiştirildi");
+      window.location.reload();
+    } else {
       setMessage(res.message);
     }
-    router.refresh();
   };
   return (
     <>

@@ -23,6 +23,7 @@ const ProductClient = (props) => {
   const searchParams = useSearchParams();
   const selectedColor = searchParams.get("color");
 
+  console.log(product);
   const [modalShow, setModalShow] = useState(false);
 
   const [count, setCount] = useState(1);
@@ -256,13 +257,13 @@ const ProductClient = (props) => {
                         })}
                       </div>
                     </div>
-                    {product?.Category?.CategoryType.type !== "acc" ? (
+                    {product?.Category?.SizeType.type !== "acc" ? (
                       <div className=" tw-border-t-[1px]  tw-border-black tw-w-full md:tw-w-96 tw-my-2" />
                     ) : (
                       ""
                     )}
 
-                    {product?.Category?.CategoryType.type !== "acc" ? (
+                    {product?.Category?.SizeType.type !== "acc" ? (
                       <div className="variable-single-item">
                         <span>Taille</span>
                         <div className="product-variable-size">
@@ -283,7 +284,7 @@ const ProductClient = (props) => {
                                   }}
                                 />
                                 <span
-                                  className={`tw-flex tw-items-center tw-justify-center tw-font-bold ${
+                                  className={`tw-flex tw-items-center tw-justify-center tw-font-bold tw-text-sm ${
                                     item === size
                                       ? "tw-border tw-border-black"
                                       : ""
@@ -299,7 +300,7 @@ const ProductClient = (props) => {
                     ) : (
                       ""
                     )}
-                    {product?.Category?.CategoryType?.type !== "acc" && (
+                    {product?.Category?.SizeType?.type !== "acc" && (
                       <a
                         href="#!"
                         onClick={() => setModalShow(true)}
@@ -400,7 +401,7 @@ const ProductClient = (props) => {
               <div className="empty_cart_area">
                 <h2>Produit non trouvé </h2>
                 <h3>Le produit que vous recherchez n&apos;a pas été trouvé</h3>
-                <Link href="/shop" className="btn btn-black-overlay btn_sm">
+                <Link href="/boutique" className="btn btn-black-overlay btn_sm">
                   Continuez Vos Achats
                 </Link>
               </div>

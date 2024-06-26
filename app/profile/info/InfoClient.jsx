@@ -3,8 +3,14 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import Modal from "react-bootstrap/Modal";
-import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import dynamic from "next/dynamic";
+
+// PhoneInput bileşenini dinamik olarak yükle
+const PhoneInput = dynamic(() => import("react-phone-number-input"), {
+  ssr: false,
+});
+
 import { TiTimes } from "react-icons/ti";
 import ReactGA from "react-ga4";
 import setUserData from "@/app/actions/User/setUserData";
