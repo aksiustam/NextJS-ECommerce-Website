@@ -19,7 +19,7 @@ const SetClient = (props) => {
             </Tab>
             <Tab eventKey="resim" title="Resimler">
               <BannerSet settings={ayarlar} />
-              <BannerBSet />
+              <BannerBSet settings={ayarlar} />
             </Tab>
             <Tab eventKey="ayar" title="Mail Ayarlar">
               <SettingsClient settings={ayarlar} />

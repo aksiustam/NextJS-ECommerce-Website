@@ -3,12 +3,18 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { CldUploadWidget } from "next-cloudinary";
-const BannerBSet = () => {
+const BannerBSet = (props) => {
+  const { settings } = props;
   const { handleSubmit } = useForm();
   const [video, setVideo] = useState(null);
+  const [check, setCheck] = useState(settings?.bannerb?.check);
 
   const onSubmit = async () => {
-    const formData = { imageid: video.public_id, imageurl: video.secure_url };
+    const formData = {
+      imageid: video === null ? null : video.public_id,
+      imageurl: video === null ? null : video.secure_url,
+      check: check,
+    };
     await axios
       .post("/api/settings/bannerb", formData)
       .then(async () => {
@@ -73,7 +79,22 @@ const BannerBSet = () => {
             </CldUploadWidget>
           </div>
         </div>
-
+        <div className="col-lg-4">
+          <div className="fotm-group tw-flex tw-flex-col">
+            <label htmlFor="indirim_etkin">
+              Video Göster
+              <span className="text-danger">*</span>
+            </label>
+            <select
+              id="btncheck"
+              value={check}
+              onChange={(e) => setCheck(e.target.value)}
+            >
+              <option value="false">Hayır</option>
+              <option value="true">Evet</option>
+            </select>
+          </div>
+        </div>
         <div className="col-lg-12 tw-flex tw-items-center">
           <button
             type="submit"

@@ -9,15 +9,12 @@ const Layout = async (props) => {
       <>
         <section id="vendor_area" className="tw-mt-12">
           <div className="container-fluid">
-            <div className="row">
-              <SideBar />
-              <div className="col-sm-12 col-md-12 col-lg-10 col_xl_10">
-                <div className="tab-content dashboard_content">
-                  <div className="tab-pane fade show active">
-                    {props.children}
-                  </div>
-                </div>
-              </div>
+            <SideBar />
+
+            <div className="tw-relative md:tw-ml-64 tw-mt-12">
+              <main className="tw-px-4 md:tw-px-10 tw-mx-auto tw-w-full">
+                {props.children}
+              </main>
             </div>
           </div>
         </section>

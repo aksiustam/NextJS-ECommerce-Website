@@ -82,12 +82,22 @@ export async function POST(req, { params }) {
 
       break;
     case "bannerb":
-      await cloudinary.uploader.destroy(set.bannerb.imageid);
-      let setbannerb = data;
+      let formData5 = {
+        imageid: set.bannerb.imageid,
+        imageurl: set.bannerb.imageurl,
+        check: data.check,
+      };
+
+      if (data.imageid !== null) {
+        await cloudinary.uploader.destroy(formData5.imageid);
+        formData5.imageid = data.imageid;
+        formData5.imageurl = data.imageurl;
+      }
+
       await prisma.ayarlar.update({
         where: { id: 1 },
         data: {
-          bannerb: setbannerb,
+          bannerb: formData5,
         },
       });
       break;
