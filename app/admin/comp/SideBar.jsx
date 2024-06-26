@@ -5,7 +5,7 @@ import { BiWorld } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { MdOutlineCategory } from "react-icons/md";
 import { BiAperture } from "react-icons/bi";
-import { FaTshirt } from "react-icons/fa";
+import { FaTshirt, FaArchive } from "react-icons/fa";
 import { MdDiscount } from "react-icons/md";
 import { FaShopify } from "react-icons/fa";
 import { FaHouseUser } from "react-icons/fa";
@@ -109,6 +109,16 @@ const SideBar = () => {
               >
                 <div className="tw-flex tw-gap-2 tw-items-center">
                   <MdConnectWithoutContact size={20} /> İletişim
+                </div>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/admin/archive"
+                className={pathname === "/admin/archive" ? "active" : null}
+              >
+                <div className="tw-flex tw-gap-2 tw-items-center">
+                  <FaArchive size={20} /> Arşivler
                 </div>
               </Link>
             </li>

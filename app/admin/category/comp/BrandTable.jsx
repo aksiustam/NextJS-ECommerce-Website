@@ -18,7 +18,7 @@ const BrandTable = (props) => {
 
   const onDelete = async (data) => {
     Swal.fire({
-      title: name + " Adlı Çeşit Arşivlenecek! ",
+      title: data.name + " Adlı Çeşit Arşivlenecek! ",
       showDenyButton: true,
       confirmButtonText: "Arşiv",
       denyButtonText: "Hayır",

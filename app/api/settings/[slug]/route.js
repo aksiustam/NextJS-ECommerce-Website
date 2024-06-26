@@ -1,5 +1,14 @@
 import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
+
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 export async function POST(req, { params }) {
   const { slug } = params;
 
@@ -52,8 +61,17 @@ export async function POST(req, { params }) {
         banner: set.banner.banner,
         banneryan: set.banner.banneryan,
       };
-      if (data.banner !== null) formData2.banner = data.banner;
-      if (data.banneryan !== null) formData2.banneryan = data.banneryan;
+      if (data.banner !== null) {
+        await cloudinary.uploader.destroy(formData2.banner.imageid);
+        formData2.banner = data.banner;
+      }
+      if (data.banneryan !== null) {
+        for (const item of formData2.banneryan) {
+          await cloudinary.uploader.destroy(item.imageid);
+        }
+
+        formData2.banneryan = data.banneryan;
+      }
 
       await prisma.ayarlar.update({
         where: { id: 1 },
@@ -64,7 +82,8 @@ export async function POST(req, { params }) {
 
       break;
     case "bannerb":
-      let setbannerb = data ? data : set.bannerb;
+      await cloudinary.uploader.destroy(set.bannerb.imageid);
+      let setbannerb = data;
       await prisma.ayarlar.update({
         where: { id: 1 },
         data: {
@@ -84,6 +103,7 @@ export async function POST(req, { params }) {
         discres: set.discountpage.discres,
       };
       if (data.discres !== null) {
+        await cloudinary.uploader.destroy(formData.discres.imageid);
         formData.discres = data.discres;
       }
 
