@@ -1,9 +1,9 @@
-import getSiparisOne from "../../../actions/Siparis/getSiparisOne";
+import getSiparisToken from "../../../actions/Siparis/getSiparisToken";
 import SuccessClient from "./SuccessClient";
 
 const page = async ({ params }) => {
-  const { id } = params;
-  const sipdata = await getSiparisOne(id);
+  const { token } = params;
+  const sipdata = await getSiparisToken(token);
 
   return (
     <>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import KRGlue from "@lyracom/embedded-form-glue";
 import Swal from "sweetalert2";
-import ReactGA from "react-ga4";
+
 import UseCart from "@/hooks/useCart";
 import createOrder from "../../actions/Order/createOrder";
 import finishOrder from "../../actions/Order/finishOrder";
@@ -134,14 +134,6 @@ const Payment = (props) => {
               setMessage("Karttan Para çekilemedi");
               return;
             }
-
-            ReactGA.event({
-              category: "event",
-              action: "SatınAldı",
-              label: "Satın Alma Başarılı Oldu",
-              value: formdata.data.amount,
-              currency: "EUR",
-            });
 
             const findata = await finishOrder(formdata);
             setfinishBasket(findata);

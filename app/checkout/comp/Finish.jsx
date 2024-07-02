@@ -40,7 +40,7 @@ const Finish = (props) => {
       <div>
         <Link
           className="tw-text-blue-600 tw-cursor-pointer"
-          href={`/order-complete/${finishBasket?.id}`}
+          href={`/order-complete/${finishBasket?.token}`}
         >
           Cliquez
         </Link>{" "}

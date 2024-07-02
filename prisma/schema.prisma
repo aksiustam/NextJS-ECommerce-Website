@@ -189,6 +189,7 @@ model Siparis {
     status     String?
     error      String?
     kargono    String?
+    token      String?
     createdAt  DateTime? @default(now())
     updatedAt  DateTime? @updatedAt
 }

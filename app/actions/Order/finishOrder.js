@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/prismadb";
-
+import { v4 as uuidv4 } from "uuid";
 export default async function finishOrder(formdata) {
   try {
     let { data, basket, note, billcategory, sendcategory, shipping } = formdata;
@@ -19,7 +19,7 @@ export default async function finishOrder(formdata) {
       });
       username = user.name;
     }
-
+    const uutoken = uuidv4();
     const formData = {
       username: username,
       userId: user === null ? null : parseInt(user.id),
@@ -55,6 +55,7 @@ export default async function finishOrder(formdata) {
       amount: parseFloat(data.amount) / 100,
       status: "paid",
       error: "null",
+      token: uutoken,
     };
 
     formData.basket.push(
@@ -88,7 +89,7 @@ export default async function finishOrder(formdata) {
             },
           },
         });
-        console.log(pcs);
+
         if (pcs) {
           await prisma.product.update({
             where: {

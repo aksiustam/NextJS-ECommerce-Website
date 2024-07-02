@@ -63,6 +63,9 @@ function SuccessClient(props) {
     </>
   );
 }
+
+export default SuccessClient;
+
 const OrderSuccess = React.forwardRef(function OrderSuccess(props, ref) {
   const { sipdata } = props;
 
@@ -756,5 +759,3 @@ const OrderSuccess = React.forwardRef(function OrderSuccess(props, ref) {
     </>
   );
 });
-
-export default SuccessClient;
