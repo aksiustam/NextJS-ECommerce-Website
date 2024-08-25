@@ -61,7 +61,7 @@ const Trending = () => {
                 <form onSubmit={handleSubmit}>
                   <InputGroup>
                     <Form.Control
-                      className="!tw-min-h-4"
+                      className="!tw-min-h-4 tw-text-white !tw-rounded-l-full !tw-border-r-0 !tw-bg-transparent focus:tw-text-white focus:!tw-border-r-0 focus:!tw-border-[#DDDDDD] placeholder:tw-text-white"
                       type="email"
                       placeholder="Votre Adresse E-Mail"
                       aria-label="Email Gir"
@@ -73,7 +73,7 @@ const Trending = () => {
                       type="submit"
                       variant="outline-secondary"
                       id="button-addon2"
-                      className="tw-text-white"
+                      className="tw-text-white tw-border-[#DDDDDD] tw-rounded-r-full !tw-border-l-0 !tw-bg-transparent hover:tw-border-[#DDDDDD] active:!tw-ring-0"
                     >
                       OK
                     </Button>

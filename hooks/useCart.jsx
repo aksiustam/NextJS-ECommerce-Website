@@ -16,8 +16,8 @@ export const CartContextProvider = (props) => {
   useEffect(() => {
     const fetchAndUpdateCart = async () => {
       let getItem = localStorage.getItem("cart");
-      let getItemParse = JSON.parse(getItem);
-      if (getItemParse) {
+      let getItemParse = JSON.parse(getItem) || [];
+      if (getItemParse.length > 0) {
         const res = await updateProducts(getItemParse);
         localStorage.setItem("cart", JSON.stringify(res));
         setBasket(res);

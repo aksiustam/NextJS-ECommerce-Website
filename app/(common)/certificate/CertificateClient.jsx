@@ -10,89 +10,90 @@ import Nav from "react-bootstrap/Nav";
 import Image from "next/image";
 const CertificateClient = () => {
   return (
-    <div className="container tw-mt-12 tw-mb-12 AkayaTelivigala">
+    <div className="container tw-mt-12 tw-mb-12 tw-mx-auto AkayaTelivigala">
       <div className="row">
         <div className="col-lg-12 col-md-12">
           <Tab.Container defaultActiveKey="ser1">
-            <div className="tabs_center_button ">
-              <ul className="nav nav-tabs">
-                <li>
-                  <Nav.Link eventKey="ser1" className="!tw-font-bold">
-                    <Image
-                      src={ser1}
-                      width={500}
-                      height={500}
-                      alt="sertifika1"
-                      loading="eager"
-                      className="tw-w-[240px] tw-h-[240px] tw-object-contain"
-                    />
+            <div className="tw-flex tw-justify-center">
+              <div className="tw-w-full tw-overflow-x-scroll xl:tw-overflow-hidden">
+                <div className="tw-inline-flex ">
+                  <div className="tw-w-64 tw-h-full  tw-mx-2">
+                    <Nav.Link eventKey="ser1" className="!tw-font-bold">
+                      <Image
+                        src={ser1}
+                        width={500}
+                        height={500}
+                        alt="sertifika1"
+                        loading="eager"
+                        className="tw-w-[240px] tw-h-[240px] tw-object-contain"
+                      />
 
-                    <div className="tw-text-center tw-mt-4 ">
-                      Origine France Garantie
-                    </div>
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link eventKey="ser4" className="!tw-font-bold">
-                    <Image
-                      src={ser4}
-                      width={500}
-                      height={500}
-                      alt="sertifika4"
-                      loading="eager"
-                      className="tw-w-[240px] tw-h-[240px] tw-object-contain"
-                    />
+                      <div className="tw-text-center tw-mt-4 ">
+                        Origine France Garantie
+                      </div>
+                    </Nav.Link>
+                  </div>
+                  <div className="tw-w-64 tw-h-full  tw-mx-2">
+                    <Nav.Link eventKey="ser4" className="!tw-font-bold">
+                      <Image
+                        src={ser4}
+                        width={500}
+                        height={500}
+                        alt="sertifika4"
+                        loading="eager"
+                        className="tw-w-[240px] tw-h-[240px] tw-object-contain"
+                      />
 
-                    <div className="tw-text-center tw-mt-4">
-                      Oeko-Tex STANDARD 100
-                    </div>
-                  </Nav.Link>
-                </li>
+                      <div className="tw-text-center tw-mt-4">
+                        Oeko-Tex STANDARD 100
+                      </div>
+                    </Nav.Link>
+                  </div>
+                  <div className="tw-w-64 tw-h-full  tw-mx-2">
+                    <Nav.Link eventKey="ser3" className="!tw-font-bold">
+                      <Image
+                        src={ser3}
+                        width={500}
+                        height={500}
+                        alt="sertifika3"
+                        loading="eager"
+                        className="tw-w-[240px] tw-h-[240px] tw-object-contain"
+                      />
+                      <div className="tw-text-center tw-mt-4 ">
+                        Hohenstein Textile
+                      </div>
+                    </Nav.Link>
+                  </div>
+                  <div className="tw-w-64 tw-h-full  tw-mx-2">
+                    <Nav.Link eventKey="ser2" className="!tw-font-bold ">
+                      <Image
+                        src={ser2}
+                        width={500}
+                        height={500}
+                        alt="sertifika2"
+                        loading="eager"
+                        className="tw-w-[240px] tw-h-[240px] tw-object-contain"
+                      />
 
-                <li>
-                  <Nav.Link eventKey="ser3" className="!tw-font-bold">
-                    <Image
-                      src={ser3}
-                      width={500}
-                      height={500}
-                      alt="sertifika3"
-                      loading="eager"
-                      className="tw-w-[240px] tw-h-[240px] tw-object-contain"
-                    />
-                    <div className="tw-text-center tw-mt-4 ">
-                      Hohenstein Textile
-                    </div>
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link eventKey="ser2" className="!tw-font-bold ">
-                    <Image
-                      src={ser2}
-                      width={500}
-                      height={500}
-                      alt="sertifika2"
-                      loading="eager"
-                      className="tw-w-[240px] tw-h-[240px] tw-object-contain"
-                    />
+                      <div className="tw-text-center tw-mt-4 ">ISO 9001</div>
+                    </Nav.Link>
+                  </div>
+                  <div className="tw-w-64 tw-h-full  tw-mx-2">
+                    <Nav.Link eventKey="ser5" className="!tw-font-bold ">
+                      <Image
+                        src={ser5}
+                        width={500}
+                        height={500}
+                        alt="sertifika5"
+                        loading="eager"
+                        className="tw-w-[240px] tw-h-[240px] tw-object-contain"
+                      />
 
-                    <div className="tw-text-center tw-mt-4 ">ISO 9001</div>
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link eventKey="ser5" className="!tw-font-bold ">
-                    <Image
-                      src={ser5}
-                      width={500}
-                      height={500}
-                      alt="sertifika5"
-                      loading="eager"
-                      className="tw-w-[240px] tw-h-[240px] tw-object-contain"
-                    />
-
-                    <div className="tw-text-center tw-mt-4">ISO 14001</div>
-                  </Nav.Link>
-                </li>
-              </ul>
+                      <div className="tw-text-center tw-mt-4">ISO 14001</div>
+                    </Nav.Link>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="container">
               <div className="row">

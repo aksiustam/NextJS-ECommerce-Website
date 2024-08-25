@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/lib/prismadb";
 
-export default async function setSettings(role, formData) {
+export default async function setSettings(formData) {
   try {
     await prisma.Ayarlar.update({
       where: {

@@ -8,10 +8,10 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./productStyle.css";
-const HotProduct = (props) => {
+const HotProductTwo = (props) => {
   const { products, settings } = props;
-  const trendname = settings?.trend?.name;
-  const trend = settings?.trend?.checkname;
+  const trendname = settings?.trend2?.name;
+  const trend = settings?.trend2?.checkname;
 
   const pdata = () => {
     let bucket;
@@ -165,4 +165,4 @@ const HotProduct = (props) => {
   );
 };
 
-export default HotProduct;
+export default HotProductTwo;

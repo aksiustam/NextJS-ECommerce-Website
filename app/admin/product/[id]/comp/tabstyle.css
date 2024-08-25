@@ -1,3 +1,4 @@
 .nav-link.active{
-    color: blue;
+    color: blue !important;
+    background-color: gold !important;
 }

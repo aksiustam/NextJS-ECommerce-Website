@@ -1,7 +1,7 @@
 import getProductOne from "../../../actions/Products/getProductOne";
 import Layout from "../../comp/Layout";
 import ProductClient from "./comp/ProductClient";
-import getAllCategory from "../../../actions/category/getAllCategory";
+import getAllCategory from "../../../actions/Category/getAllCategory";
 const page = async ({ params }) => {
   const { id } = params;
   const product = await getProductOne(id);

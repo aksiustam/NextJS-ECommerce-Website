@@ -6,8 +6,9 @@ import logo from "@/public/assets/img/common/logo-nilrio-icon.png";
 import logoWhite from "@/public/assets/img/logo-white.png";
 import errimg from "@/public/assets/img/common/defproductimg.webp";
 import frflag from "@/public/assets/img/svg/flag-france.svg";
+import trflag from "@/public/assets/img/svg/flag-turkey.svg";
 import svg from "@/public/assets/img/svg/cancel.svg";
-
+import { RxCross2 } from "react-icons/rx";
 import {
   FaTrashAlt,
   FaShoppingBasket,
@@ -40,6 +41,7 @@ const Header = (props) => {
   };
   const [click, setClick] = useState(false);
   const [show, setShow] = useState();
+  const [showflag, setShowFlag] = useState(false);
 
   const { removeBasket, basket } = UseCart();
 
@@ -130,8 +132,8 @@ const Header = (props) => {
 
   return (
     <>
-      <header className="header-section d-none d-xl-block tw-w-full tw-z-20 tw-bg-black">
-        <div className="header-wrapper">
+      <header className="header-section d-none d-lg-block tw-w-screen tw-z-20 tw-fixed">
+        <div className="header-wrapper ">
           <div className="header-bottom  section-fluid sticky-header sticky-color--golden ">
             <div className="container">
               <div className="row">
@@ -155,10 +157,10 @@ const Header = (props) => {
               </div>
             </div>
           </div>
-          <div className="row tw-border-y-2 tw-mx-0">
+          <div className="row tw-border-y-2 tw-mx-0 tw-px-0">
             <div className="col-2"></div>
             <div className="col-8">
-              <div className="main-menu menu-color--black menu-hover-color--golden d-none d-xl-flex ">
+              <div className="main-menu menu-color--black menu-hover-color--golden d-none d-lg-flex ">
                 <nav>
                   <ul>
                     {MenuData?.map((item, index) => {
@@ -273,13 +275,66 @@ const Header = (props) => {
                   </ul>
                 </li>
                 <li>
-                  <Image
-                    src={frflag}
-                    alt="france"
-                    width={25}
-                    height={25}
-                    loading="eager"
-                  />
+                  <button
+                    onClick={() => setShowFlag(!showflag)}
+                    className="tw-flex tw-items-center tw-justify-center"
+                  >
+                    <Image
+                      src={frflag}
+                      alt="france"
+                      width={25}
+                      height={25}
+                      loading="eager"
+                    />
+                  </button>
+                  {showflag && (
+                    <div className="-tw-translate-x-44 tw-translate-y-3 tw-fixed tw-z-20">
+                      <div className="tw-flex tw-flex-col tw-items-start tw-pb-2 tw-bg-white tw-space-y-4">
+                        <div className="tw-bg-black tw-flex tw-items-center tw-justify-between tw-py-4 tw-px-3">
+                          <div className="tw-text-white tw-font-bold tw-text-xs tw-mr-12 tw-text-nowrap">
+                            Choisir votre pays
+                          </div>
+                          <div
+                            className="tw-cursor-pointer tw-flex tw-items-center tw-justify-center"
+                            onClick={() => setShowFlag(false)}
+                          >
+                            <RxCross2 size={16} color="white" />
+                          </div>
+                        </div>
+                        <a
+                          href="https://deneme.nilrio.com/"
+                          className="tw-w-[80%] tw-flex tw-items-center tw-space-x-3 tw-ml-4 tw-pb-2 tw-border-b-2 tw-cursor-pointer"
+                        >
+                          <Image
+                            src={frflag}
+                            alt="france"
+                            width={25}
+                            height={25}
+                            loading="eager"
+                          />
+                          <div className="tw-text-sm tw-font-bold tw-text-black">
+                            France
+                          </div>
+                        </a>
+                        <a
+                          href="https://denemetr.nilrio.com/"
+                          className="tw-w-[80%] tw-flex tw-items-center tw-space-x-3 tw-ml-4 tw-pb-2 tw-cursor-pointer"
+                        >
+                          <Image
+                            src={trflag}
+                            alt="turkey"
+                            width={25}
+                            height={25}
+                            loading="eager"
+                            className="tw-rounded-sm"
+                          />
+                          <div className="tw-text-sm tw-font-bold tw-text-black">
+                            Turkey
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </li>
               </ul>
             </div>
@@ -287,7 +342,7 @@ const Header = (props) => {
         </div>
       </header>
 
-      <div className="mobile-header sticky-header sticky-color--golden tw-bg-black section-fluid d-lg-block d-xl-none">
+      <div className="mobile-header sticky-header sticky-color--golden tw-bg-black section-fluid d-md-block d-lg-none">
         <div className="container">
           <div className="row">
             <div className="col-12 d-flex align-items-center justify-content-between">
@@ -377,13 +432,66 @@ const Header = (props) => {
                     </ul>
                   </li>
                   <li>
-                    <Image
-                      src={frflag}
-                      alt="france"
-                      width={25}
-                      height={25}
-                      loading="eager"
-                    />
+                    <button
+                      onClick={() => setShowFlag(!showflag)}
+                      className="tw-flex tw-items-center tw-justify-center"
+                    >
+                      <Image
+                        src={frflag}
+                        alt="france"
+                        width={25}
+                        height={25}
+                        loading="eager"
+                      />
+                    </button>
+                    {showflag && (
+                      <div className="-tw-translate-x-44 tw-translate-y-4 tw-fixed tw-z-20">
+                        <div className="tw-flex tw-flex-col tw-items-start tw-pb-2 tw-bg-white tw-space-y-4">
+                          <div className="tw-bg-black tw-flex tw-items-center tw-justify-between tw-py-3 tw-px-3">
+                            <div className="tw-text-white tw-font-bold tw-text-xs tw-mr-12 tw-text-nowrap">
+                              Choisir votre pays
+                            </div>
+                            <div
+                              className="tw-cursor-pointer tw-flex tw-items-center tw-justify-center"
+                              onClick={() => setShowFlag(false)}
+                            >
+                              <RxCross2 size={16} color="white" />
+                            </div>
+                          </div>
+                          <a
+                            href="https://deneme.nilrio.com/"
+                            className="tw-w-[80%] tw-flex tw-items-center tw-space-x-3 tw-ml-4 tw-pb-2 tw-border-b-2 tw-cursor-pointer"
+                          >
+                            <Image
+                              src={frflag}
+                              alt="france"
+                              width={25}
+                              height={25}
+                              loading="eager"
+                            />
+                            <div className="tw-text-sm tw-font-bold tw-text-black">
+                              France
+                            </div>
+                          </a>
+                          <a
+                            href="https://denemetr.nilrio.com/"
+                            className="tw-w-[80%] tw-flex tw-items-center tw-space-x-3 tw-ml-4 tw-pb-2 tw-cursor-pointer"
+                          >
+                            <Image
+                              src={trflag}
+                              alt="turkey"
+                              width={25}
+                              height={25}
+                              loading="eager"
+                              className="tw-rounded-sm"
+                            />
+                            <div className="tw-text-sm tw-font-bold tw-text-black">
+                              Turkey
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </li>
                   <li>
                     <a

@@ -79,11 +79,15 @@ const OrderTrackClient = () => {
               <table>
                 <thead>
                   <tr>
-                    <th>No commande</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                    <th>Nombre D’article</th>
-                    <th>Total</th>
+                    <th className="!tw-text-xs md:!tw-text-base">
+                      No commande
+                    </th>
+                    <th className="!tw-text-xs md:!tw-text-base">Date</th>
+                    <th className="!tw-text-xs md:!tw-text-base">Statut</th>
+                    <th className="!tw-text-xs md:!tw-text-base">
+                      Nombre D’article
+                    </th>
+                    <th className="!tw-text-xs md:!tw-text-base">Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -107,9 +111,13 @@ const OrderTrackClient = () => {
 
                       return (
                         <tr key={item?.id}>
-                          <td>#{item?.id}</td>
-                          <td>{formattedDate}</td>
-                          <td>
+                          <td className="!tw-text-xs md:!tw-text-base">
+                            #{item?.id}
+                          </td>
+                          <td className="!tw-text-xs md:!tw-text-base">
+                            {formattedDate}
+                          </td>
+                          <td className="!tw-text-xs md:!tw-text-base">
                             {item?.status === "paid" && (
                               <span className="badge badge-info">
                                 En cours de traitement
@@ -140,8 +148,10 @@ const OrderTrackClient = () => {
                               </span>
                             )}
                           </td>
-                          <td>{total}</td>
-                          <td>
+                          <td className="!tw-text-xs md:!tw-text-base">
+                            {total}
+                          </td>
+                          <td className="!tw-text-xs md:!tw-text-base">
                             {item?.status === "error"
                               ? item?.error
                               : `${item?.amount?.toFixed(2)}€ `}

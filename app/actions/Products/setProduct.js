@@ -48,11 +48,18 @@ export default async function setProduct(data) {
         slug: slug,
       },
     });
+    const prdct1 = await prisma.product.findFirst({
+      where: {
+        pid: data.pid,
+      },
+    });
 
-    if (prdct) return { message: "Bu ürünün aynısından var " };
+    if (prdct || prdct1)
+      return { message: "Bu Ürünün Kodunda aynısından var " };
     await prisma.product.create({
       data: {
         name: data.name,
+        pid: data.pid,
         slug: slug,
         desc: data.desc,
         gender: data.gender,

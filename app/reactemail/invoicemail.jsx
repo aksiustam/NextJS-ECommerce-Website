@@ -46,14 +46,6 @@ const InvoiceEmail = ({ sipdata }) => {
     }
     return formattedNumber;
   }
-  function formatPNumber(num) {
-    // Gelen sayıyı istenen formata dönüştür
-    let formattedNumber = String(num);
-    while (formattedNumber.length < 6) {
-      formattedNumber = "0" + formattedNumber;
-    }
-    return formattedNumber;
-  }
 
   const getCountryFullName = (countryCode) => {
     const countryData = {
@@ -403,7 +395,7 @@ const InvoiceEmail = ({ sipdata }) => {
                               padding: "6px",
                             }}
                           >
-                            {formatPNumber(item?.id)}
+                            {item?.pid}
                           </td>
                           <td
                             style={{

@@ -5,12 +5,13 @@ import Footer from "../../../components/Layout/Footer";
 import Image from "next/image";
 import "./style.css";
 import Link from "next/link";
+import { getCurrentUser } from "@/app/actions/getCurrentUser";
 const page = async () => {
   const headerdata = await MenuData();
-
+  const user = await getCurrentUser();
   return (
     <>
-      <Header headerdata={headerdata} />
+      <Header headerdata={headerdata} user={user} />
       <Banner title="Conditions De Vente" />
       <main>
         <section id="privacy-policy_area" className="ptb-100">

@@ -34,6 +34,7 @@ const ProductClient = (props) => {
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
       name: product.name,
+      pid: product.pid,
       desc: product.desc,
       category: product.categoryId,
       price: product.price,
@@ -106,7 +107,7 @@ const ProductClient = (props) => {
                 onSubmit={handleSubmit(onSubmit)}
               >
                 <div className="row">
-                  <div className="col-lg-6">
+                  <div className="col-lg-4">
                     <div className="fotm-group">
                       <label htmlFor="product_name">
                         Ürün Adı<span className="text-danger">*</span>
@@ -120,7 +121,21 @@ const ProductClient = (props) => {
                       />
                     </div>
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-4">
+                    <div className="fotm-group">
+                      <label htmlFor="product_name">
+                        Ürün Kodu<span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="product_pid"
+                        className="form-control"
+                        placeholder="Ürün Kodu"
+                        {...register("pid")}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
                     <div className="fotm-group">
                       <label htmlFor="product_desc">Ürün Açıklaması</label>
                       <input
@@ -277,11 +292,10 @@ const ProductClient = (props) => {
                           <Tab
                             eventKey="gram"
                             title="Gramaj"
-                            className="tw-mr-4"
+                            className="tw-mr-4 tw-bg-slate-100 tw-p-2"
                           >
                             <div>
-                              {product?.Category?.SizeType?.type ===
-                                "dress" && (
+                              {product?.Category?.SizeType?.type !== "acc" && (
                                 <>
                                   <div className="row tw-mt-6">
                                     {size
@@ -296,6 +310,8 @@ const ProductClient = (props) => {
                                             (data) => item.id === data.sizeId
                                           );
 
+                                        const type =
+                                          product?.Category?.SizeType?.type;
                                         return (
                                           <div
                                             key={item?.id}
@@ -315,7 +331,7 @@ const ProductClient = (props) => {
                                                 defaultValue={defvalue?.gram}
                                                 onBlur={(e) => {
                                                   register(
-                                                    `gram_dress_${item?.name}`,
+                                                    `gram_${type}_${item?.name}`,
                                                     {
                                                       shouldUnregister: true,
                                                       value: e.target.value,

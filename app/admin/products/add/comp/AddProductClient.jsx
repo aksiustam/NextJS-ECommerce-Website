@@ -9,7 +9,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import { MultiSelect } from "react-multi-select-component";
 import setProduct from "@/app/actions/Products/setProduct";
-import { useRouter } from "next/navigation";
+
 const AddProductClient = (props) => {
   const { allcategory } = props;
   const { category, brand } = allcategory;
@@ -21,7 +21,7 @@ const AddProductClient = (props) => {
   const [quillValue, setQuillValue] = useState("");
 
   const { register, handleSubmit } = useForm();
-  const router = useRouter();
+
   const onSubmit = async (data) => {
     if (mybrand.length === 0) {
       await Swal.fire({
@@ -34,20 +34,20 @@ const AddProductClient = (props) => {
     }
     const formData = { ...data, brand: mybrand, quill: quillValue };
     const res = await setProduct(formData);
-    if (res === true)
+    if (res === true) {
       Swal.fire({
         icon: "success",
         title: "Başarıyla Eklendi",
         showConfirmButton: false,
         timer: 1500,
       });
-    else {
+      location.reload();
+    } else {
       Swal.fire({
         icon: "error",
         title: JSON.stringify(res.message),
       });
     }
-    router.refresh();
   };
 
   return (
@@ -62,7 +62,7 @@ const AddProductClient = (props) => {
                 onSubmit={handleSubmit(onSubmit)}
               >
                 <div className="row">
-                  <div className="col-lg-6">
+                  <div className="col-lg-4">
                     <div className="fotm-group">
                       <label htmlFor="product_name">
                         Ürün Adı<span className="text-danger">*</span>
@@ -79,7 +79,24 @@ const AddProductClient = (props) => {
                       />
                     </div>
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-4">
+                    <div className="fotm-group">
+                      <label htmlFor="product_name">
+                        Ürün Kodu<span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="product_name"
+                        className="form-control"
+                        placeholder="Ürün Kodu"
+                        {...register("pid", {
+                          required: "Ürün Kodu Giriniz",
+                        })}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
                     <div className="fotm-group">
                       <label htmlFor="product_desc">Ürün Açıklaması</label>
                       <input

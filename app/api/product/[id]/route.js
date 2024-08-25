@@ -104,6 +104,7 @@ export async function PUT(req, { params }) {
     },
     data: {
       name: data.name,
+      pid: data.pid,
       desc: data.desc,
       price: parseFloat(data.price),
       inprice: parseFloat(data.inprice),
@@ -151,37 +152,6 @@ export async function PUT(req, { params }) {
     if (gram === "gram") {
       const gramValue = parseInt(data[key]);
       switch (type) {
-        case "dress":
-          const mysize = await prisma.Size.findFirst({
-            where: {
-              name: gramsize,
-              SizeType: { type: type },
-            },
-          });
-
-          const parcelData = {
-            gram: gramValue,
-            Size: { connect: { id: mysize.id } },
-            Product: { connect: { id: product.id } },
-          };
-
-          const parcel = await prisma.ParcelGram.findFirst({
-            where: {
-              Product: { id: product.id },
-              Size: { id: mysize.id },
-            },
-          });
-
-          if (parcel) {
-            await prisma.ParcelGram.update({
-              where: { id: parcel.id },
-              data: parcelData,
-            });
-          } else {
-            await prisma.ParcelGram.create({ data: parcelData });
-          }
-          break;
-
         case "acc":
           const mysize2 = await prisma.Size.findFirst({
             where: {
@@ -213,6 +183,34 @@ export async function PUT(req, { params }) {
           break;
 
         default:
+          const mysize = await prisma.Size.findFirst({
+            where: {
+              name: gramsize,
+              SizeType: { type: type },
+            },
+          });
+
+          const parcelData = {
+            gram: gramValue,
+            Size: { connect: { id: mysize.id } },
+            Product: { connect: { id: product.id } },
+          };
+
+          const parcel = await prisma.ParcelGram.findFirst({
+            where: {
+              Product: { id: product.id },
+              Size: { id: mysize.id },
+            },
+          });
+
+          if (parcel) {
+            await prisma.ParcelGram.update({
+              where: { id: parcel.id },
+              data: parcelData,
+            });
+          } else {
+            await prisma.ParcelGram.create({ data: parcelData });
+          }
           break;
       }
     }

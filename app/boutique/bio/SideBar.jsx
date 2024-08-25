@@ -329,7 +329,7 @@ const SideBar = (props) => {
               ))}
             </div>
           </div>
-          <div
+          {/* <div
             className={`shop_sidebar_boxed ${
               isSidebarOpen ? "tw-block tw-mb-5" : "tw-hidden"
             }`}
@@ -388,7 +388,7 @@ const SideBar = (props) => {
                   ))}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

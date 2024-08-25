@@ -224,7 +224,7 @@ const OrderDetailClient = (props) => {
                       <table className="table pending_table">
                         <thead className="thead-light">
                           <tr>
-                            <th scope="col">Ad</th>
+                            <th scope="col">Ad / Kodu</th>
                             <th scope="col">Renk</th>
                             <th scope="col">Boyut</th>
                             <th scope="col">Miktar</th>
@@ -234,7 +234,9 @@ const OrderDetailClient = (props) => {
                         <tbody>
                           {data?.basket?.map((item, index) => (
                             <tr key={index}>
-                              <td>{item?.name}</td>
+                              <td>
+                                {item?.name} / {item?.pid}
+                              </td>
                               <td>{item?.color}</td>
                               <td>
                                 {item?.size === "null" ? "Yok" : item?.size}

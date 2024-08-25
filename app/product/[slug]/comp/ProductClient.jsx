@@ -23,7 +23,6 @@ const ProductClient = (props) => {
   const searchParams = useSearchParams();
   const selectedColor = searchParams.get("color");
 
-  console.log(product);
   const [modalShow, setModalShow] = useState(false);
 
   const [count, setCount] = useState(1);
@@ -114,6 +113,7 @@ const ProductClient = (props) => {
     if (count <= stocksShown.stock) {
       const data = {
         id: product.id,
+        pid: product.pid,
         name: product.name,
         slug: product.slug,
         price: product.price,
@@ -203,21 +203,25 @@ const ProductClient = (props) => {
               </div>
               <div className="col-lg-8">
                 <div className="product_details_right_one">
-                  <div className="modal_product_content_one">
-                    <h1 className="tw-text-2xl tw-font-bold tw-mb-2">
+                  <div className="modal_product_content_one ">
+                    <h1 className="tw-text-3xl tw-font-bold tw-mb-2">
                       {product?.name}
                     </h1>
-
-                    {product.indirim === true ? (
-                      <span className="tw-font-bold tw-text-lg">
-                        {product?.inprice}€{" "}
-                        <del className="tw-pl-3">{product?.price}€</del>{" "}
+                    <div className="tw-flex tw-flex-col tw-space-y-1">
+                      <span className="tw-text-xs tw-font-bold tw-mb-2">
+                        Code: {product?.pid}
                       </span>
-                    ) : (
-                      <span className="tw-font-bold tw-text-lg">
-                        {product?.price}€{" "}
-                      </span>
-                    )}
+                      {product.indirim === true ? (
+                        <span className="tw-font-bold tw-text-lg">
+                          {product?.inprice}€{" "}
+                          <del className="tw-pl-3">{product?.price}€</del>{" "}
+                        </span>
+                      ) : (
+                        <span className="tw-font-bold tw-text-lg">
+                          {product?.price}€{" "}
+                        </span>
+                      )}
+                    </div>
                     <div className=" tw-border-b-[1px] tw-border-black tw-w-full md:tw-w-96 tw-mt-3" />
                     <div className="variable-single-item ">
                       <span>Couleur</span>

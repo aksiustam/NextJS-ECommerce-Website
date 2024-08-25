@@ -48,7 +48,7 @@ const ProductsTable = (props) => {
       : productData?.filter(
           (data) =>
             data?.name?.toLowerCase().includes(search?.toLowerCase()) ||
-            data?.id?.toString().includes(search?.toLowerCase())
+            data?.pid?.toLowerCase().includes(search?.toLowerCase())
         );
   const data = { nodes: filteredData };
 

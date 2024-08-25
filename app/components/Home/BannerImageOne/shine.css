@@ -1,0 +1,32 @@
+.img-shine {
+	position: relative;
+	overflow: hidden;
+}
+
+.img-shine::before {
+	background: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0.6) 0%,
+		rgba(255, 255, 255, 0.2) 100%
+	);
+	content: "";
+	display: block;
+	height: 100%;
+	left: -75%;
+	position: absolute;
+	top: 0;
+	transform: skewX(-25deg);
+	width: 20%;
+	z-index: 5;
+}
+
+.img-shine:hover::before,
+.img-shine:focus::before {
+	animation: shine 0.85s;
+}
+
+@keyframes shine {
+	100% {
+		left: 125%;
+	}
+}

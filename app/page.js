@@ -4,11 +4,14 @@ import Certificas from "./components/Home/Certificas";
 import HotProduct from "./components/Home/HotProduct";
 import OfferTime from "./components/Home/OfferTime";
 import BannerBottom from "./components/Home/BannerBottom";
+import BannerImageOne from "./components/Home/BannerImageOne";
+import BannerImageTwo from "./components/Home/BannerImageTwo";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import { getCurrentUser } from "./actions/getCurrentUser";
 import getSettings from "./actions/getSettings";
 import getProducts from "./actions/Products/getProducts";
+import HotProductTwo from "./components/Home/HotProductTwo";
 
 export default async function Home() {
   const headerdata = await MenuData();
@@ -24,7 +27,10 @@ export default async function Home() {
       <main>
         <Banner settings={settings} />
         <BannerBottom settings={settings} />
-        <HotProduct products={products} />
+        <BannerImageOne settings={settings} />
+        <HotProduct products={products} settings={settings} />
+        <BannerImageTwo settings={settings} />
+        <HotProductTwo products={products} settings={settings} />
         {checkbox === "true" && <OfferTime settings={settings} />}
         <Certificas />
       </main>

@@ -84,7 +84,7 @@ const processCartData = async (basket) => {
                 productType: "CLOTHING_AND_ACCESSORIES",
                 productQty: basketitem.quantity,
                 productLabel: name,
-                productRef: product.id.toString(),
+                productRef: product.pid,
                 productAmount: (price * 100).toFixed(0),
                 productVat: Vat,
               };

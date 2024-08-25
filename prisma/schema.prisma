@@ -44,6 +44,7 @@ model Address {
 
 model Product {
     id               Int                @id @default(autoincrement())
+    pid              String?            @unique
     name             String
     slug             String             @unique
     desc             String?
@@ -213,8 +214,12 @@ model Ayarlar {
     desc         String?
     keywords     String?
     header       Json?
+    trend        Json?
+    trend2       Json?
     banner       Json?
-    bannerb      Json?
+    bannerb1     Json?
+    bannerb2     Json?
+    bannerb3     Json?
     discountset  Json?
     discountpage Json?
     settings     Json?

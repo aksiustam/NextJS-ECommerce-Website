@@ -61,6 +61,7 @@ export default async function finishOrder(formdata) {
     formData.basket.push(
       ...basket.map((item) => ({
         id: item.id,
+        pid: item.pid,
         name: item.name,
         color: item.color,
         size: item.size,

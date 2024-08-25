@@ -7,43 +7,34 @@ import Image from "next/image";
 import img1 from "@/public/assets/img/common/Guides1.jpg";
 import img2 from "@/public/assets/img/common/Guides2.jpg";
 import img3 from "@/public/assets/img/common/Guides3.jpg";
+import getSettings from "@/app/actions/getSettings";
+import { getCurrentUser } from "@/app/actions/getCurrentUser";
 
 const page = async () => {
   const headerdata = await MenuData();
-
+  const settings = await getSettings();
+  const images = settings?.settings?.tailimage;
+  const user = await getCurrentUser();
   return (
     <>
-      <Header headerdata={headerdata} />
+      <Header headerdata={headerdata} user={user} />
       <Banner title="Guide des Taille" />
       <main>
         <section id="Taille" className="tw-bg-[#CECAC5]">
           <div className="container">
             <div className="row tw-flex tw-items-center tw-justify-center">
               <div className="tw-w-5/6">
-                <Image
-                  src={img1}
-                  alt="guides1"
-                  width={1500}
-                  height={1000}
-                  loading="eager"
-                  className="tw-object-contain"
-                />
-                <Image
-                  src={img2}
-                  alt="guides2"
-                  width={1500}
-                  height={1000}
-                  loading="eager"
-                  className="tw-object-contain"
-                />
-                <Image
-                  src={img3}
-                  alt="guides3"
-                  width={1500}
-                  height={1000}
-                  loading="eager"
-                  className="tw-object-contain"
-                />
+                {images?.map((item, index) => (
+                  <Image
+                    key={index}
+                    src={item.imageurl}
+                    alt={`guides-${index}`}
+                    width={1500}
+                    height={1000}
+                    loading="eager"
+                    className="tw-object-contain"
+                  />
+                ))}
               </div>
             </div>
           </div>

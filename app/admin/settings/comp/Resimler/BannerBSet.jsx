@@ -7,7 +7,7 @@ const BannerBSet = (props) => {
   const { settings } = props;
   const { handleSubmit } = useForm();
   const [video, setVideo] = useState(null);
-  const [check, setCheck] = useState(settings?.bannerb?.check);
+  const [check, setCheck] = useState(settings?.bannerb1?.check);
 
   const onSubmit = async () => {
     const formData = {
@@ -16,7 +16,7 @@ const BannerBSet = (props) => {
       check: check,
     };
     await axios
-      .post("/api/settings/bannerb", formData)
+      .post("/api/settings/bannerb1", formData)
       .then(async () => {
         await Swal.fire({
           icon: "success",
