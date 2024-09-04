@@ -26,16 +26,19 @@ const Banner = (props) => {
 
   return (
     <>
-      <section
-        id="banner_one"
-        style={{
-          backgroundImage: `url(${data?.banner?.imageurl})`,
-        }}
-      >
+      <section id="banner_one" className="tw-py-12 md:tw-py-24">
+        <Image
+          src={data?.banner?.imageurl}
+          alt="Nilrio Banner"
+          width={3000}
+          height={2000}
+          loading="eager"
+          className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-object-center -tw-z-30"
+        />
         <div className="container">
           <div className="row">
             <div className="col-6 tw-px-0">
-              <div className="banner_text_one">
+              <div className="banner_text_one ">
                 <h1
                   className={`wow flipInX `}
                   data-wow-duration="3.0s"

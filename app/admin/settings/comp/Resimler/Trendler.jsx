@@ -9,12 +9,14 @@ const Trendler = (props) => {
 
   const [name, setName] = useState(settings?.trend?.name);
   const [checkname, setCheckName] = useState(settings?.trend?.checkname);
-
+  const [check, setCheck] = useState(settings?.trend?.check);
   const onSubmit = async () => {
     const formData = {
       name: name,
       checkname: checkname,
+      check: check === "true" ? true : false,
     };
+
     await axios
       .post("/api/settings/trendler", formData)
       .then(async () => {
@@ -81,7 +83,22 @@ const Trendler = (props) => {
             />
           </div>
         </div>
-
+        <div className="col-lg-4">
+          <div className="fotm-group tw-flex tw-flex-col">
+            <label>
+              Trendler Göster
+              <span className="text-danger">*</span>
+            </label>
+            <select
+              id="trendcheck"
+              value={check}
+              onChange={(e) => setCheck(e.target.value)}
+            >
+              <option value="true">Evet</option>
+              <option value="false">Hayır</option>
+            </select>
+          </div>
+        </div>
         <div className="col-lg-12 tw-flex tw-items-center">
           <button
             type="submit"

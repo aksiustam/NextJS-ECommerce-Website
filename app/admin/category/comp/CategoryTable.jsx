@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
@@ -356,7 +356,7 @@ const CategoryTable = (props) => {
                                 return { label: item?.name, value: item?.id };
                               });
                               setModalBrand(value);
-                              setModalSize(item);
+                              setModalData(item);
                             }}
                           >
                             <FaRegEdit size={26} color="green" />

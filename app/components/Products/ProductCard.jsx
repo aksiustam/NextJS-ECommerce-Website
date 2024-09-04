@@ -24,7 +24,7 @@ const ProductCard = (props) => {
 
   return (
     <>
-      <div className="product_wrappers_one">
+      <div className="product_wrappers_one tw-rounded-lg">
         <div className="thumb">
           <Link
             href={`/product/${product?.slug}?color=${color?.Color?.name}`}

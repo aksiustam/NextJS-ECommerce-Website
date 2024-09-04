@@ -21,8 +21,8 @@ body {
 body {
   padding: 0;
   margin: 0;
-  /* background-color: #090C0F;
-    color: white; */
+  background-color: #E6E9E4;
+  /*   color: white; */
   font-size: 16px;
   font-family: "Poppins", sans-serif;
   /* font-family: "Anton", sans-serif; */
@@ -1924,12 +1924,9 @@ textarea:focus {
 #banner_one {
   z-index: 10;
   position: relative;
-  padding: 230px 0 0 0;
+
   display: flex;
   align-items: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
   overflow: hidden;
 }
 .banner_text_one {
@@ -1938,7 +1935,7 @@ textarea:focus {
   align-items: flex-start;
   justify-content: center;
   padding-left: 30px;
-  padding-bottom: 30px;
+  padding-top: 70px;
 }
 .banner_text_one h1 {
   padding: 100px 0 0 0;
@@ -1976,9 +1973,7 @@ textarea:focus {
 ---------------------------*/
 
 @media (max-width: 1024px) {
-  #banner_one {
-    padding: 20px 0 0 0;
-  }
+
   .banner_text_one {
     padding-left: 20px;
   }

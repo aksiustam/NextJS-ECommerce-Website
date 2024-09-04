@@ -12,6 +12,7 @@ const HotProductTwo = (props) => {
   const { products, settings } = props;
   const trendname = settings?.trend2?.name;
   const trend = settings?.trend2?.checkname;
+  const check = settings?.trend2?.check;
 
   const pdata = () => {
     let bucket;
@@ -117,50 +118,52 @@ const HotProductTwo = (props) => {
   };
   return (
     <>
-      <section id="hot_Product_area" className="tw-mt-2 md:tw-mt-2">
-        <div className="flex flex-col">
-          <div className="w-full">
-            <div className="tw-w-full tw-flex tw-items-center tw-justify-center">
-              <div className="tw-mt-1 md:tw-text-xl tw-font-extrabold tw-uppercase tw-flex tw-items-center tw-justify-center">
-                {trendname}{" "}
-                {trend === "Bio" && (
-                  <Image
-                    src={bioimg}
-                    alt="Nilrio Bio"
-                    width={300}
-                    height={300}
-                    loading="eager"
-                    className="tw-ml-4 tw-w-4 tw-h-4 md:tw-w-6 md:tw-h-6 tw-object-contain"
-                  />
-                )}
-                {trend === "Origine France Garantie" && (
-                  <Image
-                    src={ofgimg}
-                    alt="Nilrio OFG"
-                    width={300}
-                    height={300}
-                    loading="eager"
-                    className="tw-ml-4 tw-w-4 tw-h-4 md:tw-w-6 md:tw-h-6 tw-object-contain"
-                  />
+      {check === true && (
+        <section id="hot_Product_area" className="tw-mt-2 md:tw-mt-2">
+          <div className="flex flex-col">
+            <div className="w-full">
+              <div className="tw-w-full tw-flex tw-items-center tw-justify-center">
+                <div className="tw-mt-1 md:tw-text-xl tw-font-extrabold tw-uppercase tw-flex tw-items-center tw-justify-center">
+                  {trendname}{" "}
+                  {trend === "Bio" && (
+                    <Image
+                      src={bioimg}
+                      alt="Nilrio Bio"
+                      width={300}
+                      height={300}
+                      loading="eager"
+                      className="tw-ml-4 tw-w-4 tw-h-4 md:tw-w-6 md:tw-h-6 tw-object-contain"
+                    />
+                  )}
+                  {trend === "Origine France Garantie" && (
+                    <Image
+                      src={ofgimg}
+                      alt="Nilrio OFG"
+                      width={300}
+                      height={300}
+                      loading="eager"
+                      className="tw-ml-4 tw-w-4 tw-h-4 md:tw-w-6 md:tw-h-6 tw-object-contain"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="w-full">
+              <div className="w-full tw-relative">
+                {pdata() && (
+                  <Slider {...slidersettings} className="w-full">
+                    {pdata().map((data) => (
+                      <div className="tw-w-full tw-px-1" key={data.id}>
+                        <ProductCard data={data} />
+                      </div>
+                    ))}
+                  </Slider>
                 )}
               </div>
             </div>
           </div>
-          <div className="w-full">
-            <div className="w-full tw-relative">
-              {pdata() && (
-                <Slider {...slidersettings} className="w-full">
-                  {pdata().map((data) => (
-                    <div className="tw-w-full tw-px-1" key={data.id}>
-                      <ProductCard data={data} />
-                    </div>
-                  ))}
-                </Slider>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 };

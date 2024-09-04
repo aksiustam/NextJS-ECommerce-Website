@@ -44,7 +44,7 @@ const OrderTrackClient = () => {
     <>
       <section id="order-track" className="tw-my-8">
         <div className="container">
-          <div className="account_form  tw-flex tw-flex-col tw-gap-4 tw-justify-center tw-items-center">
+          <div className="account_form  tw-flex tw-flex-col tw-gap-4 tw-justify-center tw-items-center tw-rounded-lg">
             <div className="default-form-box">
               <form onSubmit={handleSubmit} className="tw-text-center">
                 <label>

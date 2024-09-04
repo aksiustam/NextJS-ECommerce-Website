@@ -24,21 +24,25 @@ const BannerB2Set = (props) => {
         imageid: image1 === null ? null : image1.public_id,
         imageurl: image1 === null ? null : image1.secure_url,
         check: check1,
+        url: image1url,
       },
       image2: {
         imageid: image2 === null ? null : image2.public_id,
         imageurl: image2 === null ? null : image2.secure_url,
         check: check2,
+        url: image2url,
       },
       image3: {
         imageid: image3 === null ? null : image3.public_id,
         imageurl: image3 === null ? null : image3.secure_url,
         check: check3,
+        url: image3url,
       },
       image4: {
         imageid: image4 === null ? null : image4.public_id,
         imageurl: image4 === null ? null : image4.secure_url,
         check: check4,
+        url: image4url,
       },
     };
 

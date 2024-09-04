@@ -158,8 +158,8 @@ const Header = (props) => {
             </div>
           </div>
           <div className="row tw-border-y-2 tw-mx-0 tw-px-0">
-            <div className="col-2"></div>
-            <div className="col-8">
+            <div className="col-lg-0 col-xl-2"></div>
+            <div className="col-lg-10 col-xl-8">
               <div className="main-menu menu-color--black menu-hover-color--golden d-none d-lg-flex ">
                 <nav>
                   <ul>
@@ -168,7 +168,7 @@ const Header = (props) => {
                         <li className="has-dropdown" key={index}>
                           <Link
                             href={item.href !== "" ? item.href : "#!"}
-                            className="main-menu-link !tw-text-white"
+                            className="main-menu-link !tw-text-white lg:!tw-text-xs xl:!tw-text-[14px]"
                             onClick={() => {
                               ReactGA.event({
                                 category: "event",

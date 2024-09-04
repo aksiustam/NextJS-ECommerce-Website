@@ -115,12 +115,6 @@ const ShopContent = ({ props }) => {
   const [visibleCount, setVisibleCount] = useState(12);
   const pagiProducts = filterProducts.slice(0, visibleCount);
 
-  const loadMoreProducts = () => {
-    setVisibleCount((prevCount) => {
-      const newCount = prevCount + 12;
-      return Math.min(newCount, filterProducts.length);
-    });
-  };
   useEffect(() => {
     const handleScroll = async () => {
       const scrollPosition =
@@ -128,16 +122,21 @@ const ShopContent = ({ props }) => {
       const threshold = document.documentElement.scrollHeight - 150;
 
       if (scrollPosition >= threshold) {
-        setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        loadMoreProducts();
-        setLoading(false);
+        if (filterProducts.length > visibleCount) {
+          setLoading(true);
+          await new Promise((resolve) => setTimeout(resolve, 800));
+          setVisibleCount((prevCount) => {
+            const newCount = prevCount + 12;
+            return Math.min(newCount, filterProducts.length);
+          });
+          setLoading(false);
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [filterProducts, loadMoreProducts]);
+  }, [filterProducts, visibleCount]);
   return (
     <>
       <section id="shop_main_area" className="ptb-100">

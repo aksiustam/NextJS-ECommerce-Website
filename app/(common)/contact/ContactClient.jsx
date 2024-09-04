@@ -29,8 +29,8 @@ const ContactClient = () => {
       <section id="contact_area" className="ptb-100">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6 ">
-              <div className="contact_form_one contact_info_wrapper">
+            <div className="col-lg-6">
+              <div className="contact_form_one contact_info_wrapper  tw-rounded-lg">
                 <div className="tw-flex tw-flex-col tw-justify-center tw-h-full">
                   <h3 className="text-center tw-font-bold">
                     En quoi pouvons-nous vous aider ?
@@ -121,7 +121,7 @@ const ContactClient = () => {
               </div>
             </div>
             <div className="col-lg-6">
-              <div className="left_side_contact contact_info_wrapper">
+              <div className="left_side_contact contact_info_wrapper tw-rounded-lg">
                 <ul>
                   <li className="address_location">
                     <div className="contact_widget ">

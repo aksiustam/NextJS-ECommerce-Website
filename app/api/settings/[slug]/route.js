@@ -85,6 +85,7 @@ export async function POST(req, { params }) {
       let form = {
         name: data.name,
         checkname: data.checkname,
+        check: data.check,
       };
 
       await prisma.ayarlar.update({
@@ -99,6 +100,7 @@ export async function POST(req, { params }) {
       let form55 = {
         name: data.name,
         checkname: data.checkname,
+        check: data.check,
       };
 
       await prisma.ayarlar.update({
