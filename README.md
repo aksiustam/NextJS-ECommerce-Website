@@ -1,4 +1,4 @@
-Nilrio T-Shirt İmalat Şirketi Fransa için Yaptığım E-Ticaret websitesi  [deneme.nilrio.com](https://deneme.nilrio.com/) 
+Nilrio T-Shirt İmalat Şirketi Fransa için Yaptığım E-Ticaret websitesi  [tr.nilrio.com](https://tr.nilrio.com/) 
 
 Websitesinde NextJS 14 ve Bootstrap kullanılmıştır. Site Tamamen Kişiye özel tasarlanmıştır.
 
@@ -10,7 +10,7 @@ Websitesindeki ürünlerin rengi ve boyutları ve çeşitleri ( ayakkabı,çanta
 
 Websitesinde Resimleri yükleme paneli Cloudinary ile yapılmıştır.
 
-Websitesindeki Banka entegrasyonu sogecommerce fransa bankası ile yapılmıştır.
+Websitesindeki Banka entegrasyonu sogecommerce fransa bankası / Türkiye için İyzico ile yapılmıştır.
 
-İncelemek için : [deneme.nilrio.com](https://deneme.nilrio.com/) 
+İncelemek için : [tr.nilrio.com](https://tr.nilrio.com/) 
 
