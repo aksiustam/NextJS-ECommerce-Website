@@ -1,3 +1,22 @@
+# T-Shirt Manufacturing E-Commerce Website
+
+## Website: unavailable
+
+### Features:
+- Built with **Next.js 14** and **Bootstrap** and custom css.
+- Fully customized and tailored design.
+- **Admin panel controls:**
+  - Homepage **banner images, texts, buttons**, and a **collapsible video section**.
+  - Homepage images can be **managed and hidden** via the admin panel.
+  - Products' **colors, sizes, and categories** (Shoes, Bags, Men, Women, Kids) are adjustable.
+- **Cloudinary** is used for image upload integration.
+- **Bank payment integrations:**
+  - **Sogecommerce** for France.
+  - **Iyzico** for Turkey.
+
+### Live Preview: unavailable
+
+
 Nilrio T-Shirt İmalat Şirketi Fransa için Yaptığım E-Ticaret websitesi  [tr.nilrio.com](https://tr.nilrio.com/) 
 
 Websitesinde NextJS 14 ve Bootstrap kullanılmıştır. Site Tamamen Kişiye özel tasarlanmıştır.
